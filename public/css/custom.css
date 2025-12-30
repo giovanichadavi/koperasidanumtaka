@@ -1,0 +1,34 @@
+/* Hilangkan warna aktif permanen */
+.sidebar-dark-primary .nav-sidebar .nav-link.active {
+    background-color: transparent !important;
+    color: #c2c7d0 !important;
+}
+
+/* Warna hanya saat hover */
+.sidebar-dark-primary .nav-sidebar .nav-link:hover {
+    background-color: #007bff !important;
+    color: #ffffff !important;
+}
+.navbar-nav .nav-link:hover {
+    background-color: #007bff !important;
+    color: #ffffff !important; 
+    border-radius: 8px;           /* bikin tidak tajam */
+    transition: all 0.2s ease;  /* biru */
+}
+.navbar .nav-item.dropdown > .nav-link::after {
+    content: "\f2f5"; /* icon sign-out-alt */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-left: 8px;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* Efek hover */
+.navbar .nav-item.dropdown > .nav-link:hover {
+    color: #d6d5d5ff !important; /* merah */
+}
+
+.navbar .nav-item.dropdown > .nav-link:hover::after {
+    opacity: 5;
+}
