@@ -25,14 +25,14 @@
         <div class="card">
 
             {{-- HEADER --}}
-        <div class="card-header d-flex justify-content-between align-items-center header-admin">
-            <h5 class="mb-0">Manajemen Admin</h5>
+            <div class="card-header d-flex align-items-center">
+                <h5 class="mb-0">Manajemen Admin</h5>
 
-            <a href="{{ route('users.create') }}"
-            class="btn btn-primary btn-sm">
-                <i class="fas fa-plus"></i> Tambah Admin
-            </a>
-        </div>
+                <a href="{{ route('users.create') }}"
+                class="btn btn-primary btn-sm ml-auto">
+                    <i class="fas fa-plus"></i> Tambah Admin
+                </a>
+            </div>
 
             {{-- BODY --}}
             <div class="card-body">
