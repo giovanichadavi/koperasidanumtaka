@@ -307,9 +307,9 @@ return [
             'url' => 'admin/blog',
             'can' => 'manage-blog',
         ],
-                [
+        [
             'text' => 'Menu Risiko',
-            'url' => 'Risiko',
+            'url' => 'risiko',
             'icon' => 'fas fa-file-alt',
             'label_color' => 'success',
         ],
