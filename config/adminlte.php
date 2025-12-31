@@ -29,7 +29,8 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
     |
     */
-
+    'logo_img' => 'favicon.png',
+    'favicon'  => 'favicon.png',
     'use_ico_only' => false,
     'use_full_favicon' => false,
 
@@ -307,8 +308,8 @@ return [
             'can' => 'manage-blog',
         ],
                 [
-            'text' => 'Menu Koperasi',
-            'url' => 'koperasi',
+            'text' => 'Menu Risiko',
+            'url' => 'Risiko',
             'icon' => 'fas fa-file-alt',
             'label_color' => 'success',
         ],

@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class KoperasiController extends Controller
+class RisikoController extends Controller
 {
 
     public function index()
     {
-        return view('koperasi.index');
+        return view('risiko.index');
     }
 }
 

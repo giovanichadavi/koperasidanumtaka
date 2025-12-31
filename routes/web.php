@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
-use App\http\Controllers\KoperasiController;
+use App\http\Controllers\RisikoController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
@@ -24,8 +24,8 @@ Route::middleware(['auth'])->group(function () {
 
 });
     Route::middleware(['auth'])->group(function () {
-    Route::get('/koperasi', [KoperasiController::class, 'index'])
-        ->name('koperasi.index');
+    Route::get('/risiko', [RisikoController::class, 'index'])
+        ->name('risiko.index');
 });
 
     Route::middleware(['auth','role:user'])->group(function () {

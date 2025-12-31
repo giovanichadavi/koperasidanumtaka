@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Koperasi')
+@section('title', 'Risiko')
 
 @section('content_header')
-    <h1>Halaman Koperasi</h1>
+    <h1>Halaman Risiko</h1>
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
