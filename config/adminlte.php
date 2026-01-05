@@ -302,13 +302,14 @@ return [
     'menu' => [
         // Navbar items:
         // Sidebar items:
+
+        [   'text' => 'Manajemen Risiko',
+            'url' => 'manajemen_risiko',
+            'icon' => 'fas fa-file-alt',
+            'label_color' => 'success',
+    ],
         [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
-        ],
-        [
-            'text' => 'Menu Risiko',
+            'text' => 'Tabel Risiko',
             'url' => 'risiko',
             'icon' => 'fas fa-file-alt',
             'label_color' => 'success',
@@ -320,6 +321,7 @@ return [
             'label_color' => 'success',
             'can' => 'admin',
         ],
+
 
     ],
 
