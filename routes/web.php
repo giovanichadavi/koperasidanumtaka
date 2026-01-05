@@ -45,6 +45,8 @@ Route::middleware(['auth'])->group(function () {
     [UserController::class, 'toggleStatus'])
     ->name('users.toggleStatus');
     
-});
+    Route::get('/peta-risiko', [RisikoController::class, 'index'])
+    ->name('peta.risiko');
+    });
 
 require __DIR__.'/auth.php';
