@@ -38,28 +38,40 @@
                                class="form-control form-control-sm">
                     </div>
 
-                    <div class="form-group mb-4">
-                        <label>Role</label>
-                        <select name="role" class="form-control form-control-sm">
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
-                            <option value="user">Divisi Umum</option>
-                            <option value="user">Divisi Hublang</option>
-                            <option value="user">Divisi Kepegawaian</option>
-                            <option value="user">Divisi Humas</option>
-                            <option value="user">Divisi Hukum</option>
-                            <option value="user">Divisi Perencanaan Anggaran</option>
-                            <option value="user">Divisi Pembukuan</option>
-                            <option value="user">Divisi Kas Dan Penagihan</option>
-                            <option value="user">Unit Lawe-Lawe</option>
-                            <option value="user">Unit Sepaku</option>
-                            <option value="user">Unit Waru</option>
-                            <option value="user">Unit Sotek</option>
-                            <option value="user">Unit Maridan</option>
-                            <option value="user">Unit Babulu</option>
-                            <option value="user">Divisi Laboratorium</option>
-                        </select>
-                    </div>
+                    <div class="form-group">
+            <label>Role</label>
+            <select name="role" class="form-control" required>
+
+                <optgroup label="Admin">
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
+                </optgroup>
+
+                <optgroup label="Departemen Umum">
+                    <option value="divisi_umum">Divisi Umum</option>
+                    <option value="divisi_hublang">Divisi Hublang</option>
+                    <option value="divisi_kepegawaian">Divisi Kepegawaian</option>
+                    <option value="divisi_humas">Divisi Humas</option>
+                    <option value="divisi_hukum">Divisi Hukum</option>
+                </optgroup>
+
+                <optgroup label="Departemen Keuangan">
+                    <option value="divisi_perencanaan_anggaran">Divisi Perencanaan Anggaran</option>
+                    <option value="divisi_pembukuan">Divisi Pembukuan</option>
+                    <option value="divisi_kas_penagihan">Divisi Kas & Penagihan</option>
+                </optgroup>
+
+                <optgroup label="Departemen Teknik">
+                    <option value="unit_lawe_lawe">Unit Lawe-Lawe</option>
+                    <option value="unit_waru">Unit Waru</option>
+                    <option value="unit_sotek">Unit Sotek</option>
+                    <option value="unit_maridan">Unit Maridan</option>
+                    <option value="unit_babulu">Unit Babulu</option>
+                    <option value="divisi_laboratorium">Divisi Laboratorium</option>
+                </optgroup>
+
+            </select>
+        </div>
 
                     <div class="text-end">
                         <button class="btn btn-primary btn-sm px-4">

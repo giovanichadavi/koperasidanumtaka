@@ -27,6 +27,22 @@
     <select name="role" class="form-control">
         <option value="admin" {{ $user->role=='admin'?'selected':'' }}>Admin</option>
         <option value="user" {{ $user->role=='user'?'selected':'' }}>User</option>
+        <optgroup label="Departemen Umum">
+            <option value="divisi_umum">Divisi Umum</option>
+            <option value="divisi_hublang">Divisi Hublang</option>
+            <option value="divisi_kepegawaian">Divisi Kepegawaian</option>
+            <option value="divisi_humas">Divisi Humas</option>
+            <option value="divisi_hukum">Divisi Hukum</option>
+        </optgroup>
+
+        <optgroup label="Departemen Keuangan">
+            <option value="divisi_umum">Divisi Umum</option>
+            <option value="divisi_hublang">Divisi Hublang</option>
+            <option value="divisi_kepegawaian">Divisi Kepegawaian</option>
+            <option value="divisi_humas">Divisi Humas</option>
+            <option value="divisi_hukum">Divisi Hukum</option>
+        </optgroup>
+
     </select>
 </div>
 
