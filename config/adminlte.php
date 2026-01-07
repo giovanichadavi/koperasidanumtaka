@@ -304,8 +304,8 @@ return [
         // Sidebar items:
 
         [   'text' => 'Manajemen Risiko',
-            'url' => 'manajemen_risiko',
-            'icon' => 'fas fa-file-alt',
+            'url' => 'laporan/daftar-risiko',
+            'icon' => 'fas fa-clipboard-list',
             'label_color' => 'success',
     ],
         [

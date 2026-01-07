@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\http\Controllers\RisikoController;
+use App\Http\Controllers\LaporanRisikoController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
@@ -48,5 +49,21 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/peta-risiko', [RisikoController::class, 'index'])
     ->name('peta.risiko');
     });
+
+    Route::get('/laporan/daftar-risiko', 
+    [LaporanRisikoController::class, 'index'])
+    ->name('laporan.daftar.risiko');
+
+    Route::get('/laporan/daftar-risiko', 
+    [LaporanRisikoController::class, 'index'])
+    ->name('laporan.daftar.risiko');
+
+    Route::get('/laporan/daftar-risiko/create', 
+    [LaporanRisikoController::class, 'create'])
+    ->name('laporan.daftar.risiko.create');
+
+    Route::post('/laporan/daftar-risiko', 
+    [LaporanRisikoController::class, 'store'])
+    ->name('laporan.daftar.risiko.store');
 
 require __DIR__.'/auth.php';

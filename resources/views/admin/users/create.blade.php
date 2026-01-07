@@ -43,6 +43,21 @@
                         <select name="role" class="form-control form-control-sm">
                             <option value="admin">Admin</option>
                             <option value="user">User</option>
+                            <option value="user">Divisi Umum</option>
+                            <option value="user">Divisi Hublang</option>
+                            <option value="user">Divisi Kepegawaian</option>
+                            <option value="user">Divisi Humas</option>
+                            <option value="user">Divisi Hukum</option>
+                            <option value="user">Divisi Perencanaan Anggaran</option>
+                            <option value="user">Divisi Pembukuan</option>
+                            <option value="user">Divisi Kas Dan Penagihan</option>
+                            <option value="user">Unit Lawe-Lawe</option>
+                            <option value="user">Unit Sepaku</option>
+                            <option value="user">Unit Waru</option>
+                            <option value="user">Unit Sotek</option>
+                            <option value="user">Unit Maridan</option>
+                            <option value="user">Unit Babulu</option>
+                            <option value="user">Divisi Laboratorium</option>
                         </select>
                     </div>
 
