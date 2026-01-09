@@ -307,6 +307,7 @@ return [
             'url' => 'laporan/daftar-risiko',
             'icon' => 'fas fa-clipboard-list',
             'label_color' => 'success',
+            
     ],
         [
             'text' => 'Tabel Risiko',

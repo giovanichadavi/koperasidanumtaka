@@ -63,6 +63,7 @@
 
                 <optgroup label="Departemen Teknik">
                     <option value="unit_lawe_lawe">Unit Lawe-Lawe</option>
+                    <option value="unit_sepaku">Unit Sepaku</option>
                     <option value="unit_waru">Unit Waru</option>
                     <option value="unit_sotek">Unit Sotek</option>
                     <option value="unit_maridan">Unit Maridan</option>
