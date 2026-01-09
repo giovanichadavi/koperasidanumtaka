@@ -36,12 +36,21 @@
         </optgroup>
 
         <optgroup label="Departemen Keuangan">
-            <option value="divisi_umum">Divisi Umum</option>
-            <option value="divisi_hublang">Divisi Hublang</option>
-            <option value="divisi_kepegawaian">Divisi Kepegawaian</option>
-            <option value="divisi_humas">Divisi Humas</option>
-            <option value="divisi_hukum">Divisi Hukum</option>
+            <option value="divisi_perencanaan_anggaran">Divisi Perencanaan Anggaran</option>
+            <option value="divisi_pembukuan">Divisi Pembukuan</option>
+            <option value="divisi_kas_penagihan">Divisi Kas Dan Penagihan</option>
         </optgroup>
+
+        <optgroup label="Departemen Teknik">
+            <option value="unit_lawe_lawe">Unit Lawe-Lawe</option>
+            <option value="unit_sepaku">Unit Sepaku</option>
+            <option value="unit_waru">Unit Waru</option>
+            <option value="unit_sotek">Unit Sotek</option>
+            <option value="unit_Maridan">Unit Maridan</option>
+            <option value="unit_babulu">Unit Babulu</option>
+            <option value="divisi_laboratorium">Divisi Laboratorium</option>
+        </optgroup>
+
 
     </select>
 </div>

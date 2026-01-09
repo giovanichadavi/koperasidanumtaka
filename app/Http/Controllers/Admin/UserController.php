@@ -11,9 +11,9 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::whereIn('role', ['admin','user','divisi_umum','divisi_hublang','divisi_kepegawaian',
-        'divisi_humas','divisi_hukum','divisi_perencanaan_anggaran','divisi_pembukuan','divisi_kas_dan_penagihan',
-        'unit_lawe-lawe','unit_sepaku','unit_sepaku','unit_waru','unit_sotek','unit_maridan','unit_babulu',
+        $users = User::whereIn('role', ['admin','user','divisi_umum','divisi_hublang',
+        'divisi_kepegawaian','divisi humas','divisi hukum','divisi_perencanaan_anggaran','divisi_pembukuan,
+        divisi_kas_penagihan','unit_lawe_lawe','unit_sepaku','unit_waru','unit_sotek','unit_maridan','unit_babulu',
         'divisi_laboratorium'])
                     ->paginate(5); 
         return view('admin.users.index', compact('users'));
