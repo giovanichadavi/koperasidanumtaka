@@ -29,8 +29,11 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('divisi_umum', fn($user) => $user->role === 'divisi_umum');
         Gate::define('divisi_hublang', fn($user) => $user->role === 'divisi_hublang');
         Gate::define('divisi_kepegawaian', fn($user) => $user->role === 'divisi_kepegawaian');
-        Gate::define('divisi_humas', fn($user) => $user->role === 'divisi_humas');
-        Gate::define('divisi_hukum', fn($user) => $user->role === 'divisi_hukum');
+        Gate::define('divisi_legal_drafting', fn($user) => $user->role === 'divisi_legal_drafting');
+        Gate::define('divisi_tunggakan_rekening_air', fn($user) => $user->role === 'divisi_tunggakan_rekening_air');
+        Gate::define('divisi_penerbit_rekening', fn($user) => $user->role === 'divisi_penerbit_rekening');
+        Gate::define('divisi_penyegelan_pemasangan_WM', fn($user) => $user->role === 'divisi_penyegelan_pemasangan_WM');
+        Gate::define('divisi_pengaduan_pelanggan', fn($user) => $user->role === 'divisi_pengaduan_pelanggan');
         Gate::define('divisi_perencanaan_anggaran', fn($user) => $user->role === 'divisi_perencanaan_anggaran');
         Gate::define('divisi_pembukuan', fn($user) => $user->role === 'divisi_pembukuan');
         Gate::define('divisi_kas_penagihan', fn($user) => $user->role === 'divisi_kas_dan_penagihan');

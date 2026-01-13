@@ -31,8 +31,14 @@
             <option value="divisi_umum">Divisi Umum</option>
             <option value="divisi_hublang">Divisi Hublang</option>
             <option value="divisi_kepegawaian">Divisi Kepegawaian</option>
-            <option value="divisi_humas">Divisi Humas</option>
-            <option value="divisi_hukum">Divisi Hukum</option>
+            <option value="divisi_legal_drafting">Divisi Legal Drafting</option>
+        </optgroup>
+
+        <optgroup label="Departemen Hublang">
+            <option value="divisi_tunggakan_rekening_air">Divisi Tunggakan Rekening Air</option>
+            <option value="divisi_penerbit_rekening">Divisi Penerbit Rekening</option>
+            <option value="divisi_penyegelan_pemasangan_WM">Divisi Penyegelan & Pemasangan Water Meter</option>
+            <option value="divisi_pengaduan_pelanggan">Divisi Pengaduan Pelanggan</option>
         </optgroup>
 
         <optgroup label="Departemen Keuangan">
