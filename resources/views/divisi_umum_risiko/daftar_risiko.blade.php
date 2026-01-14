@@ -109,6 +109,16 @@
                 </tbody>
 
             </table>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="text-muted">
+                Menampilkan {{ $risiko->firstItem() }} – {{ $risiko->lastItem() }}
+                dari {{ $risiko->total() }} data
+            </div>
+
+            <div>
+                {{ $risiko->links('pagination::bootstrap-4') }}
+            </div>
+        </div>
         </div>
     </div>
 </div>

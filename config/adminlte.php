@@ -310,17 +310,24 @@ return [
             
         ],
         [
-            'text' => 'Input Risiko',
-            'url'  => 'divisi/umum/risiko',
+            'text' => 'Input Risiko',   /// DIVISI UMUM
+            'url'  => 'divisi/umum/risiko', 
             'icon' => 'fas fa-exclamation-triangle',
             'can'  => 'divisi_umum',
         ],
         [
-            'text' => 'Input Risiko',
+            'text' => 'Input Risiko',   /// DIVISI HUBLANG
             'url'  => 'divisi/hublang/risiko',
             'icon' => 'fas fa-exclamation-triangle',
             'can'  => 'divisi_hublang',
         ],
+
+        [
+            'text' => 'Input Risiko',   /// DIVISI KEPEGAWAIAN
+            'url'  => 'divisi/kepegawaian/risiko',
+            'icon' => 'fas fa-exclamation-triangle',
+            'can'  => 'divisi_kepegawaian',
+        ],        
         [
             'text' => 'Tabel Risiko',
             'url' => 'risiko',

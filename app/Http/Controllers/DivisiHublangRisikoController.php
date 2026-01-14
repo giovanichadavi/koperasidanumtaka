@@ -21,7 +21,9 @@ class DivisiHublangRisikoController extends Controller
     {
         $this->checkRole();
 
-        $risiko = DaftarRisiko::where('unit_nama', 'Divisi Hublang')->get();
+        $risiko = DaftarRisiko::where('unit_nama', 'Divisi Hublang')
+        ->orderBy('created_at', 'desc')
+                ->paginate(5);
 
         return view('divisi_hublang_risiko.daftar_risiko', compact('risiko'));
     }

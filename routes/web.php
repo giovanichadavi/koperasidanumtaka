@@ -110,8 +110,9 @@ Route::middleware(['auth'])->group(function () {
     });
     //// DIVISI UMUM
 
+///---------------------------
     /// DIVISI HUBLANG
-        Route::middleware(['auth'])
+    Route::middleware(['auth'])
     ->prefix('divisi/hublang')
     ->name('divisi_hublang.')
     ->group(function () {
@@ -135,13 +136,33 @@ Route::middleware(['auth'])->group(function () {
             ->name('risiko.destroy');
     });
     /// DIVISI HUBLANG
+///------------------
 
+    /// DIVISI KEPEGAWAIAN
+Route::middleware(['auth'])
+    ->prefix('divisi/kepegawaian')
+    ->name('divisi_kepegawaian.')
+    ->group(function () {
 
-    Route::middleware(['auth','role:divisi_kepegawaian'])->prefix('divisi/kepegawaian')->group(function () {
-    Route::get('/risiko', [DivisiKepegawaianRisikoController::class, 'index']);
-    Route::get('/risiko/create', [DivisiKepegawaianRisikoController::class, 'create']);
-    Route::post('/risiko', [DivisiKepegawaianRisikoController::class, 'store']);
+        Route::get('/risiko', [DivisiKepegawaianRisikoController::class, 'index'])
+            ->name('risiko.index');
+
+        Route::get('/risiko/create', [DivisiKepegawaianRisikoController::class, 'create'])
+            ->name('risiko.create');
+
+        Route::post('/risiko', [DivisiKepegawaianRisikoController::class, 'store'])
+            ->name('risiko.store');
+
+        Route::get('/risiko/{id}/edit', [DivisiKepegawaianRisikoController::class, 'edit'])
+            ->name('risiko.edit');
+
+        Route::put('/risiko/{id}', [DivisiKepegawaianRisikoController::class, 'update'])
+            ->name('risiko.update');
+
+        Route::delete('/risiko/{id}', [DivisiKepegawaianRisikoController::class, 'destroy'])
+            ->name('risiko.destroy');
     });
+
 
 
     Route::middleware(['auth','role:divisi_legal_drafting'])->prefix('divisi/hukum')->group(function () {

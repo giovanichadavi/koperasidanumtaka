@@ -21,7 +21,9 @@ class DivisiUmumRisikoController extends Controller
     {
         $this->checkRole();
 
-        $risiko = DaftarRisiko::where('unit_nama', 'Divisi Umum')->get();
+        $risiko = DaftarRisiko::where('unit_nama', 'Divisi Umum')
+        ->orderBy('created_at', 'desc')
+                ->paginate(5);
 
         return view('divisi_umum_risiko.daftar_risiko', compact('risiko'));
     }
