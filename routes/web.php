@@ -84,24 +84,58 @@ Route::middleware(['auth'])->group(function () {
     [LaporanRisikoController::class, 'store'])
     ->name('laporan.daftar.risiko.store');
 
-    // ==== DIVISI ====
-    Route::middleware(['auth'])->prefix('divisi/umum')->group(function () {
+    // ==== DIVISI UMUM ====
+    Route::middleware(['auth'])
+    ->prefix('divisi/umum')
+    ->name('divisi_umum.')
+    ->group(function () {
 
-    Route::get('/risiko', [DivisiUmumRisikoController::class, 'index'])
-        ->name('divisi_umum.risiko.index');
+        Route::get('/risiko', [DivisiUmumRisikoController::class, 'index'])
+            ->name('risiko.index');
 
-    Route::get('/risiko/create', [DivisiUmumRisikoController::class, 'create'])
-        ->name('divisi_umum.risiko.create');
+        Route::get('/risiko/create', [DivisiUmumRisikoController::class, 'create'])
+            ->name('risiko.create');
 
-    Route::post('/risiko', [DivisiUmumRisikoController::class, 'store'])
-        ->name('divisi_umum.risiko.store');
-});
+        Route::post('/risiko', [DivisiUmumRisikoController::class, 'store'])
+            ->name('risiko.store');
 
-    Route::middleware(['auth','role:divisi_hublang'])->prefix('divisi/hublang')->group(function () {
-    Route::get('/risiko', [DivisiHublangRisikoController::class, 'index']);
-    Route::get('/risiko/create', [DivisiHublangRisikoController::class, 'create']);
-    Route::post('/risiko', [DivisiHublangRisikoController::class, 'store']);
+        Route::get('/risiko/{id}/edit', [DivisiUmumRisikoController::class, 'edit'])
+            ->name('risiko.edit');
+
+        Route::put('/risiko/{id}', [DivisiUmumRisikoController::class, 'update'])
+            ->name('risiko.update');
+
+        Route::delete('/risiko/{id}', [DivisiUmumRisikoController::class, 'destroy'])
+            ->name('risiko.destroy');
     });
+    //// DIVISI UMUM
+
+    /// DIVISI HUBLANG
+        Route::middleware(['auth'])
+    ->prefix('divisi/hublang')
+    ->name('divisi_hublang.')
+    ->group(function () {
+
+        Route::get('/risiko', [DivisiHublangRisikoController::class, 'index'])
+            ->name('risiko.index');
+
+        Route::get('/risiko/create', [DivisiHublangRisikoController::class, 'create'])
+            ->name('risiko.create');
+
+        Route::post('/risiko', [DivisiHublangRisikoController::class, 'store'])
+            ->name('risiko.store');
+
+        Route::get('/risiko/{id}/edit', [DivisiHublangRisikoController::class, 'edit'])
+            ->name('risiko.edit');
+
+        Route::put('/risiko/{id}', [DivisiHublangRisikoController::class, 'update'])
+            ->name('risiko.update');
+
+        Route::delete('/risiko/{id}', [DivisiHublangRisikoController::class, 'destroy'])
+            ->name('risiko.destroy');
+    });
+    /// DIVISI HUBLANG
+
 
     Route::middleware(['auth','role:divisi_kepegawaian'])->prefix('divisi/kepegawaian')->group(function () {
     Route::get('/risiko', [DivisiKepegawaianRisikoController::class, 'index']);

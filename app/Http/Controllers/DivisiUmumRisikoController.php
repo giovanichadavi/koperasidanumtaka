@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\DaftarRisiko;
 
@@ -13,40 +14,106 @@ class DivisiUmumRisikoController extends Controller
         }
     }
 
+    // ======================
+    // 1️⃣ DAFTAR RISIKO
+    // ======================
     public function index()
     {
         $this->checkRole();
-        return view('divisi_umum_risiko.daftar_risiko');
-    }
-    
 
+        $risiko = DaftarRisiko::where('unit_nama', 'Divisi Umum')->get();
+
+        return view('divisi_umum_risiko.daftar_risiko', compact('risiko'));
+    }
+
+    // ======================
+    // 2️⃣ TAMBAH RISIKO
+    // ======================
     public function create()
     {
         $this->checkRole();
         return view('divisi_umum_risiko.tambah_risiko');
     }
 
-
     public function store(Request $request)
-{
-    $validated = $request->validate([
-        'nama_kegiatan' => 'required',
-        'tujuan' => 'required',
-        'id_risiko' => 'required|array|min:1',
-        'pernyataan_risiko' => 'required',
-        'sebab' => 'required',
-        'dampak' => 'required',
-    ]);
+    {
+        $validated = $request->validate([
+            'nama_kegiatan' => 'required',
+            'tujuan' => 'required',
+            'id_risiko' => 'required|array|min:1',
+            'pernyataan_risiko' => 'required',
+            'sebab' => 'required',
+            'dampak' => 'required',
+        ]);
 
-    DaftarRisiko::create([
-        'nama_kegiatan' => $validated['nama_kegiatan'],
-        'tujuan' => $validated['tujuan'],
-        'id_risiko' => implode(', ', $validated['id_risiko']),
-        'pernyataan_risiko' => $validated['pernyataan_risiko'],
-        'sebab' => $validated['sebab'],
-        'dampak' => $validated['dampak'],
-    ]);
+        DaftarRisiko::create([
+            'unit_nama' => 'Divisi Umum',
+            'nama_kegiatan' => $validated['nama_kegiatan'],
+            'tujuan' => $validated['tujuan'],
+            'id_risiko' => implode(', ', $validated['id_risiko']),
+            'pernyataan_risiko' => $validated['pernyataan_risiko'],
+            'sebab' => $validated['sebab'],
+            'dampak' => $validated['dampak'],
+        ]);
 
-    return redirect()->back()->with('success', 'Data berhasil disimpan');
-}
+        return redirect()
+            ->route('divisi_umum.risiko.index')
+            ->with('success', 'Data risiko berhasil ditambahkan');
+    }
+
+    // ======================
+    // 3️⃣ EDIT RISIKO
+    // ======================
+    public function edit($id)
+    {
+        $this->checkRole();
+
+        $risiko = DaftarRisiko::findOrFail($id);
+
+        return view('divisi_umum_risiko.edit_risiko', compact('risiko'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->checkRole();
+
+        $validated = $request->validate([
+            'nama_kegiatan' => 'required',
+            'tujuan' => 'required',
+            'id_risiko' => 'required|array|min:1',
+            'pernyataan_risiko' => 'required',
+            'sebab' => 'required',
+            'dampak' => 'required',
+        ]);
+
+        $risiko = DaftarRisiko::findOrFail($id);
+
+        $risiko->update([
+            'nama_kegiatan' => $validated['nama_kegiatan'],
+            'tujuan' => $validated['tujuan'],
+            'id_risiko' => implode(', ', $validated['id_risiko']),
+            'pernyataan_risiko' => $validated['pernyataan_risiko'],
+            'sebab' => $validated['sebab'],
+            'dampak' => $validated['dampak'],
+        ]);
+
+        return redirect()
+            ->route('divisi_umum.risiko.index')
+            ->with('success', 'Data risiko berhasil diperbarui');
+    }
+
+    // ======================
+    // 4️⃣ HAPUS RISIKO
+    // ======================
+    public function destroy($id)
+    {
+        $this->checkRole();
+
+        $risiko = DaftarRisiko::findOrFail($id);
+        $risiko->delete();
+
+        return redirect()
+            ->route('divisi_umum.risiko.index')
+            ->with('success', 'Data risiko berhasil dihapus');
+    }
 }

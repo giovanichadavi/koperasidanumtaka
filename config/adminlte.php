@@ -316,6 +316,12 @@ return [
             'can'  => 'divisi_umum',
         ],
         [
+            'text' => 'Input Risiko',
+            'url'  => 'divisi/hublang/risiko',
+            'icon' => 'fas fa-exclamation-triangle',
+            'can'  => 'divisi_hublang',
+        ],
+        [
             'text' => 'Tabel Risiko',
             'url' => 'risiko',
             'icon' => 'fas fa-file-alt',

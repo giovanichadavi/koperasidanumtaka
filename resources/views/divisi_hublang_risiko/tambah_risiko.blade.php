@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Tambah Risiko | Umum')
+@section('title', 'Tambah Risiko | Hublang')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
@@ -26,14 +26,14 @@
 
         <div class="card-header">
             <label class="mb-0 font-weight-semibold">
-                Tambah Daftar Risiko Divisi Umum
+                Tambah Daftar Risiko Divisi Hublang
             </label>
         </div>
 
         <div class="card-body d-flex flex-column">
 
             <form method="POST"
-                  action="{{ route('divisi_umum.risiko.store') }}"
+                  action="{{ route('divisi_hublang.risiko.store') }}"
                   class="flex-grow-1 d-flex flex-column">
                 @csrf
 
@@ -115,11 +115,12 @@
                                       rows="2"
                                       required></textarea>
                         </div>
+
                     </div>
                 </div>
 
                 <div class="d-flex justify-content-end border-top pt-3 mt-auto">
-                    <a href="{{ route('divisi_umum.risiko.index') }}"
+                    <a href="{{ route('divisi_hublang.risiko.index') }}"
                        class="btn btn-secondary">
                         Kembali
                     </a>
