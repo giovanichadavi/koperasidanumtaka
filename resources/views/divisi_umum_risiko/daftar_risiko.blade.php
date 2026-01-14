@@ -1,15 +1,15 @@
 @extends('adminlte::page')
 
-@section('title', 'Laporan Daftar Risiko')
+@section('title', 'Laporan Daftar Risiko Divisi Umum')
 
 @section('content')
 <div class="card mt-4">
     <div class="card-header">
-        <a href="{{ route('divisi_umum_risiko.daftar.risiko.create') }}"
+        <a href="{{ route('divisi_umum.risiko.create') }}"
         class="btn btn-primary btn-sm float-right">
         <i class="fas fa-plus"></i> Tambah Risiko Divisi Umum
 </a>
-        <h5 class="mb-0">Laporan Daftar Risiko</h5>
+        <h5 class="mb-0">Laporan Daftar Risiko Divisi Umum</h5>
     </div>
 
     <div class="card-body">
@@ -27,20 +27,6 @@
                         <th>Dampak</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach($risiko as $i => $r)
-                    <tr>
-                        <td class="text-center">{{ $i+1 }}</td>
-                        <td>{{ $r->unit_nama }}</td>
-                        <td>{{ $r->nama_kegiatan }}</td>
-                        <td>{{ $r->tujuan}}</td>
-                        <td>{{ $r->id_risiko }}</td>
-                        <td>{{ $r->pernyataan_risiko }}</td>
-                        <td>{{ $r->sebab }}</td>
-                        <td>{{ $r->dampak }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
             </table>
         </div>
     </div>

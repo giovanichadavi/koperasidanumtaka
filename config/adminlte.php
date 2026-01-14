@@ -311,7 +311,7 @@ return [
         ],
         [
             'text' => 'Input Risiko',
-            'url'  => 'divisi/umum/risiko/create',
+            'url'  => 'divisi/umum/risiko',
             'icon' => 'fas fa-exclamation-triangle',
             'can'  => 'divisi_umum',
         ],

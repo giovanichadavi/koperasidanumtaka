@@ -18,6 +18,7 @@ class DivisiUmumRisikoController extends Controller
         $this->checkRole();
         return view('divisi_umum_risiko.daftar_risiko');
     }
+    
 
     public function create()
     {
@@ -27,14 +28,25 @@ class DivisiUmumRisikoController extends Controller
 
 
     public function store(Request $request)
-    {
-        DaftarRisiko::create([
-            'unit_nama' => 'Divisi Umum',
-            'pernyataan_risiko' => $request->pernyataan_risiko,
-            'sebab' => $request->sebab,
-            'dampak' => $request->dampak,
-        ]);
+{
+    $validated = $request->validate([
+        'nama_kegiatan' => 'required',
+        'tujuan' => 'required',
+        'id_risiko' => 'required|array|min:1',
+        'pernyataan_risiko' => 'required',
+        'sebab' => 'required',
+        'dampak' => 'required',
+    ]);
 
-        return redirect()->back()->with('success','Data berhasil disimpan');
-    }
+    DaftarRisiko::create([
+        'nama_kegiatan' => $validated['nama_kegiatan'],
+        'tujuan' => $validated['tujuan'],
+        'id_risiko' => implode(', ', $validated['id_risiko']),
+        'pernyataan_risiko' => $validated['pernyataan_risiko'],
+        'sebab' => $validated['sebab'],
+        'dampak' => $validated['dampak'],
+    ]);
+
+    return redirect()->back()->with('success', 'Data berhasil disimpan');
+}
 }

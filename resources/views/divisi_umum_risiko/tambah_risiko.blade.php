@@ -13,19 +13,6 @@
             @csrf
 
             <div class="form-group mb-3">
-                <label>Nama Unit</label>
-                <select name="unit_nama" class="form-control" required>
-                    <option value="">-- Pilih Unit --</option>
-                    <option value="Lawe-Lawe">Unit Lawe-Lawe</option>
-                    <option value="Sepaku">Unit Sepaku</option>
-                    <option value="Waru">Unit Waru</option>
-                    <option value="Sotek">Unit Sotek</option>
-                    <option value="Maridan">Unit Maridan</option>
-                    <option value="Babulu">Unit Babulu</option>
-                </select>
-            </div>
-
-            <div class="form-group mb-3">
                 <label>Nama Kegiatan</label>
                     <input type="text"
                         name="nama_kegiatan"

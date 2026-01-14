@@ -10,6 +10,7 @@ class DaftarRisiko extends Model
     protected $fillable = [
         'unit_nama',
         'nama_kegiatan',
+        'tujuan',
         'id_risiko',
         'pernyataan_risiko',
         'sebab',
