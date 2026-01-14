@@ -85,11 +85,17 @@ Route::middleware(['auth'])->group(function () {
     ->name('laporan.daftar.risiko.store');
 
     // ==== DIVISI ====
-    Route::middleware(['auth','role:divisi_umum'])->prefix('divisi/umum')->group(function () {
-    Route::get('/risiko', [DivisiUmumRisikoController::class, 'index']);
-    Route::get('/risiko/create', [DivisiUmumRisikoController::class, 'create']);
-    Route::post('/risiko', [DivisiUmumRisikoController::class, 'store']);
-    });
+    Route::middleware(['auth'])->prefix('divisi/umum')->group(function () {
+
+    Route::get('/risiko', [DivisiUmumRisikoController::class, 'index'])
+        ->name('divisi_umum.risiko.index');
+
+    Route::get('/risiko/create', [DivisiUmumRisikoController::class, 'create'])
+        ->name('divisi_umum.risiko.create');
+
+    Route::post('/risiko', [DivisiUmumRisikoController::class, 'store'])
+        ->name('divisi_umum.risiko.store');
+});
 
     Route::middleware(['auth','role:divisi_hublang'])->prefix('divisi/hublang')->group(function () {
     Route::get('/risiko', [DivisiHublangRisikoController::class, 'index']);

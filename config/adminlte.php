@@ -308,7 +308,13 @@ return [
             'icon' => 'fas fa-clipboard-list',
             'label_color' => 'success',
             
-    ],
+        ],
+        [
+            'text' => 'Input Risiko',
+            'url'  => 'divisi/umum/risiko/create',
+            'icon' => 'fas fa-exclamation-triangle',
+            'can'  => 'divisi_umum',
+        ],
         [
             'text' => 'Tabel Risiko',
             'url' => 'risiko',
