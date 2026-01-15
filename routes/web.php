@@ -264,5 +264,29 @@ Route::middleware(['auth'])
             ->name('risiko.destroy');
     });
 
+    //// DIVISI PENGADUAN PELANGGAN
+    Route::middleware(['auth'])
+    ->prefix('divisi/pengaduan_pelanggan')
+    ->name('divisi_pengaduan_pelanggan.')
+    ->group(function () {
+
+        Route::get('/risiko', [DivisiPengaduanPelangganRisikoController::class, 'index'])
+            ->name('risiko.index');
+
+        Route::get('/risiko/create', [DivisiPengaduanPelangganRisikoController::class, 'create'])
+            ->name('risiko.create');
+
+        Route::post('/risiko', [DivisiPengaduanPelangganRisikoController::class, 'store'])
+            ->name('risiko.store');
+
+        Route::get('/risiko/{id}/edit', [DivisiPengaduanPelangganRisikoController::class, 'edit'])
+            ->name('risiko.edit');
+
+        Route::put('/risiko/{id}', [DivisiPengaduanPelangganRisikoController::class, 'update'])
+            ->name('risiko.update');
+
+        Route::delete('/risiko/{id}', [DivisiPengaduanPelangganRisikoController::class, 'destroy'])
+            ->name('risiko.destroy');
+    });
 
 require __DIR__.'/auth.php';
