@@ -6,7 +6,7 @@ use App\Http\Controllers\DivisiKepegawaianRisikoController;
 use App\Http\Controllers\DivisiLegalDraftingRisikoController;
 use App\Http\Controllers\DivisiTunggakanRekeningAirRisikoController;
 use App\Http\Controllers\DivisiPenerbitRekeningRisikoController;
-use App\Http\Controllers\DivisiPenyegelanPemasanganWMRisikoController;
+use App\Http\Controllers\DivisiPenyegelanPemasanganWmRisikoController;
 use App\Http\Controllers\DivisiPengaduanPelangganRisikoController;
 use App\Http\Controllers\DivisiPerencanaanAnggaranRisikoController;
 use App\Http\Controllers\DivisiPembukuanRisikoController;
@@ -163,8 +163,8 @@ Route::middleware(['auth'])
             ->name('risiko.destroy');
     });
 
-        /// DIVISI LEGAL DRAFTING
-Route::middleware(['auth'])
+    /// DIVISI LEGAL DRAFTING
+    Route::middleware(['auth'])
     ->prefix('divisi/legal_drafting')
     ->name('divisi_legal_drafting.')
     ->group(function () {
@@ -188,93 +188,81 @@ Route::middleware(['auth'])
             ->name('risiko.destroy');
     });
 
+/// DIVISI TUNGGAKAN REKENING AIR
 
+    Route::middleware(['auth'])
+    ->prefix('divisi/tunggakan_rekening_air')
+    ->name('divisi_tunggakan_rekening_air.')
+    ->group(function () {
 
-    Route::middleware(['auth','role:divisi_tunggakan_rekening_air'])->prefix('divisi/perencanaananggaran')->group(function () {
-    Route::get('/risiko', [DivisiTunggakanRekeningAirRisikoController::class, 'index']);
-    Route::get('/risiko/create', [DivisiTunggakanRekeningAirRisikoController::class, 'create']);
-    Route::post('/risiko', [DivisiTunggakanRekeningAirRisikoController::class, 'store']);
-    });
-    
-    Route::middleware(['auth','role:divisi_penerbit_rekening'])->prefix('divisi/perencanaananggaran')->group(function () {
-    Route::get('/risiko', [DivisiPenerbitRekeningRisikoController::class, 'index']);
-    Route::get('/risiko/create', [DivisiPenerbitRekeningRisikoController::class, 'create']);
-    Route::post('/risiko', [DivisiPenerbitRekeningRisikoController::class, 'store']);
-    });
+        Route::get('/risiko', [DivisiTunggakanRekeningAirRisikoController::class, 'index'])
+            ->name('risiko.index');
 
-    Route::middleware(['auth','role:divisi_penyegelan_pemasangan_WM'])->prefix('divisi/perencanaananggaran')->group(function () {
-    Route::get('/risiko', [DivisiPenyegelanPemasanganWMRisikoController::class, 'index']);
-    Route::get('/risiko/create', [DivisiPenyegelanPemasanganWMRisikoController::class, 'create']);
-    Route::post('/risiko', [DivisiPenyegelanPemasanganWMRisikoController::class, 'store']);
-    });
-    
-        Route::middleware(['auth','role:divisi_pengaduan_pelanggan'])->prefix('divisi/perencanaananggaran')->group(function () {
-    Route::get('/risiko', [DivisiPengaduanPelangganRisikoController::class, 'index']);
-    Route::get('/risiko/create', [DivisiPengaduanPelangganRisikoController::class, 'create']);
-    Route::post('/risiko', [DivisiPengaduanPelangganRisikoController::class, 'store']);
-    });
+        Route::get('/risiko/create', [DivisiTunggakanRekeningAirRisikoController::class, 'create'])
+            ->name('risiko.create');
 
-    Route::middleware(['auth','role:divisi_perencanaan_anggaran'])->prefix('divisi/perencanaananggaran')->group(function () {
-    Route::get('/risiko', [DivisiPerencanaanAnggaranRisikoController::class, 'index']);
-    Route::get('/risiko/create', [DivisiPerencanaanAnggaranRisikoController::class, 'create']);
-    Route::post('/risiko', [DivisiPerencanaanAnggaranRisikoController::class, 'store']);
+        Route::post('/risiko', [DivisiTunggakanRekeningAirRisikoController::class, 'store'])
+            ->name('risiko.store');
+
+        Route::get('/risiko/{id}/edit', [DivisiTunggakanRekeningAirRisikoController::class, 'edit'])
+            ->name('risiko.edit');
+
+        Route::put('/risiko/{id}', [DivisiTunggakanRekeningAirRisikoController::class, 'update'])
+            ->name('risiko.update');
+
+        Route::delete('/risiko/{id}', [DivisiTunggakanRekeningAirRisikoController::class, 'destroy'])
+            ->name('risiko.destroy');
     });
 
-    Route::middleware(['auth','role:divisi_pembukuan'])->prefix('divisi/pembukuan')->group(function () {
-    Route::get('/risiko', [DivisiPembukuanRisikoController::class, 'index']);
-    Route::get('/risiko/create', [DivisiPembukuanRisikoController::class, 'create']);
-    Route::post('/risiko', [DivisiPembukuanRisikoController::class, 'store']);
+//// DIVISI PENERBIT REKENING 
+    Route::middleware(['auth'])
+    ->prefix('divisi/penerbit_rekening')
+    ->name('divisi_penerbit_rekening.')
+    ->group(function () {
+
+        Route::get('/risiko', [DivisiPenerbitRekeningRisikoController::class, 'index'])
+            ->name('risiko.index');
+
+        Route::get('/risiko/create', [DivisiPenerbitRekeningRisikoController::class, 'create'])
+            ->name('risiko.create');
+
+        Route::post('/risiko', [DivisiPenerbitRekeningRisikoController::class, 'store'])
+            ->name('risiko.store');
+
+        Route::get('/risiko/{id}/edit', [DivisiPenerbitRekeningRisikoController::class, 'edit'])
+            ->name('risiko.edit');
+
+        Route::put('/risiko/{id}', [DivisiPenerbitRekeningRisikoController::class, 'update'])
+            ->name('risiko.update');
+
+        Route::delete('/risiko/{id}', [DivisiPenerbitRekeningRisikoController::class, 'destroy'])
+            ->name('risiko.destroy');
     });
 
-    Route::middleware(['auth','role:divisi_kas_penagihan'])->prefix('divisi/kaspenagihan')->group(function () {
-    Route::get('/risiko', [DivisiKasPenagihanRisikoController::class, 'index']);
-    Route::get('/risiko/create', [DivisiKasPenagihanRisikoController::class, 'create']);
-    Route::post('/risiko', [DivisiKasPenagihanRisikoController::class, 'store']);
-    });
+    //// DIVISI PENERBIT REKENING 
+    Route::middleware(['auth'])
+    ->prefix('divisi/penyegelan_pemasangan_wm')
+    ->name('divisi_penyegelan_pemasangan_wm.')
+    ->group(function () {
 
-        // ================= UNIT =================
-    Route::middleware(['auth','role:unit_lawe_lawe'])->prefix('unit/lawe-lawe')->group(function () {
-    Route::get('/risiko', [UnitLaweLaweRisikoController::class, 'index']);
-    Route::get('/risiko/create', [UnitLaweLaweRisikoController::class, 'create']);
-    Route::post('/risiko', [UnitLaweLaweRisikoController::class, 'store']);
-    });
-    
-    Route::middleware(['auth','role:unit_sepaku'])->prefix('unit/sepaku')->group(function () {
-    Route::get('/risiko', [UnitSepakuRisikoController::class, 'index']);
-    Route::get('/risiko/create', [UnitSepakuRisikoController::class, 'create']);
-    Route::post('/risiko', [UnitSepakuRisikoController::class, 'store']);
-    });
+        Route::get('/risiko', [DivisiPenyegelanPemasanganWmRisikoController::class, 'index'])
+            ->name('risiko.index');
 
-    Route::middleware(['auth','role:unit_waru'])->prefix('unit/waru')->group(function () {
-    Route::get('/risiko', [UnitWaruRisikoController::class, 'index']);
-    Route::get('/risiko/create', [UnitWaruRisikoController::class, 'create']);
-    Route::post('/risiko', [UnitWaruRisikoController::class, 'store']);
+        Route::get('/risiko/create', [DivisiPenyegelanPemasanganWmRisikoController::class, 'create'])
+            ->name('risiko.create');
+
+        Route::post('/risiko', [DivisiPenyegelanPemasanganWmRisikoController::class, 'store'])
+            ->name('risiko.store');
+
+        Route::get('/risiko/{id}/edit', [DivisiPenyegelanPemasanganWmRisikoController::class, 'edit'])
+            ->name('risiko.edit');
+
+        Route::put('/risiko/{id}', [DivisiPenyegelanPemasanganWmRisikoController::class, 'update'])
+            ->name('risiko.update');
+
+        Route::delete('/risiko/{id}', [DivisiPenyegelanPemasanganWmRisikoController::class, 'destroy'])
+            ->name('risiko.destroy');
     });
-
-    Route::middleware(['auth','role:unit_sotek'])->prefix('unit/sotek')->group(function () {
-    Route::get('/risiko', [UnitSotekRisikoController::class, 'index']);
-    Route::get('/risiko/create', [UnitSotekRisikoController::class, 'create']);
-    Route::post('/risiko', [UnitSotekRisikoController::class, 'store']);
-    });
-
-    Route::middleware(['auth','role:unit_maridan'])->prefix('unit/maridan')->group(function () {
-    Route::get('/risiko', [UnitMaridanRisikoController::class, 'index']);
-    Route::get('/risiko/create', [UnitMaridanRisikoController::class, 'create']);
-    Route::post('/risiko', [UnitMaridanRisikoController::class, 'store']);
-    });
-
-    Route::middleware(['auth','role:unit_babulu'])->prefix('unit/babulu')->group(function () {
-    Route::get('/risiko', [UnitBabuluRisikoController::class, 'index']);
-    Route::get('/risiko/create', [UnitBabuluRisikoController::class, 'create']);
-    Route::post('/risiko', [UnitBabuluRisikoController::class, 'store']);
-    });
-
-    Route::middleware(['auth','role:divisi_laboratorium'])->prefix('divisi/laboratorium')->group(function () {
-    Route::get('/risiko', [DivisiLaboratoriumRisikoController::class, 'index']);
-    Route::get('/risiko/create', [DivisiLaboratoriumRisikoController::class, 'create']);
-    Route::post('/risiko', [DivisiLaboratoriumRisikoController::class, 'store']);
-     });
-
 
 
 require __DIR__.'/auth.php';

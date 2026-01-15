@@ -333,7 +333,27 @@ return [
             'url'  => 'divisi/legal_drafting/risiko',
             'icon' => 'fas fa-exclamation-triangle',
             'can'  => 'divisi_legal_drafting',
-        ],          
+        ],      
+        [
+            'text' => 'Input Risiko',   /// DIVISI TUNGGAKAN REKENING AIR
+            'url'  => 'divisi/tunggakan_rekening_air/risiko',
+            'icon' => 'fas fa-exclamation-triangle',
+            'can'  => 'divisi_tunggakan_rekening_air',
+        ],
+
+        [
+            'text' => 'Input Risiko',   /// DIVISI PENERBIT REKENING
+            'url'  => 'divisi/penerbit_rekening/risiko',
+            'icon' => 'fas fa-exclamation-triangle',
+            'can'  => 'divisi_penerbit_rekening',
+        ],
+
+        [
+            'text' => 'Input Risiko',   /// DIVISI PENYEGELAN & PEMASANGAN WM
+            'url'  => 'divisi/penyegelan_pemasangan_wm/risiko',
+            'icon' => 'fas fa-exclamation-triangle',
+            'can'  => 'divisi_penyegelan_pemasangan_wm',
+        ],
         [
             'text' => 'Tabel Risiko',
             'url' => 'risiko',

@@ -57,7 +57,7 @@
                 <optgroup label="Departemen Hublang">
                     <option value="divisi_tunggakan_rekening_air">Divisi Tunggakan Rekening Air</option>
                     <option value="divisi_penerbit_rekening">Divisi Penerbit Rekening</option>
-                    <option value="divisi_penyegelan_pemasangan_WM">Divisi Penyegelan & Pemasangan Water Meter</option>
+                    <option value="divisi_penyegelan_pemasangan_wm">Divisi Penyegelan & Pemasangan Water Meter</option>
                     <option value="divisi_pengaduan_pelanggan">Divisi Pengaduan Pelanggan</option>
                 </optgroup>
                 </optgroup>

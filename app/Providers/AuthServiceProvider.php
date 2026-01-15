@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('divisi_legal_drafting', fn($user) => $user->role === 'divisi_legal_drafting');
         Gate::define('divisi_tunggakan_rekening_air', fn($user) => $user->role === 'divisi_tunggakan_rekening_air');
         Gate::define('divisi_penerbit_rekening', fn($user) => $user->role === 'divisi_penerbit_rekening');
-        Gate::define('divisi_penyegelan_pemasangan_WM', fn($user) => $user->role === 'divisi_penyegelan_pemasangan_WM');
+        Gate::define('divisi_penyegelan_pemasangan_wm', fn($user) => $user->role === 'divisi_penyegelan_pemasangan_wm');
         Gate::define('divisi_pengaduan_pelanggan', fn($user) => $user->role === 'divisi_pengaduan_pelanggan');
         Gate::define('divisi_perencanaan_anggaran', fn($user) => $user->role === 'divisi_perencanaan_anggaran');
         Gate::define('divisi_pembukuan', fn($user) => $user->role === 'divisi_pembukuan');

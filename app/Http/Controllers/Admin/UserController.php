@@ -13,7 +13,7 @@ class UserController extends Controller
     {
         $users = User::whereIn('role', ['admin','user','divisi_umum','divisi_hublang',
         'divisi_kepegawaian','','divisi_legal_drafting','divisi_tunggakan_rekening_air'
-        ,'divisi_penerbit_rekening','divisi_penyegelan_pemasangan_WM'
+        ,'divisi_penerbit_rekening','divisi_penyegelan_pemasangan_wm'
         ,'divisi_pengaduan_masyarakat','divisi_perencanaan_anggaran','divisi_pembukuan,
         divisi_kas_penagihan','unit_lawe_lawe','unit_sepaku','unit_waru','unit_sotek','unit_maridan','unit_babulu',
         'divisi_laboratorium'])
