@@ -163,13 +163,32 @@ Route::middleware(['auth'])
             ->name('risiko.destroy');
     });
 
+        /// DIVISI LEGAL DRAFTING
+Route::middleware(['auth'])
+    ->prefix('divisi/legal_drafting')
+    ->name('divisi_legal_drafting.')
+    ->group(function () {
 
+        Route::get('/risiko', [DivisiLegalDraftingRisikoController::class, 'index'])
+            ->name('risiko.index');
 
-    Route::middleware(['auth','role:divisi_legal_drafting'])->prefix('divisi/hukum')->group(function () {
-    Route::get('/risiko', [DivisiLegalDraftingRisikoController::class, 'index']);
-    Route::get('/risiko/create', [DivisiLegalDraftingRisikoController::class, 'create']);
-    Route::post('/risiko', [DivisiLegalDraftingRisikoController::class, 'store']);
+        Route::get('/risiko/create', [DivisiLegalDraftingRisikoController::class, 'create'])
+            ->name('risiko.create');
+
+        Route::post('/risiko', [DivisiLegalDraftingRisikoController::class, 'store'])
+            ->name('risiko.store');
+
+        Route::get('/risiko/{id}/edit', [DivisiLegalDraftingRisikoController::class, 'edit'])
+            ->name('risiko.edit');
+
+        Route::put('/risiko/{id}', [DivisiLegalDraftingRisikoController::class, 'update'])
+            ->name('risiko.update');
+
+        Route::delete('/risiko/{id}', [DivisiLegalDraftingRisikoController::class, 'destroy'])
+            ->name('risiko.destroy');
     });
+
+
 
     Route::middleware(['auth','role:divisi_tunggakan_rekening_air'])->prefix('divisi/perencanaananggaran')->group(function () {
     Route::get('/risiko', [DivisiTunggakanRekeningAirRisikoController::class, 'index']);

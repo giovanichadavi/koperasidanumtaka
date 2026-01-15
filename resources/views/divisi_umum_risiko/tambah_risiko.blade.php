@@ -39,12 +39,14 @@
 
                 <div class="row flex-grow-1">
 
+                    {{-- KOLOM KIRI --}}
                     <div class="col-md-6">
                         <div class="form-group mb-4">
                             <label>Nama Kegiatan</label>
                             <input type="text"
                                    name="nama_kegiatan"
                                    class="form-control"
+                                   placeholder="Masukkan nama kegiatan"
                                    required>
                         </div>
 
@@ -53,6 +55,7 @@
                             <input type="text"
                                    name="tujuan"
                                    class="form-control"
+                                   placeholder="Masukkan tujuan kegiatan"
                                    required>
                         </div>
 
@@ -61,17 +64,21 @@
                             <textarea name="pernyataan_risiko"
                                       class="form-control auto-resize"
                                       rows="2"
+                                      placeholder="Tuliskan pernyataan risiko yang terjadi"
                                       required></textarea>
                         </div>
+
                         <div class="form-group mb-4">
                             <label>Dampak</label>
                             <textarea name="dampak"
                                       class="form-control auto-resize"
                                       rows="2"
+                                      placeholder="Tuliskan dampak yang ditimbulkan"
                                       required></textarea>
                         </div>
                     </div>
 
+                    {{-- KOLOM KANAN --}}
                     <div class="col-md-6">
 
                         <div class="form-group mb-4">
@@ -113,11 +120,14 @@
                             <textarea name="sebab"
                                       class="form-control auto-resize"
                                       rows="2"
+                                      placeholder="Tuliskan penyebab terjadinya risiko"
                                       required></textarea>
                         </div>
+
                     </div>
                 </div>
 
+                {{-- FOOTER --}}
                 <div class="d-flex justify-content-end border-top pt-3 mt-auto">
                     <a href="{{ route('divisi_umum.risiko.index') }}"
                        class="btn btn-secondary">

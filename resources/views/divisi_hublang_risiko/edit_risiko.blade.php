@@ -20,10 +20,13 @@
 @endsection
 
 @section('content')
-<div class="container-fluid pt-1">
-<div class="card custom-card shadow-sm mt-4">
+<div class="container-fluid pt-4">
+<div class="card custom-card shadow-sm">
+
     <div class="card-header">
-        <label class="mb-0">Edit Daftar Risiko Divisi Hublang</label>
+        <label class="mb-0 font-weight-semibold">
+            Edit Daftar Risiko Divisi Hublang
+        </label>
     </div>
 
     <div class="card-body d-flex flex-column">
@@ -49,6 +52,7 @@
             @endphp
 
             <div class="row flex-grow-1">
+
                 {{-- KOLOM KIRI --}}
                 <div class="col-md-6">
                     <div class="form-group mb-4">
@@ -57,6 +61,7 @@
                                name="nama_kegiatan"
                                class="form-control"
                                value="{{ $risiko->nama_kegiatan }}"
+                               placeholder="Masukkan nama kegiatan"
                                required>
                     </div>
 
@@ -66,6 +71,7 @@
                                name="tujuan"
                                class="form-control"
                                value="{{ $risiko->tujuan }}"
+                               placeholder="Masukkan tujuan kegiatan"
                                required>
                     </div>
 
@@ -74,13 +80,16 @@
                         <textarea name="pernyataan_risiko"
                                   class="form-control auto-resize"
                                   rows="2"
+                                  placeholder="Tuliskan pernyataan risiko"
                                   required>{{ $risiko->pernyataan_risiko }}</textarea>
                     </div>
+
                     <div class="form-group mb-4">
                         <label>Dampak</label>
                         <textarea name="dampak"
                                   class="form-control auto-resize"
                                   rows="2"
+                                  placeholder="Tuliskan dampak yang ditimbulkan"
                                   required>{{ $risiko->dampak }}</textarea>
                     </div>
                 </div>
@@ -88,7 +97,7 @@
                 {{-- KOLOM KANAN --}}
                 <div class="col-md-6">
                     <div class="form-group mb-4">
-                        <label>Jenis Risiko</label>
+                        <label class="mb-2">Jenis Risiko</label>
                         <div class="row">
                             @foreach($jenisRisiko as $i => $jr)
                                 <div class="col-sm-6 mb-2">
@@ -114,14 +123,15 @@
                         <textarea name="sebab"
                                   class="form-control auto-resize"
                                   rows="2"
+                                  placeholder="Tuliskan penyebab terjadinya risiko"
                                   required>{{ $risiko->sebab }}</textarea>
                     </div>
-
                 </div>
+
             </div>
 
-            {{-- FOOTER TOMBOL --}}
-            <div class="d-flex justify-content-end border-top pt-3">
+            {{-- FOOTER --}}
+            <div class="d-flex justify-content-end border-top pt-3 mt-auto">
                 <a href="{{ route('divisi_hublang.risiko.index') }}"
                    class="btn btn-secondary">
                     Kembali
@@ -149,6 +159,7 @@
 </script>
 @endpush
 
+{{-- STYLE --}}
 @push('css')
 <style>
     textarea {

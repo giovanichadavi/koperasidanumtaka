@@ -327,7 +327,13 @@ return [
             'url'  => 'divisi/kepegawaian/risiko',
             'icon' => 'fas fa-exclamation-triangle',
             'can'  => 'divisi_kepegawaian',
-        ],        
+        ],
+        [
+            'text' => 'Input Risiko',   /// DIVISI LEGAL DRAFTING
+            'url'  => 'divisi/legal_drafting/risiko',
+            'icon' => 'fas fa-exclamation-triangle',
+            'can'  => 'divisi_legal_drafting',
+        ],          
         [
             'text' => 'Tabel Risiko',
             'url' => 'risiko',

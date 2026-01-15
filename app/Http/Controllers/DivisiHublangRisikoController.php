@@ -34,7 +34,7 @@ class DivisiHublangRisikoController extends Controller
     public function create()
     {
         $this->checkRole();
-        return view('divisi_Hublang_risiko.tambah_risiko');
+        return view('divisi_hublang_risiko.tambah_risiko');
     }
 
     public function store(Request $request)
