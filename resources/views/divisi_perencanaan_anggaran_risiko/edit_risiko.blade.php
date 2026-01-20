@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Edit Risiko | Pengaduan Pelanggan')
+@section('title', 'Edit Risiko | Perencanaan Anggaran')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
@@ -25,14 +25,14 @@
 
     <div class="card-header">
         <label class="mb-0 font-weight-semibold">
-            Edit Daftar Risiko Divisi Pengaduan Pelanggan
+            Edit Daftar Risiko Divisi Perencanaan Anggaran
         </label>
     </div>
 
     <div class="card-body d-flex flex-column">
 
         <form method="POST"
-              action="{{ route('divisi_pengaduan_pelanggan.risiko.update', $risiko->id) }}"
+              action="{{ route('divisi_perencanaan_anggaran.risiko.update', $risiko->id) }}"
               class="flex-grow-1 d-flex flex-column">
             @csrf
             @method('PUT')
@@ -132,7 +132,7 @@
 
             {{-- FOOTER --}}
             <div class="d-flex justify-content-end border-top pt-3 mt-auto">
-                <a href="{{ route('divisi_pengaduan_pelanggan.risiko.index') }}"
+                <a href="{{ route('divisi_perencanaan_anggaran.risiko.index') }}"
                    class="btn btn-secondary">
                     Kembali
                 </a>

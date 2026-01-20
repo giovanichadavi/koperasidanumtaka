@@ -361,6 +361,13 @@ return [
             'icon' => 'fas fa-exclamation-triangle',
             'can'  => 'divisi_pengaduan_pelanggan',
         ],
+
+        [
+            'text' => 'Input Risiko',   /// DIVISI PERENCANAAN ANGGARAN
+            'url'  => 'divisi/perencanaan_anggaran/risiko',
+            'icon' => 'fas fa-exclamation-triangle',
+            'can'  => 'divisi_perencanaan_anggaran',
+        ],
         [
             'text' => 'Tabel Risiko',
             'url' => 'risiko',

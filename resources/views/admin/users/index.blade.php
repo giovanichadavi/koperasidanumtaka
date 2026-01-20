@@ -36,6 +36,21 @@
 
             {{-- BODY --}}
             <div class="card-body">
+                @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle mr-2"></i>
+            {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+        </div>
+
+        <script>
+            setTimeout(() => {
+                $('.alert').alert('close');
+            }, 3000);
+        </script>
+    @endif
 
                 {{-- TABLE RESPONSIVE --}}
                 <div class="table-responsive">

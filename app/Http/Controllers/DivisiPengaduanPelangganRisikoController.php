@@ -21,7 +21,7 @@ class DivisiPengaduanPelangganRisikoController extends Controller
     {
         $this->checkRole();
 
-        $risiko = DaftarRisiko::where('unit_nama', 'Divisi Pengaduan')
+        $risiko = DaftarRisiko::where('unit_nama', 'Divisi Pengaduan Pelanggan')
         ->orderBy('created_at', 'desc')
                 ->paginate(5);
 
@@ -49,7 +49,7 @@ class DivisiPengaduanPelangganRisikoController extends Controller
         ]);
 
         DaftarRisiko::create([
-            'unit_nama' => 'Divisi Pengaduan',
+            'unit_nama' => 'Divisi Pengaduan Pelanggan',
             'nama_kegiatan' => $validated['nama_kegiatan'],
             'tujuan' => $validated['tujuan'],
             'id_risiko' => implode(', ', $validated['id_risiko']),
