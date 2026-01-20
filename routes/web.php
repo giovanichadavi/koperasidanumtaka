@@ -339,5 +339,28 @@ Route::middleware(['auth'])
             ->name('risiko.destroy');
     });
 
+    //// DIVISI KAS DAN PENAGIHAN
+    Route::middleware(['auth'])
+    ->prefix('divisi/kas_penagihan')
+    ->name('divisi_kas_penagihan.')
+    ->group(function () {
 
+        Route::get('/risiko', [DivisiKasPenagihanRisikoController::class, 'index'])
+            ->name('risiko.index');
+
+        Route::get('/risiko/create', [DivisiKasPenagihanRisikoController::class, 'create'])
+            ->name('risiko.create');
+
+        Route::post('/risiko', [DivisiKasPenagihanRisikoController::class, 'store'])
+            ->name('risiko.store');
+
+        Route::get('/risiko/{id}/edit', [DivisiKasPenagihanRisikoController::class, 'edit'])
+            ->name('risiko.edit');
+
+        Route::put('/risiko/{id}', [DivisiKasPenagihanRisikoController::class, 'update'])
+            ->name('risiko.update');
+
+        Route::delete('/risiko/{id}', [DivisiKasPenagihanRisikoController::class, 'destroy'])
+            ->name('risiko.destroy');
+    });
 require __DIR__.'/auth.php';
