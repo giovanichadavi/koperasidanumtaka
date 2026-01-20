@@ -368,6 +368,13 @@ return [
             'icon' => 'fas fa-exclamation-triangle',
             'can'  => 'divisi_perencanaan_anggaran',
         ],
+
+        [
+            'text' => 'Input Risiko',   /// DIVISI PEMBUKUAN
+            'url'  => 'divisi/pembukuan/risiko',
+            'icon' => 'fas fa-exclamation-triangle',
+            'can'  => 'divisi_pembukuan',
+        ],
         [
             'text' => 'Tabel Risiko',
             'url' => 'risiko',

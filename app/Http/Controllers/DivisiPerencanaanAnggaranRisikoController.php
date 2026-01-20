@@ -25,7 +25,7 @@ class DivisiPerencanaanAnggaranRisikoController extends Controller
         ->orderBy('created_at', 'desc')
                 ->paginate(5);
 
-        return view('divisi_perencanaan_anggaran.daftar_risiko', compact('risiko'));
+        return view('divisi_perencanaan_anggaran_risiko.daftar_risiko', compact('risiko'));
     }
 
     // ======================
