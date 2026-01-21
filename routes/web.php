@@ -363,4 +363,29 @@ Route::middleware(['auth'])
         Route::delete('/risiko/{id}', [DivisiKasPenagihanRisikoController::class, 'destroy'])
             ->name('risiko.destroy');
     });
+
+//// UNIT LAWE-LAWE
+    Route::middleware(['auth'])
+    ->prefix('unit/lawe_lawe')
+    ->name('unit_lawe_lawe.')
+    ->group(function () {
+
+        Route::get('/risiko', [UnitLaweLaweRisikoController::class, 'index'])
+            ->name('risiko.index');
+
+        Route::get('/risiko/create', [UnitLaweLaweRisikoController::class, 'create'])
+            ->name('risiko.create');
+
+        Route::post('/risiko', [UnitLaweLaweRisikoController::class, 'store'])
+            ->name('risiko.store');
+
+        Route::get('/risiko/{id}/edit', [UnitLaweLaweRisikoController::class, 'edit'])
+            ->name('risiko.edit');
+
+        Route::put('/risiko/{id}', [UnitLaweLaweRisikoController::class, 'update'])
+            ->name('risiko.update');
+
+        Route::delete('/risiko/{id}', [UnitLaweLaweRisikoController::class, 'destroy'])
+            ->name('risiko.destroy');
+    });
 require __DIR__.'/auth.php';

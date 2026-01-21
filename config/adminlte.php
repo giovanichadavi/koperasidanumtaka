@@ -384,6 +384,12 @@ return [
         ],
 
         [
+            'text' => 'Input Risiko',   /// UNIT LAWE_LAWE
+            'url'  => 'unit/lawe_lawe/risiko',
+            'icon' => 'fas fa-exclamation-triangle',
+            'can'  => 'unit_lawe_lawe',
+        ],
+        [
             'text' => 'Tabel Risiko',
             'url' => 'risiko',
             'icon' => 'fas fa-file-alt',
