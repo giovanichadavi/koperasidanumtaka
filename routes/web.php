@@ -363,7 +363,7 @@ Route::middleware(['auth'])
         Route::delete('/risiko/{id}', [DivisiKasPenagihanRisikoController::class, 'destroy'])
             ->name('risiko.destroy');
     });
-
+    
 //// UNIT LAWE-LAWE
     Route::middleware(['auth'])
     ->prefix('unit/lawe_lawe')
@@ -386,6 +386,106 @@ Route::middleware(['auth'])
             ->name('risiko.update');
 
         Route::delete('/risiko/{id}', [UnitLaweLaweRisikoController::class, 'destroy'])
+            ->name('risiko.destroy');
+    });
+
+//// UNIT SEPAKU
+    Route::middleware(['auth'])
+    ->prefix('unit/sepaku')
+    ->name('unit_sepaku.')
+    ->group(function () {
+
+        Route::get('/risiko', [UnitSepakuRisikoController::class, 'index'])
+            ->name('risiko.index');
+
+        Route::get('/risiko/create', [UnitSepakuRisikoController::class, 'create'])
+            ->name('risiko.create');
+
+        Route::post('/risiko', [UnitSepakuRisikoController::class, 'store'])
+            ->name('risiko.store');
+
+        Route::get('/risiko/{id}/edit', [UnitSepakuRisikoController::class, 'edit'])
+            ->name('risiko.edit');
+
+        Route::put('/risiko/{id}', [UnitSepakuRisikoController::class, 'update'])
+            ->name('risiko.update');
+
+        Route::delete('/risiko/{id}', [UnitSepakuRisikoController::class, 'destroy'])
+            ->name('risiko.destroy');
+    });
+
+//// UNIT WARU
+    Route::middleware(['auth'])
+    ->prefix('unit/waru')
+    ->name('unit_waru.')
+    ->group(function () {
+
+        Route::get('/risiko', [UnitWaruRisikoController::class, 'index'])
+            ->name('risiko.index');
+
+        Route::get('/risiko/create', [UnitWaruRisikoController::class, 'create'])
+            ->name('risiko.create');
+
+        Route::post('/risiko', [UnitWaruRisikoController::class, 'store'])
+            ->name('risiko.store');
+
+        Route::get('/risiko/{id}/edit', [UnitWaruRisikoController::class, 'edit'])
+            ->name('risiko.edit');
+
+        Route::put('/risiko/{id}', [UnitWaruRisikoController::class, 'update'])
+            ->name('risiko.update');
+
+        Route::delete('/risiko/{id}', [UnitWaruRisikoController::class, 'destroy'])
+            ->name('risiko.destroy');
+    });
+
+//// UNIT SOTEK
+    Route::middleware(['auth'])
+    ->prefix('unit/sotek')
+    ->name('unit_sotek.')
+    ->group(function () {
+
+        Route::get('/risiko', [UnitSotekRisikoController::class, 'index'])
+            ->name('risiko.index');
+
+        Route::get('/risiko/create', [UnitSotekRisikoController::class, 'create'])
+            ->name('risiko.create');
+
+        Route::post('/risiko', [UnitSotekRisikoController::class, 'store'])
+            ->name('risiko.store');
+
+        Route::get('/risiko/{id}/edit', [UnitSotekRisikoController::class, 'edit'])
+            ->name('risiko.edit');
+
+        Route::put('/risiko/{id}', [UnitSotekRisikoController::class, 'update'])
+            ->name('risiko.update');
+
+        Route::delete('/risiko/{id}', [UnitSotekRisikoController::class, 'destroy'])
+            ->name('risiko.destroy');
+    });
+
+//// UNIT MARIDAN
+    Route::middleware(['auth'])
+    ->prefix('unit/maridan')
+    ->name('unit_maridan.')
+    ->group(function () {
+
+        Route::get('/risiko', [UnitMaridanRisikoController::class, 'index'])
+            ->name('risiko.index');
+
+        Route::get('/risiko/create', [UnitMaridanRisikoController::class, 'create'])
+            ->name('risiko.create');
+
+        Route::post('/risiko', [UnitMaridanRisikoController::class, 'store'])
+            ->name('risiko.store');
+
+        Route::get('/risiko/{id}/edit', [UnitMaridanRisikoController::class, 'edit'])
+            ->name('risiko.edit');
+
+        Route::put('/risiko/{id}', [UnitMaridanRisikoController::class, 'update'])
+            ->name('risiko.update');
+
+        Route::delete('/risiko/{id}', [UnitMaridanRisikoController::class, 'destroy'])
             ->name('risiko.destroy');
     });
 require __DIR__.'/auth.php';

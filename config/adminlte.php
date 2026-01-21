@@ -307,6 +307,7 @@ return [
             'url' => 'laporan/daftar-risiko',
             'icon' => 'fas fa-clipboard-list',
             'label_color' => 'success',
+            'can' => 'admin'
             
         ],
         [
@@ -389,6 +390,35 @@ return [
             'icon' => 'fas fa-exclamation-triangle',
             'can'  => 'unit_lawe_lawe',
         ],
+
+        [
+            'text' => 'Input Risiko',   /// UNIT SEPAKU
+            'url'  => 'unit/sepaku/risiko',
+            'icon' => 'fas fa-exclamation-triangle',
+            'can'  => 'unit_sepaku',
+        ],
+
+        [
+            'text' => 'Input Risiko',   /// UNIT WARU
+            'url'  => 'unit/waru/risiko',
+            'icon' => 'fas fa-exclamation-triangle',
+            'can'  => 'unit_waru',
+        ],
+
+        [
+            'text' => 'Input Risiko',   /// UNIT SOTEK
+            'url'  => 'unit/sotek/risiko',
+            'icon' => 'fas fa-exclamation-triangle',
+            'can'  => 'unit_sotek',
+        ],
+
+        [
+            'text' => 'Input Risiko',   /// UNIT MARIDAN
+            'url'  => 'unit/maridan/risiko',
+            'icon' => 'fas fa-exclamation-triangle',
+            'can'  => 'unit_maridan',
+        ],
+
         [
             'text' => 'Tabel Risiko',
             'url' => 'risiko',
