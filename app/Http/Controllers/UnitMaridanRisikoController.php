@@ -49,7 +49,7 @@ class UnitMaridanRisikoController extends Controller
         ]);
 
         DaftarRisiko::create([
-            'unit_nama' => 'Unit Sotek',
+            'unit_nama' => 'Unit Maridan',
             'nama_kegiatan' => $validated['nama_kegiatan'],
             'tujuan' => $validated['tujuan'],
             'id_risiko' => implode(', ', $validated['id_risiko']),

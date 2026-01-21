@@ -420,6 +420,13 @@ return [
         ],
 
         [
+            'text' => 'Input Risiko',   /// UNIT BABULU
+            'url'  => 'unit/babulu/risiko',
+            'icon' => 'fas fa-exclamation-triangle',
+            'can'  => 'unit_babulu',
+        ],
+
+        [
             'text' => 'Tabel Risiko',
             'url' => 'risiko',
             'icon' => 'fas fa-file-alt',

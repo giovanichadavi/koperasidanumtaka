@@ -488,4 +488,29 @@ Route::middleware(['auth'])
         Route::delete('/risiko/{id}', [UnitMaridanRisikoController::class, 'destroy'])
             ->name('risiko.destroy');
     });
+
+//// UNIT BABULU
+    Route::middleware(['auth'])
+    ->prefix('unit/babulu')
+    ->name('unit_babulu.')
+    ->group(function () {
+
+        Route::get('/risiko', [UnitBabuluRisikoController::class, 'index'])
+            ->name('risiko.index');
+
+        Route::get('/risiko/create', [UnitBabuluRisikoController::class, 'create'])
+            ->name('risiko.create');
+
+        Route::post('/risiko', [UnitBabuluRisikoController::class, 'store'])
+            ->name('risiko.store');
+
+        Route::get('/risiko/{id}/edit', [UnitBabuluRisikoController::class, 'edit'])
+            ->name('risiko.edit');
+
+        Route::put('/risiko/{id}', [UnitBabuluRisikoController::class, 'update'])
+            ->name('risiko.update');
+
+        Route::delete('/risiko/{id}', [UnitBabuluRisikoController::class, 'destroy'])
+            ->name('risiko.destroy');
+    });
 require __DIR__.'/auth.php';
