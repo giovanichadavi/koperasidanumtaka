@@ -29,7 +29,7 @@
     color: #d6d5d5ff !important; /* merah */
 }
 
-.navbar .nav-item.dropdown > .nav-link:hover::after {
-    opacity: 5;
+.badge-orange {
+    background-color: #fd7e14;
+    color: white;
 }
-

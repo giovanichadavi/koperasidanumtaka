@@ -40,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('unit_maridan', fn($user) => $user->role === 'unit_maridan');
         Gate::define('unit_babulu', fn($user) => $user->role === 'unit_babulu');
         Gate::define('divisi_laboratorium', fn($user) => $user->role === 'divisi_laboratorium');
+        Gate::define('admin_mr', fn($user) => $user->role === 'admin_mr');
 
         Paginator::useBootstrap();
         

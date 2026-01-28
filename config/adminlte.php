@@ -310,6 +310,13 @@ return [
             'can' => 'admin'
             
         ],
+        [   'text' => 'Manajemen Risiko',
+            'url' => 'laporan/daftar-risiko',
+            'icon' => 'fas fa-clipboard-list',
+            'label_color' => 'success',
+            'can' => 'admin_mr'
+            
+        ],
         [
             'text' => 'Input Risiko',   /// DIVISI UMUM
             'url'  => 'divisi/umum/risiko', 
@@ -424,6 +431,13 @@ return [
             'url'  => 'unit/babulu/risiko',
             'icon' => 'fas fa-exclamation-triangle',
             'can'  => 'unit_babulu',
+        ],
+
+        [
+            'text' => 'Input Risiko',   /// DIVISI LABORATORIUM
+            'url'  => 'divisi/laboratorium/risiko',
+            'icon' => 'fas fa-exclamation-triangle',
+            'can'  => 'divisi_laboratorium',
         ],
 
         [

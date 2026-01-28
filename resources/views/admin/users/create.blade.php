@@ -43,8 +43,8 @@
             <select name="role" class="form-control" required>
 
                 <optgroup label="Admin">
-                    <option value="admin">Admin</option>
-                    <option value="user">User</option>
+                    <option value="admin"> Super Admin</option>
+                    <option value="admin_mr">Admin Manajemen Risiko</option>
                 </optgroup>
 
                 <optgroup label="Departemen Umum">
@@ -76,6 +76,7 @@
                     <option value="unit_maridan">Unit Maridan</option>
                     <option value="unit_babulu">Unit Babulu</option>
                     <option value="divisi_laboratorium">Divisi Laboratorium</option>
+                    <option value="admin_mr">Admin Manajemen Risiko</option>
                 </optgroup>
 
             </select>

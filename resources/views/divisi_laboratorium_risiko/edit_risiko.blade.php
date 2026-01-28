@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Edit Risiko | Umum')
+@section('title', 'Edit Risiko | Laboratorium')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
@@ -25,14 +25,14 @@
 
     <div class="card-header">
         <label class="mb-0 font-weight-semibold">
-            Edit Daftar Risiko Divisi Umum
+            Edit Daftar Risiko Divisi Laboratorium
         </label>
     </div>
 
     <div class="card-body d-flex flex-column">
 
         <form method="POST"
-              action="{{ route('divisi_umum.risiko.update', $risiko->id) }}"
+              action="{{ route('divisi_laboratorium.risiko.update', $risiko->id) }}"
               class="flex-grow-1 d-flex flex-column">
             @csrf
             @method('PUT')
@@ -47,6 +47,7 @@
                     'Risiko Transparansi',
                     'Risiko Kepatuhan'
                 ];
+
                 $selected = explode(', ', $risiko->id_risiko);
             @endphp
 
@@ -54,90 +55,47 @@
 
                 {{-- KOLOM KIRI --}}
                 <div class="col-md-6">
-
                     <div class="form-group mb-4">
                         <label>Nama Kegiatan</label>
-                        <input type="text" name="nama_kegiatan"
+                        <input type="text"
+                               name="nama_kegiatan"
                                class="form-control"
-                               value="{{ $risiko->nama_kegiatan }}" required>
+                               value="{{ $risiko->nama_kegiatan }}"
+                               placeholder="Masukkan nama kegiatan"
+                               required>
                     </div>
 
                     <div class="form-group mb-4">
                         <label>Tujuan Kegiatan</label>
-                        <input type="text" name="tujuan"
+                        <input type="text"
+                               name="tujuan"
                                class="form-control"
-                               value="{{ $risiko->tujuan }}" required>
+                               value="{{ $risiko->tujuan }}"
+                               placeholder="Masukkan tujuan kegiatan"
+                               required>
                     </div>
 
                     <div class="form-group mb-4">
                         <label>Pernyataan Risiko</label>
                         <textarea name="pernyataan_risiko"
                                   class="form-control auto-resize"
-                                  rows="2" required>{{ $risiko->pernyataan_risiko }}</textarea>
+                                  rows="2"
+                                  placeholder="Tuliskan pernyataan risiko"
+                                  required>{{ $risiko->pernyataan_risiko }}</textarea>
                     </div>
 
                     <div class="form-group mb-4">
                         <label>Dampak</label>
                         <textarea name="dampak"
                                   class="form-control auto-resize"
-                                  rows="2" required>{{ $risiko->dampak }}</textarea>
+                                  rows="2"
+                                  placeholder="Tuliskan dampak yang ditimbulkan"
+                                  required>{{ $risiko->dampak }}</textarea>
                     </div>
-
-                    {{-- TABEL PENGENDALIAN --}}
-                    <div class="form-group mb-4">
-                        <label>Pengendalian</label>
-                        <table class="table table-bordered text-center">
-                            <thead>
-                                <tr>
-                                    <th rowspan="2">Uraian</th>
-                                    <th colspan="2">Desain</th>
-                                    <th colspan="3">Efektivitas</th>
-                                </tr>
-                                <tr>
-                                    <th>A</th>
-                                    <th>T</th>
-                                    <th>TE</th>
-                                    <th>KE</th>
-                                    <th>E</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <textarea name="pengendalian_uraian"
-                                                  class="form-control auto-resize"
-                                                  rows="2">{{ $risiko->pengendalian_uraian }}</textarea>
-                                    </td>
-                                    <td>
-                                        <input type="checkbox" name="desain_a" value="1"
-                                            {{ $risiko->desain_a ? 'checked' : '' }}>
-                                    </td>
-                                    <td>
-                                        <input type="checkbox" name="desain_t" value="1"
-                                            {{ $risiko->desain_t ? 'checked' : '' }}>
-                                    </td>
-                                    <td>
-                                        <input type="checkbox" name="efektivitas_te" value="1"
-                                            {{ $risiko->efektivitas_te ? 'checked' : '' }}>
-                                    </td>
-                                    <td>
-                                        <input type="checkbox" name="efektivitas_ke" value="1"
-                                            {{ $risiko->efektivitas_ke ? 'checked' : '' }}>
-                                    </td>
-                                    <td>
-                                        <input type="checkbox" name="efektivitas_e" value="1"
-                                            {{ $risiko->efektivitas_e ? 'checked' : '' }}>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
                 </div>
 
                 {{-- KOLOM KANAN --}}
                 <div class="col-md-6">
-
                     <div class="form-group mb-4">
                         <label class="mb-2">Jenis Risiko</label>
                         <div class="row">
@@ -164,24 +122,18 @@
                         <label>Sebab</label>
                         <textarea name="sebab"
                                   class="form-control auto-resize"
-                                  rows="2" required>{{ $risiko->sebab }}</textarea>
+                                  rows="2"
+                                  placeholder="Tuliskan penyebab terjadinya risiko"
+                                  required>{{ $risiko->sebab }}</textarea>
                     </div>
-
-                    {{-- UC / C --}}
-                    <div class="form-group mb-4">
-                        <label>UC / C</label>
-                        <select name="uc_c" class="form-control" required>
-                            <option value="UC" {{ $risiko->uc_c == 'UC' ? 'selected' : '' }}>UC</option>
-                            <option value="C" {{ $risiko->uc_c == 'C' ? 'selected' : '' }}>C</option>
-                        </select>
-                    </div>
-
                 </div>
+
             </div>
 
             {{-- FOOTER --}}
             <div class="d-flex justify-content-end border-top pt-3 mt-auto">
-                <a href="{{ route('divisi_umum.risiko.index') }}" class="btn btn-secondary">
+                <a href="{{ route('divisi_laboratorium.risiko.index') }}"
+                   class="btn btn-secondary">
                     Kembali
                 </a>
                 <button class="btn btn-primary ml-2">
@@ -195,19 +147,23 @@
 </div>
 @endsection
 
+{{-- AUTO RESIZE TEXTAREA --}}
 @push('js')
 <script>
-document.querySelectorAll('.auto-resize').forEach(el => {
-    el.addEventListener('input', function () {
-        this.style.height = 'auto';
-        this.style.height = this.scrollHeight + 'px';
+    document.querySelectorAll('.auto-resize').forEach(el => {
+        el.addEventListener('input', function () {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        });
     });
-});
 </script>
 @endpush
 
+{{-- STYLE --}}
 @push('css')
 <style>
-textarea { resize: none; }
+    textarea {
+        resize: none;
+    }
 </style>
 @endpush

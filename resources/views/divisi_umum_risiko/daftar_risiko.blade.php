@@ -49,56 +49,81 @@
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
-                <thead class="text-center">
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Unit</th>
-                        <th>Nama Kegiatan</th>
-                        <th>Tujuan Kegiatan</th>
-                        <th>ID Risiko</th>
-                        <th>Pernyataan Risiko</th>
-                        <th>Sebab</th>
-                        <th>Dampak</th>
-                        <th style="width:140px;">Aksi</th>
-                    </tr>
-                </thead>
+            <thead class="text-center">
+            <tr>
+                <th>No</th>
+                <th>Nama Unit</th>
+                <th>Nama Kegiatan</th>
+                <th>Tujuan Kegiatan</th>
+                <th>ID Risiko</th>
+                <th>Pernyataan Risiko</th>
+                <th>Sebab</th>
+                <th>UC / C</th>
+                <th>Dampak</th>
+                <th>Pengendalian Uraian</th>
+                <th>Desain A</th>
+                <th>Desain T</th>
+                <th>TE</th>
+                <th>KE</th>
+                <th>E</th>
+                <th style="width:140px;">Aksi</th>
+            </tr>
+            </thead>
 
                 <tbody>
                 @forelse ($risiko as $i => $r)
-                    <tr>
-                        <td class="text-center">{{ $i + 1 }}</td>
-                        <td>{{ $r->unit_nama }}</td>
-                        <td>{{ $r->nama_kegiatan }}</td>
-                        <td>{{ $r->tujuan }}</td>
-                        <td>{{ $r->id_risiko }}</td>
-                        <td>{{ $r->pernyataan_risiko }}</td>
-                        <td>{{ $r->sebab }}</td>
-                        <td>{{ $r->dampak }}</td>
+    <tr>
+        <td class="text-center">{{ $i + 1 }}</td>
+        <td>{{ $r->unit_nama }}</td>
+        <td>{{ $r->nama_kegiatan }}</td>
+        <td>{{ $r->tujuan }}</td>
+        <td>{{ $r->id_risiko }}</td>
+        <td>{{ $r->pernyataan_risiko }}</td>
+        <td>{{ $r->sebab }}</td>
+        <td class="text-center">{{ $r->uc_c }}</td>
+        <td>{{ $r->dampak }}</td>
+        <td>{{ $r->pengendalian_uraian }}</td>
 
-                        {{-- AKSI --}}
-                        <td class="text-center">
-                            <div class="d-inline-flex align-items-center">
+        <td class="text-center">
+            {{ $r->desain_a ? '✔' : '-' }}
+        </td>
+        <td class="text-center">
+            {{ $r->desain_t ? '✔' : '-' }}
+        </td>
+        <td class="text-center">
+            {{ $r->efektivitas_te ? '✔' : '-' }}
+        </td>
+        <td class="text-center">
+            {{ $r->efektivitas_ke ? '✔' : '-' }}
+        </td>
+        <td class="text-center">
+            {{ $r->efektivitas_e ? '✔' : '-' }}
+        </td>
 
-                                <a href="{{ route('divisi_umum.risiko.edit', $r->id) }}"
-                                   class="btn btn-warning btn-sm mr-2">
-                                    <i class="fas fa-edit mr-1"></i> Edit
-                                </a>
+        {{-- AKSI --}}
+        <td class="text-center">
+            <div class="d-inline-flex align-items-center">
 
-                                <form action="{{ route('divisi_umum.risiko.destroy', $r->id) }}"
-                                      method="POST"
-                                      class="d-inline"
-                                      onsubmit="return confirm('Yakin ingin menghapus data ini?')">
-                                    @csrf
-                                    @method('DELETE')
+                <a href="{{ route('divisi_umum.risiko.edit', $r->id) }}"
+                class="btn btn-warning btn-sm mr-2">
+                    <i class="fas fa-edit mr-1"></i> Edit
+                </a>
 
-                                    <button class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash mr-1"></i> Hapus
-                                    </button>
-                                </form>
+                <form action="{{ route('divisi_umum.risiko.destroy', $r->id) }}"
+                    method="POST"
+                    class="d-inline"
+                    onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                    @csrf
+                    @method('DELETE')
 
-                            </div>
-                        </td>
-                    </tr>
+                    <button class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash mr-1"></i> Hapus
+                    </button>
+                </form>
+
+            </div>
+        </td>
+    </tr>
                 @empty
                     <tr>
                         <td colspan="9" class="text-center text-muted">

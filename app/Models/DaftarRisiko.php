@@ -14,8 +14,15 @@ class DaftarRisiko extends Model
         'id_risiko',
         'pernyataan_risiko',
         'sebab',
-        'dampak'
-    ];
+        'dampak',
+        'uc_c',
+        'pengendalian_uraian',
+        'desain_a',
+        'desain_t',
+        'efektivitas_te',
+        'efektivitas_ke',
+        'efektivitas_e',
+        ];
 
 
 

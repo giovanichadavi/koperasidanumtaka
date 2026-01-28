@@ -37,95 +37,153 @@
                   class="flex-grow-1 d-flex flex-column">
                 @csrf
 
-                <div class="row flex-grow-1">
+        <div class="row flex-grow-1">
 
-                    {{-- KOLOM KIRI --}}
-                    <div class="col-md-6">
-                        <div class="form-group mb-4">
-                            <label>Nama Kegiatan</label>
-                            <input type="text"
-                                   name="nama_kegiatan"
-                                   class="form-control"
-                                   placeholder="Masukkan nama kegiatan"
-                                   required>
-                        </div>
+            {{-- KOLOM KIRI --}}
+            <div class="col-md-6">
 
-                        <div class="form-group mb-4">
-                            <label>Tujuan Kegiatan</label>
-                            <input type="text"
-                                   name="tujuan"
-                                   class="form-control"
-                                   placeholder="Masukkan tujuan kegiatan"
-                                   required>
-                        </div>
-
-                        <div class="form-group mb-4">
-                            <label>Pernyataan Risiko</label>
-                            <textarea name="pernyataan_risiko"
-                                      class="form-control auto-resize"
-                                      rows="2"
-                                      placeholder="Tuliskan pernyataan risiko yang terjadi"
-                                      required></textarea>
-                        </div>
-
-                        <div class="form-group mb-4">
-                            <label>Dampak</label>
-                            <textarea name="dampak"
-                                      class="form-control auto-resize"
-                                      rows="2"
-                                      placeholder="Tuliskan dampak yang ditimbulkan"
-                                      required></textarea>
-                        </div>
-                    </div>
-
-                    {{-- KOLOM KANAN --}}
-                    <div class="col-md-6">
-
-                        <div class="form-group mb-4">
-                            <label class="mb-2">Jenis Risiko</label>
-
-                            @php
-                                $jenisRisiko = [
-                                    'Risiko Operasional',
-                                    'Risiko K3',
-                                    'Risiko Hukum',
-                                    'Risiko SDM',
-                                    'Risiko Keuangan',
-                                    'Risiko Transparansi',
-                                    'Risiko Kepatuhan'
-                                ];
-                            @endphp
-
-                            <div class="row">
-                                @foreach($jenisRisiko as $i => $risiko)
-                                    <div class="col-sm-6 mb-2">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox"
-                                                   class="custom-control-input"
-                                                   id="risiko{{ $i }}"
-                                                   name="id_risiko[]"
-                                                   value="{{ $risiko }}">
-                                            <label class="custom-control-label"
-                                                   for="risiko{{ $i }}">
-                                                {{ $risiko }}
-                                            </label>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <div class="form-group mb-4">
-                            <label>Sebab</label>
-                            <textarea name="sebab"
-                                      class="form-control auto-resize"
-                                      rows="2"
-                                      placeholder="Tuliskan penyebab terjadinya risiko"
-                                      required></textarea>
-                        </div>
-
-                    </div>
+                <div class="form-group mb-4">
+                    <label>Nama Kegiatan</label>
+                    <input type="text" name="nama_kegiatan" class="form-control"
+                        placeholder="Masukkan nama kegiatan" required>
                 </div>
+
+                <div class="form-group mb-4">
+                    <label>Tujuan Kegiatan</label>
+                    <input type="text" name="tujuan" class="form-control"
+                        placeholder="Masukkan tujuan kegiatan" required>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label>Pernyataan Risiko</label>
+                    <textarea name="pernyataan_risiko" class="form-control auto-resize"
+                            rows="2" required></textarea>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label>Dampak</label>
+                    <textarea name="dampak" class="form-control auto-resize"
+                            rows="2" required></textarea>
+                </div>
+
+                {{-- TABEL PENGENDALIAN --}}
+                <div class="form-group mb-4">
+                    <label>Pengendalian</label>
+                    <table class="table table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Uraian</th>
+                                <th colspan="2">Desain</th>
+                                <th colspan="3">Efektivitas</th>
+                            </tr>
+                            <tr>
+                                <th>A</th>
+                                <th>T</th>
+                                <th>TE</th>
+                                <th>KE</th>
+                                <th>E</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                {{-- URAIAN (sama seperti Dampak) --}}
+                                <td>
+                                    <textarea name="pengendalian_uraian"
+                                            class="form-control auto-resize"
+                                            rows="2"
+                                            placeholder="Tuliskan uraian pengendalian"></textarea>
+                                </td>
+
+                                {{-- DESAIN A --}}
+                                <td>
+                                    <input type="checkbox"
+                                        name="desain_a"
+                                        value="1">
+                                </td>
+
+                                {{-- DESAIN T --}}
+                                <td>
+                                    <input type="checkbox"
+                                        name="desain_t"
+                                        value="1">
+                                </td>
+
+                                {{-- EFEKTIVITAS --}}
+                                <td>
+                                    <input type="checkbox"
+                                        name="efektivitas_te"
+                                        value="1">
+                                </td>
+                                <td>
+                                    <input type="checkbox"
+                                        name="efektivitas_ke"
+                                        value="1">
+                                </td>
+                                <td>
+                                    <input type="checkbox"
+                                        name="efektivitas_e"
+                                        value="1">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            {{-- KOLOM KANAN --}}
+            <div class="col-md-6">
+<div class="form-group mb-4">
+    <label class="mb-2">Jenis Risiko</label>
+
+    @php
+    $jenisRisiko = [
+        'Risiko Operasional',
+        'Risiko K3',
+        'Risiko Hukum',
+        'Risiko SDM',
+        'Risiko Keuangan',
+        'Risiko Transparansi',
+        'Risiko Kepatuhan'
+    ];
+    @endphp
+
+    <div class="row">
+        @foreach($jenisRisiko as $i => $risiko)
+        <div class="col-sm-6 mb-2">
+            <div class="custom-control custom-switch">
+                <input type="checkbox"
+                       class="custom-control-input"
+                       id="risiko{{ $i }}"
+                       name="id_risiko[]"
+                       value="{{ $risiko }}">
+                <label class="custom-control-label" for="risiko{{ $i }}">
+                    {{ $risiko }}
+                </label>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
+
+                <div class="form-group mb-4">
+                    <label>Sebab</label>
+                    <textarea name="sebab" class="form-control auto-resize"
+                            rows="2" required></textarea>
+                </div>
+
+                {{-- INPUT BARU UC / C --}}
+                <div class="form-group mb-4">
+                    <label>UC / C</label>
+                    <select name="uc_c" class="form-control" required>
+                        <option value="">-- Pilih --</option>
+                        <option value="UC">UC</option>
+                        <option value="C">C</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
 
                 {{-- FOOTER --}}
                 <div class="d-flex justify-content-end border-top pt-3 mt-auto">

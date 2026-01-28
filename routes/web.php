@@ -513,4 +513,46 @@ Route::middleware(['auth'])
         Route::delete('/risiko/{id}', [UnitBabuluRisikoController::class, 'destroy'])
             ->name('risiko.destroy');
     });
+
+//// DIVISI LABORATORIUM
+    Route::middleware(['auth'])
+    ->prefix('divisi/laboratorium')
+    ->name('divisi_laboratorium.')
+    ->group(function () {
+
+        Route::get('/risiko', [DivisiLaboratoriumRisikoController::class, 'index'])
+            ->name('risiko.index');
+
+        Route::get('/risiko/create', [DivisiLaboratoriumRisikoController::class, 'create'])
+            ->name('risiko.create');
+
+        Route::post('/risiko', [DivisiLaboratoriumRisikoController::class, 'store'])
+            ->name('risiko.store');
+
+        Route::get('/risiko/{id}/edit', [DivisiLaboratoriumRisikoController::class, 'edit'])
+            ->name('risiko.edit');
+
+        Route::put('/risiko/{id}', [DivisiLaboratoriumRisikoController::class, 'update'])
+            ->name('risiko.update');
+
+        Route::delete('/risiko/{id}', [DivisiLaboratoriumRisikoController::class, 'destroy'])
+            ->name('risiko.destroy');
+    });
+
+        Route::get('/laporan/daftar-risiko',
+            [LaporanRisikoController::class, 'index']
+        )->name('laporan.daftar_risiko.index');
+
+        Route::post('/laporan/daftar-risiko/tindaklanjut',
+            [LaporanRisikoController::class, 'tindakLanjut']
+        )->name('laporan.risiko.tindaklanjut');
+
+        Route::post('/laporan/risiko/{id}/tindaklanjut', 
+            [LaporanRisikoController::class, 'simpanTindakLanjut']
+        )->name('laporan.risiko.tindaklanjut.simpan');
+
+
+Route::get('/laporan/risiko/{id}/tindak-lanjut',
+    [LaporanRisikoController::class, 'formTindakLanjut']
+)->name('laporan.risiko.tindak_lanjut.form');
 require __DIR__.'/auth.php';
