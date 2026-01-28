@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Laporan Daftar Risiko | Umum')
+@section('title', 'Laporan Daftar Risiko | Legal Drafting')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
@@ -24,9 +24,9 @@
     <div class="card-header text-center">
         <a href="{{ route('divisi_umum.risiko.create') }}"
            class="btn btn-primary btn-sm float-right">
-            <i class="fas fa-plus mr-1"></i> Tambah Risiko Divisi Umum
+            <i class="fas fa-plus mr-1"></i> Tambah Risiko Divisi Legal Drafting
         </a>
-        <h5 class="mb-0 text-center">Laporan Daftar Risiko Divisi Umum</h5>
+        <h5 class="mb-0 text-center">Laporan Daftar Risiko Divisi Legal Drafting</h5>
     </div>
 
     {{-- NOTIFIKASI --}}
@@ -100,12 +100,12 @@
 
                         <td class="text-center">
                             <div class="d-inline-flex align-items-center">
-                                <a href="{{ route('divisi_umum.risiko.edit', $r->id) }}"
+                                <a href="{{ route('divisi_legal_drafting.risiko.edit', $r->id) }}"
                                    class="btn btn-warning btn-sm mr-2">
                                     <i class="fas fa-edit mr-1"></i> Edit
                                 </a>
 
-                                <form action="{{ route('divisi_umum.risiko.destroy', $r->id) }}"
+                                <form action="{{ route('divisi_legal_drafting.risiko.destroy', $r->id) }}"
                                       method="POST"
                                       class="d-inline"
                                       onsubmit="return confirm('Yakin ingin menghapus data ini?')">
