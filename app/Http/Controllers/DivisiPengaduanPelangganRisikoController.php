@@ -25,7 +25,7 @@ class DivisiPengaduanPelangganRisikoController extends Controller
         ->orderBy('created_at', 'desc')
                 ->paginate(5);
 
-        return view('divisi_pengaduan_pelanggan_risiko.daftar_risiko', compact('risiko'));
+        return view('divisi_penyegelan_pemasangan_wm_risiko.daftar_risiko', compact('risiko'));
     }
 
     // ======================
@@ -34,34 +34,44 @@ class DivisiPengaduanPelangganRisikoController extends Controller
     public function create()
     {
         $this->checkRole();
-        return view('divisi_pengaduan_pelanggan_risiko.tambah_risiko');
+        return view('divisi_penyegelan_pemasangan_wm_risiko.tambah_risiko');
     }
 
     public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'nama_kegiatan' => 'required',
-            'tujuan' => 'required',
-            'id_risiko' => 'required|array|min:1',
-            'pernyataan_risiko' => 'required',
-            'sebab' => 'required',
-            'dampak' => 'required',
-        ]);
+{
+    $validated = $request->validate([
+        'nama_kegiatan' => 'required',
+        'tujuan' => 'required',
+        'id_risiko' => 'required|array|min:1',
+        'pernyataan_risiko' => 'required',
+        'sebab' => 'required',
+        'dampak' => 'required',
+        'uc_c' => 'required',
+        'pengendalian_uraian' => 'required',
+    ]);
 
-        DaftarRisiko::create([
-            'unit_nama' => 'Divisi Pengaduan Pelanggan',
-            'nama_kegiatan' => $validated['nama_kegiatan'],
-            'tujuan' => $validated['tujuan'],
-            'id_risiko' => implode(', ', $validated['id_risiko']),
-            'pernyataan_risiko' => $validated['pernyataan_risiko'],
-            'sebab' => $validated['sebab'],
-            'dampak' => $validated['dampak'],
-        ]);
+    DaftarRisiko::create([
+        'unit_nama' => 'Divisi Penyegelan & Pemasangan WM',
+        'nama_kegiatan' => $validated['nama_kegiatan'],
+        'tujuan' => $validated['tujuan'],
+        'id_risiko' => implode(', ', $validated['id_risiko']),
+        'pernyataan_risiko' => $validated['pernyataan_risiko'],
+        'sebab' => $validated['sebab'],
+        'dampak' => $validated['dampak'],
+        'uc_c' => $validated['uc_c'],
+        'pengendalian_uraian' => $validated['pengendalian_uraian'],
 
-        return redirect()
-            ->route('divisi_pengaduan_pelanggan.risiko.index')
-            ->with('success', 'Data risiko berhasil ditambahkan');
-    }
+        'desain_a' => $request->has('desain_a'),
+        'desain_t' => $request->has('desain_t'),
+        'efektivitas_te' => $request->has('efektivitas_te'),
+        'efektivitas_ke' => $request->has('efektivitas_ke'),
+        'efektivitas_e' => $request->has('efektivitas_e'),
+    ]);
+
+    return redirect()
+        ->route('divisi_penyegelan_pemasangan_wm.risiko.index')
+        ->with('success', 'Data risiko berhasil ditambahkan');
+}
 
     // ======================
     // 3️⃣ EDIT RISIKO
@@ -72,37 +82,45 @@ class DivisiPengaduanPelangganRisikoController extends Controller
 
         $risiko = DaftarRisiko::findOrFail($id);
 
-        return view('divisi_pengaduan_pelanggan_risiko.edit_risiko', compact('risiko'));
+        return view('divisi_penyegelan_pemasangan_wm_risiko.edit_risiko', compact('risiko'));
     }
 
     public function update(Request $request, $id)
-    {
-        $this->checkRole();
+{
+    $validated = $request->validate([
+        'nama_kegiatan' => 'required',
+        'tujuan' => 'required',
+        'id_risiko' => 'required|array|min:1',
+        'pernyataan_risiko' => 'required',
+        'sebab' => 'required',
+        'dampak' => 'required',
+        'uc_c' => 'required',
+        'pengendalian_uraian' => 'required',
+    ]);
 
-        $validated = $request->validate([
-            'nama_kegiatan' => 'required',
-            'tujuan' => 'required',
-            'id_risiko' => 'required|array|min:1',
-            'pernyataan_risiko' => 'required',
-            'sebab' => 'required',
-            'dampak' => 'required',
-        ]);
+    $risiko = DaftarRisiko::findOrFail($id);
 
-        $risiko = DaftarRisiko::findOrFail($id);
+    $risiko->update([
+        'nama_kegiatan' => $validated['nama_kegiatan'],
+        'tujuan' => $validated['tujuan'],
+        'id_risiko' => implode(', ', $validated['id_risiko']),
+        'pernyataan_risiko' => $validated['pernyataan_risiko'],
+        'sebab' => $validated['sebab'],
+        'dampak' => $validated['dampak'],
+        'uc_c' => $validated['uc_c'],
+        'pengendalian_uraian' => $validated['pengendalian_uraian'],
 
-        $risiko->update([
-            'nama_kegiatan' => $validated['nama_kegiatan'],
-            'tujuan' => $validated['tujuan'],
-            'id_risiko' => implode(', ', $validated['id_risiko']),
-            'pernyataan_risiko' => $validated['pernyataan_risiko'],
-            'sebab' => $validated['sebab'],
-            'dampak' => $validated['dampak'],
-        ]);
+        'desain_a' => $request->has('desain_a'),
+        'desain_t' => $request->has('desain_t'),
+        'efektivitas_te' => $request->has('efektivitas_te'),
+        'efektivitas_ke' => $request->has('efektivitas_ke'),
+        'efektivitas_e' => $request->has('efektivitas_e'),
+    ]);
 
-        return redirect()
-            ->route('divisi_pengaduan_pelanggan.risiko.index')
-            ->with('success', 'Data risiko berhasil diperbarui');
-    }
+    return redirect()
+        ->route('divisi_penyegelan_pemasangan_wm.risiko.index')
+        ->with('success', 'Data risiko berhasil diperbarui');
+}
 
     // ======================
     // 4️⃣ HAPUS RISIKO
@@ -115,7 +133,7 @@ class DivisiPengaduanPelangganRisikoController extends Controller
         $risiko->delete();
 
         return redirect()
-            ->route('divisi_pengaduan_pelanggan.risiko.index')
+            ->route('divisi_penyegelan_pemasangan_wm.risiko.index')
             ->with('success', 'Data risiko berhasil dihapus');
     }
 }
