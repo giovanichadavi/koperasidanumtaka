@@ -14,8 +14,10 @@ public function up()
         Schema::table('daftar_risiko', function (Blueprint $table) {
             $table->integer('poin_dampak')->nullable();
             $table->integer('poin_probabilitas')->nullable();
+            $table->string('nilai_risiko')->nullable();
             $table->integer('tingkat_risiko')->nullable();
             $table->string('level_risiko')->nullable();
+            
             $table->string('warna_risiko')->nullable();
             $table->text('rencana_pengendalian')->nullable();
             $table->date('jadwal_pengendalian')->nullable();

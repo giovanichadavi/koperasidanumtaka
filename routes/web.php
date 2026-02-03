@@ -547,12 +547,14 @@ Route::middleware(['auth'])
             [LaporanRisikoController::class, 'tindakLanjut']
         )->name('laporan.risiko.tindaklanjut');
 
-        Route::post('/laporan/risiko/{id}/tindaklanjut', 
-            [LaporanRisikoController::class, 'simpanTindakLanjut']
-        )->name('laporan.risiko.tindaklanjut.simpan');
 
+        Route::get('/laporan/tindak-lanjut', [LaporanRisikoController::class, 'daftarTindakLanjut'])
+        ->name('laporan.risiko.tindaklanjut.list');
 
-Route::get('/laporan/risiko/{id}/tindak-lanjut',
-    [LaporanRisikoController::class, 'formTindakLanjut']
-)->name('laporan.risiko.tindak_lanjut.form');
-require __DIR__.'/auth.php';
+        Route::get('/laporan/tindak-lanjut/{id}', [LaporanRisikoController::class, 'formTindakLanjut'])
+        ->name('laporan.risiko.tindaklanjut.form');
+
+        Route::post('/laporan/tindak-lanjut/{id}', [LaporanRisikoController::class, 'simpanTindakLanjut'])
+        ->name('laporan.risiko.tindaklanjut.simpan');
+        
+        require __DIR__.'/auth.php';

@@ -9,6 +9,9 @@ use App\Models\Kegiatan;
 
 class LaporanRisikoController extends Controller
 {
+    // ==============================
+    // DAFTAR RISIKO (AWAL)
+    // ==============================
     public function index(Request $request)
     {
         $units = DaftarRisiko::select('unit_nama')
@@ -30,6 +33,9 @@ class LaporanRisikoController extends Controller
         ));
     }
 
+    // ==============================
+    // FORM TAMBAH RISIKO
+    // ==============================
     public function create()
     {
         $units = Unit::all();
@@ -38,6 +44,9 @@ class LaporanRisikoController extends Controller
         return view('laporan.tambah_risiko', compact('units','kegiatan'));
     }
 
+    // ==============================
+    // SIMPAN RISIKO BARU
+    // ==============================
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -68,69 +77,93 @@ class LaporanRisikoController extends Controller
             'uc_c' => $validated['uc_c'],
             'pengendalian_uraian' => $validated['pengendalian_uraian'],
             'desain_a' => $validated['desain_a'],
-            'desain_t' => $validated['desain_'],
+            'desain_t' => $validated['desain_t'],
             'efektivitas_te' => $validated['efektivitas_te'],
             'efektivitas_ke' => $validated['efektivitas_ke'],
             'efektivitas_e' => $validated['efektivitas_e'],
+            'status' => null
         ]);
 
         return redirect()->back()->with('success', 'Data berhasil disimpan');
     }
 
-    // ✅ INI YANG KAMU BELUM ADA
-public function tindakLanjut(Request $request)
-{
-    $request->validate([
-        'risiko_ids' => 'required|array|min:1'
-    ]);
+    // ==============================
+    // PROSES KLIK "TINDAK LANJUT"
+    // ==============================
+    public function tindakLanjut(Request $request)
+    {
+        $request->validate([
+            'risiko_ids' => 'required|array|min:1'
+        ]);
 
-    // Ambil satu ID (karena form tindak lanjut per risiko)
-    $id = $request->risiko_ids[0];
+        $id = $request->risiko_ids[0];
 
-    // PINDAH HALAMAN ke form tindak lanjut
-    return redirect()->route('laporan.risiko.tindak_lanjut.form', $id);
-}
+        return redirect()->route('laporan.risiko.tindaklanjut.form', $id);
+    }
 
-    // kalau mau lanjut ke form detail tindak lanjut
-    public function formTindakLanjut($id)
-{
+    // ==============================
+    // FORM TINDAK LANJUT
+    // ==============================
+    public function formTindakLanjut($id, Request $request)
+    {
     $risiko = DaftarRisiko::findOrFail($id);
-    return view('laporan.tindak_lanjut', compact('risiko'));
-}
-    public function simpanTindakLanjut(Request $request, $id)
+    $unit = $request->unit; // simpan unit aktif
+    return view('laporan.tindak_lanjut', compact('risiko','unit'));
+    }
+
+    // ==============================
+    // SIMPAN TINDAK LANJUT
+    // ==============================
+public function simpanTindakLanjut(Request $request, $id)
 {
     $request->validate([
-        'dampak' => 'required|integer|min:1|max:5',
+        'dampak_risiko' => 'required|integer|min:1|max:5',
         'probabilitas' => 'required|integer|min:1|max:5',
-        'uraian_pengendalian' => 'required',
+        'rencana_pengendalian' => 'required',
         'jadwal_pengendalian' => 'required|date',
-        'penanggung_jawab' => 'required'
+        'penanggung_jawab' => 'required|array|min:1'
     ]);
 
-    $nilai = $request->dampak * $request->probabilitas;
+    $matrix = [
+        1 => [1=>1, 2=>3, 3=>5, 4=>8, 5=>20],
+        2 => [1=>2, 2=>7, 3=>11, 4=>13, 5=>21],
+        3 => [1=>4, 2=>10, 3=>14, 4=>17, 5=>22],
+        4 => [1=>6, 2=>12, 3=>16, 4=>19, 5=>24],
+        5 => [1=>9, 2=>15, 3=>18, 4=>23, 5=>25],
+    ];
 
-    // tentukan level
+    $nilai = $matrix[$request->dampak_risiko][$request->probabilitas];
+
     if (in_array($nilai, [1,2,3,5,7,8])) {
         $level = 'Rendah';
+        $warna = 'success';
     } elseif (in_array($nilai, [4,10,11,13,20])) {
         $level = 'Moderat';
+        $warna = 'warning';
     } elseif (in_array($nilai, [6,12,14,16,17,21])) {
         $level = 'Tinggi';
+        $warna = 'orange';
     } else {
         $level = 'Ekstrim';
+        $warna = 'danger';
     }
 
     DaftarRisiko::where('id', $id)->update([
-        'dampak' => $request->dampak,
         'probabilitas' => $request->probabilitas,
+        'dampak_risiko' => $request->dampak_risiko,
         'nilai_risiko' => $nilai,
+        'tingkat_risiko' => $nilai,
         'level_risiko' => $level,
-        'uraian_pengendalian' => $request->uraian_pengendalian,
+        'warna_risiko' => $warna,
+        'rencana_pengendalian' => $request->rencana_pengendalian,
         'jadwal_pengendalian' => $request->jadwal_pengendalian,
-        'penanggung_jawab' => $request->penanggung_jawab,
+        'penanggung_jawab' => implode(', ', $request->penanggung_jawab),
         'status' => 'ditindaklanjuti'
     ]);
 
-    return redirect()->back()->with('success','Tindak lanjut berhasil disimpan');
+
+    return redirect()->route('laporan.daftar_risiko.index', [
+        'unit' => $request->unit
+    ])->with('success','Tindak lanjut berhasil disimpan');
 }
 }

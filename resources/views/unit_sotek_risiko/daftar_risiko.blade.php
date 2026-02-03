@@ -22,7 +22,7 @@
 @section('content')
 <div class="card mt-4">
     <div class="card-header text-center">
-        <a href="{{ route('unit_waru.risiko.create') }}"
+        <a href="{{ route('unit_sotek.risiko.create') }}"
            class="btn btn-primary btn-sm float-right">
             <i class="fas fa-plus mr-1"></i> Tambah Risiko Unit Sotek
         </a>
