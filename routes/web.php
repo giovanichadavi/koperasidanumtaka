@@ -556,5 +556,12 @@ Route::middleware(['auth'])
 
         Route::post('/laporan/tindak-lanjut/{id}', [LaporanRisikoController::class, 'simpanTindakLanjut'])
         ->name('laporan.risiko.tindaklanjut.simpan');
+
+/// PDF DOWNLOAD
+        Route::get('/laporan/risiko/pdf', [LaporanRisikoController::class, 'exportPdf'])
+    ->name('laporan.daftar_risiko.pdf');
         
-        require __DIR__.'/auth.php';
+// HAPUS LAPORAN
+    Route::delete('/laporan/risiko/{id}/hapus', [LaporanRisikoController::class, 'hapus'])
+    ->name('laporan.risiko.hapus');
+require __DIR__.'/auth.php';

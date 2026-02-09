@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\DaftarRisiko;
 use App\Models\Unit;
 use App\Models\Kegiatan;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class LaporanRisikoController extends Controller
 {
@@ -165,5 +166,25 @@ public function simpanTindakLanjut(Request $request, $id)
     return redirect()->route('laporan.daftar_risiko.index', [
         'unit' => $request->unit
     ])->with('success','Tindak lanjut berhasil disimpan');
+    }
+public function exportPdf(Request $request)
+{
+    $unit = $request->unit;
+    $page = $request->page ?? 1;
+
+    $risiko = DaftarRisiko::where('unit_nama', $unit)
+        ->orderBy('created_at','desc')
+        ->paginate(5, ['*'], 'page', $page);
+
+    $pdf = Pdf::loadView('laporan.daftar_risiko_pdf', compact('risiko','unit'))
+        ->setPaper('a4', 'landscape');
+
+    return $pdf->download('laporan_risiko_'.$unit.'_halaman_'.$page.'.pdf');
+}
+public function hapus($id)
+{
+    DaftarRisiko::findOrFail($id)->delete();
+
+    return redirect()->back()->with('success','Data risiko berhasil dihapus');
 }
 }

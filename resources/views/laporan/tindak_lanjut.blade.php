@@ -68,6 +68,19 @@
                     <input type="text" id="level_risiko" class="form-control" readonly>
                 </div>
             </div>
+            <div class="row mt-3">
+            <div class="col-md-6">
+            <label>Keputusan Penanganan Risiko</label>
+            <input type="text" class="form-control" name="keputusan_penanganan" value="YA" readonly>
+            </div>
+
+            <div class="col-md-6">
+            <label>Perlakuan Risiko</label>
+            <select name="perlakuan_risiko" class="form-control">
+            <option value="Mitigasi">Mitigasi</option>
+            </select>
+            </div>
+            </div>
 
             <div class="form-group mt-3">
                 <label>Rencana Pengendalian</label>
