@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\http\Controllers\RisikoController;
 use App\Http\Controllers\LaporanRisikoController;
+use App\Http\Controllers\DashboardController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
@@ -564,4 +565,7 @@ Route::middleware(['auth'])
 // HAPUS LAPORAN
     Route::delete('/laporan/risiko/{id}/hapus', [LaporanRisikoController::class, 'hapus'])
     ->name('laporan.risiko.hapus');
+
+    // DASHBOARD
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 require __DIR__.'/auth.php';

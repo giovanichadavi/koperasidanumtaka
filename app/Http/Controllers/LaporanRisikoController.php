@@ -13,26 +13,33 @@ class LaporanRisikoController extends Controller
     // ==============================
     // DAFTAR RISIKO (AWAL)
     // ==============================
-    public function index(Request $request)
-    {
-        $units = DaftarRisiko::select('unit_nama')
-            ->distinct()
-            ->orderBy('unit_nama')
-            ->pluck('unit_nama');
+public function index(Request $request)
+{
+    $units = DaftarRisiko::select('unit_nama')
+        ->distinct()
+        ->orderBy('unit_nama')
+        ->pluck('unit_nama');
 
-        $activeUnit = $request->get('unit', $units->first());
+    $activeUnit = $request->unit;
 
-        $risiko = DaftarRisiko::where('unit_nama', $activeUnit)
-            ->orderBy('created_at', 'desc')
-            ->paginate(5)
-            ->withQueryString();
+    $query = DaftarRisiko::query();
 
-        return view('laporan.daftar_risiko', compact(
-            'units',
-            'activeUnit',
-            'risiko'
-        ));
+    // Kalau user pilih unit → filter
+    if ($activeUnit) {
+        $query->where('unit_nama', $activeUnit);
     }
+
+    $risiko = $query
+        ->orderBy('created_at', 'desc')
+        ->paginate(5)
+        ->withQueryString();
+
+    return view('laporan.daftar_risiko', compact(
+        'units',
+        'activeUnit',
+        'risiko'
+    ));
+}
 
     // ==============================
     // FORM TAMBAH RISIKO
@@ -59,6 +66,8 @@ class LaporanRisikoController extends Controller
             'sebab' => 'required',
             'dampak' => 'required',
             'uc_c' => 'required',
+            'keputusan_penanganan' => 'required',
+            'perlakuan_risiko' => 'required',
             'pengendalian_uraian' => 'required',
             'desain_a' => 'required',
             'desain_t' => 'required',
@@ -79,6 +88,8 @@ class LaporanRisikoController extends Controller
             'pengendalian_uraian' => $validated['pengendalian_uraian'],
             'desain_a' => $validated['desain_a'],
             'desain_t' => $validated['desain_t'],
+            'keputusan_penanganan' => $validated['keputusan_penanganan'],
+            'perlakuan_risiko' => $validated['perlakuan_risiko'],
             'efektivitas_te' => $validated['efektivitas_te'],
             'efektivitas_ke' => $validated['efektivitas_ke'],
             'efektivitas_e' => $validated['efektivitas_e'],
@@ -122,7 +133,9 @@ public function simpanTindakLanjut(Request $request, $id)
         'probabilitas' => 'required|integer|min:1|max:5',
         'rencana_pengendalian' => 'required',
         'jadwal_pengendalian' => 'required|date',
-        'penanggung_jawab' => 'required|array|min:1'
+        'penanggung_jawab' => 'required|array|min:1',
+        'keputusan_penanganan' => 'required',
+        'perlakuan_risiko' => 'required'
     ]);
 
     $matrix = [
@@ -156,6 +169,8 @@ public function simpanTindakLanjut(Request $request, $id)
         'tingkat_risiko' => $nilai,
         'level_risiko' => $level,
         'warna_risiko' => $warna,
+        'keputusan_penanganan' => $request->keputusan_penanganan,
+        'perlakuan_risiko' => $request->perlakuan_risiko,
         'rencana_pengendalian' => $request->rencana_pengendalian,
         'jadwal_pengendalian' => $request->jadwal_pengendalian,
         'penanggung_jawab' => implode(', ', $request->penanggung_jawab),
@@ -170,16 +185,21 @@ public function simpanTindakLanjut(Request $request, $id)
 public function exportPdf(Request $request)
 {
     $unit = $request->unit;
-    $page = $request->page ?? 1;
 
-    $risiko = DaftarRisiko::where('unit_nama', $unit)
-        ->orderBy('created_at','desc')
-        ->paginate(5, ['*'], 'page', $page);
+    $query = DaftarRisiko::query();
+
+    // kalau pilih unit → filter
+    if ($unit) {
+        $query->where('unit_nama', $unit);
+    }
+
+    // ambil SEMUA DATA (bukan paginate)
+    $risiko = $query->orderBy('created_at','desc')->get();
 
     $pdf = Pdf::loadView('laporan.daftar_risiko_pdf', compact('risiko','unit'))
-        ->setPaper('a4', 'landscape');
+        ->setPaper([0, 0, 935, 1247], 'landscape');
 
-    return $pdf->download('laporan_risiko_'.$unit.'_halaman_'.$page.'.pdf');
+    return $pdf->download('laporan_risiko.pdf');
 }
 public function hapus($id)
 {

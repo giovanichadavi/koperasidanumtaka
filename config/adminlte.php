@@ -302,6 +302,12 @@ return [
     'menu' => [
         // Navbar items:
         // Sidebar items:
+        [   'text' => 'Dashboard',
+            'url' => 'dashboard',
+            'icon' => 'fas fa-tachometer-alt',
+            'label_color' => 'success',
+            
+        ],
 
         [   'text' => 'Manajemen Risiko',
             'url' => 'laporan/daftar-risiko',
@@ -321,12 +327,14 @@ return [
             'text' => 'Input Risiko',   /// DIVISI UMUM
             'url'  => 'divisi/umum/risiko', 
             'icon' => 'fas fa-exclamation-triangle',
+            'label_color' => 'success',
             'can'  => 'divisi_umum',
         ],
         [
             'text' => 'Input Risiko',   /// DIVISI HUBLANG
             'url'  => 'divisi/hublang/risiko',
             'icon' => 'fas fa-exclamation-triangle',
+            'label_color' => 'success',
             'can'  => 'divisi_hublang',
         ],
 
@@ -334,18 +342,21 @@ return [
             'text' => 'Input Risiko',   /// DIVISI KEPEGAWAIAN
             'url'  => 'divisi/kepegawaian/risiko',
             'icon' => 'fas fa-exclamation-triangle',
+            'label_color' => 'success',
             'can'  => 'divisi_kepegawaian',
         ],
         [
             'text' => 'Input Risiko',   /// DIVISI LEGAL DRAFTING
             'url'  => 'divisi/legal_drafting/risiko',
             'icon' => 'fas fa-exclamation-triangle',
+            'label_color' => 'success',
             'can'  => 'divisi_legal_drafting',
         ],      
         [
             'text' => 'Input Risiko',   /// DIVISI TUNGGAKAN REKENING AIR
             'url'  => 'divisi/tunggakan_rekening_air/risiko',
             'icon' => 'fas fa-exclamation-triangle',
+            'label_color' => 'success',
             'can'  => 'divisi_tunggakan_rekening_air',
         ],
 
@@ -353,6 +364,7 @@ return [
             'text' => 'Input Risiko',   /// DIVISI PENERBIT REKENING
             'url'  => 'divisi/penerbit_rekening/risiko',
             'icon' => 'fas fa-exclamation-triangle',
+            'label_color' => 'success',
             'can'  => 'divisi_penerbit_rekening',
         ],
 
@@ -360,6 +372,7 @@ return [
             'text' => 'Input Risiko',   /// DIVISI PENYEGELAN & PEMASANGAN WM
             'url'  => 'divisi/penyegelan_pemasangan_wm/risiko',
             'icon' => 'fas fa-exclamation-triangle',
+            'label_color' => 'success',
             'can'  => 'divisi_penyegelan_pemasangan_wm',
         ],
 
@@ -367,6 +380,7 @@ return [
             'text' => 'Input Risiko',   /// DIVISI PENGADUAN PELANGGAN
             'url'  => 'divisi/pengaduan_pelanggan/risiko',
             'icon' => 'fas fa-exclamation-triangle',
+            'label_color' => 'success',
             'can'  => 'divisi_pengaduan_pelanggan',
         ],
 
@@ -374,6 +388,7 @@ return [
             'text' => 'Input Risiko',   /// DIVISI PERENCANAAN ANGGARAN
             'url'  => 'divisi/perencanaan_anggaran/risiko',
             'icon' => 'fas fa-exclamation-triangle',
+            'label_color' => 'success',
             'can'  => 'divisi_perencanaan_anggaran',
         ],
 
@@ -381,6 +396,7 @@ return [
             'text' => 'Input Risiko',   /// DIVISI PEMBUKUAN
             'url'  => 'divisi/pembukuan/risiko',
             'icon' => 'fas fa-exclamation-triangle',
+            'label_color' => 'success',
             'can'  => 'divisi_pembukuan',
         ],
 
@@ -388,6 +404,7 @@ return [
             'text' => 'Input Risiko',   /// DIVISI PEMBUKUAN
             'url'  => 'divisi/kas_penagihan/risiko',
             'icon' => 'fas fa-exclamation-triangle',
+            'label_color' => 'success',
             'can'  => 'divisi_kas_penagihan',
         ],
 
@@ -395,6 +412,7 @@ return [
             'text' => 'Input Risiko',   /// UNIT LAWE_LAWE
             'url'  => 'unit/lawe_lawe/risiko',
             'icon' => 'fas fa-exclamation-triangle',
+            'label_color' => 'success',
             'can'  => 'unit_lawe_lawe',
         ],
 
@@ -402,6 +420,7 @@ return [
             'text' => 'Input Risiko',   /// UNIT SEPAKU
             'url'  => 'unit/sepaku/risiko',
             'icon' => 'fas fa-exclamation-triangle',
+            'label_color' => 'success',
             'can'  => 'unit_sepaku',
         ],
 
@@ -409,6 +428,7 @@ return [
             'text' => 'Input Risiko',   /// UNIT WARU
             'url'  => 'unit/waru/risiko',
             'icon' => 'fas fa-exclamation-triangle',
+            'label_color' => 'success',
             'can'  => 'unit_waru',
         ],
 
@@ -416,6 +436,7 @@ return [
             'text' => 'Input Risiko',   /// UNIT SOTEK
             'url'  => 'unit/sotek/risiko',
             'icon' => 'fas fa-exclamation-triangle',
+            'label_color' => 'success',
             'can'  => 'unit_sotek',
         ],
 
@@ -423,6 +444,7 @@ return [
             'text' => 'Input Risiko',   /// UNIT MARIDAN
             'url'  => 'unit/maridan/risiko',
             'icon' => 'fas fa-exclamation-triangle',
+            'label_color' => 'success',
             'can'  => 'unit_maridan',
         ],
 
@@ -430,6 +452,7 @@ return [
             'text' => 'Input Risiko',   /// UNIT BABULU
             'url'  => 'unit/babulu/risiko',
             'icon' => 'fas fa-exclamation-triangle',
+            'label_color' => 'success',
             'can'  => 'unit_babulu',
         ],
 
@@ -437,6 +460,7 @@ return [
             'text' => 'Input Risiko',   /// DIVISI LABORATORIUM
             'url'  => 'divisi/laboratorium/risiko',
             'icon' => 'fas fa-exclamation-triangle',
+            'label_color' => 'success',
             'can'  => 'divisi_laboratorium',
         ],
 

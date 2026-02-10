@@ -2,7 +2,23 @@
 
 @section('title', 'Laporan Manajemen Risiko')
 
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+@endsection
+
+
+@section('navbar-right')
+
 @section('content')
+
+{{-- NOTIFIKASI --}}
+@if(session('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    ✅ {{ session('success') }}
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+</div>
+@endif
+
 <div class="card mt-4 shadow-sm">
 <div class="card-header">
 <h5 class="mb-0 text-center">Manajemen Risiko</h5>
@@ -68,6 +84,7 @@
 <td>{{ $r->uc_c }}</td>
 <td>{{ $r->dampak }}</td>
 
+
 <td>{{ $r->pengendalian_uraian }}</td>
 <td>{{ $r->desain_a ? '✔':'-' }}</td>
 <td>{{ $r->desain_t ? '✔':'-' }}</td>
@@ -92,24 +109,43 @@
 <td>{{ $r->jadwal_pengendalian }}</td>
 <td>{{ $r->penanggung_jawab }}</td>
 
-<td>
-<form action="{{ route('laporan.risiko.hapus',$r->id) }}" method="POST">
-@csrf @method('DELETE')
-<button class="btn btn-danger btn-sm">Hapus</button>
-<a href="{{ route('laporan.risiko.tindaklanjut.form',$r->id) }}"
-class="btn btn-success btn-sm">Tindak Lanjut</a>
+<td class="text-center">
+<div class="d-flex justify-content-center gap-1">
+
+<form action="{{ route('laporan.risiko.hapus',$r->id) }}" method="POST"
+onsubmit="return confirm('⚠ Yakin ingin menghapus data ini?')">
+@csrf
+@method('DELETE')
+<button class="btn btn-danger btn-sm">
+Hapus
+</button>
 </form>
+
+<a href="{{ route('laporan.risiko.tindaklanjut.form',$r->id) }}"
+class="btn btn-success btn-sm ml-1">
+Tindak Lanjut
+</a>
+
+</div>
 </td>
 </tr>
 @endforeach
 </tbody>
 </table>
 
-<a href="{{ route('laporan.daftar_risiko.pdf') }}" class="btn btn-danger btn-sm">
-<i class="fas fa-file-pdf"></i> Download PDF
-</a>
-
+{{-- BAGIAN BAWAH --}}
+<div class="d-flex justify-content-between align-items-center mt-3">
+<div>
 {{ $risiko->links() }}
+</div>
+
+<div>
+<a href="{{ route('laporan.daftar_risiko.pdf') }}" class="btn btn-danger btn-sm">
+📄 Download PDF
+</a>
+</div>
+</div>
+
 </div>
 </div>
 </div>

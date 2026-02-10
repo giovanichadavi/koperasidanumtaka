@@ -14,7 +14,7 @@ th,td{border:1px solid #000;padding:3px;text-align:center}
 </head>
 <body>
 
-<h3 align="center">Laporan Manajemen Risiko</h3>
+<h3 align="center">LAPORAN DAFTAR RISIKO PERUMDA AIR MINUM DANUM TAKA PPU TAHUN 2026</h3>
 
 <table>
 <thead>
@@ -31,14 +31,14 @@ th,td{border:1px solid #000;padding:3px;text-align:center}
 
 <th colspan="6">Pengendalian</th>
 
-<th rowspan="3">Prob</th>
+<th rowspan="3">Peluang</th>
 <th rowspan="3">Dampak</th>
-<th rowspan="3">Nilai</th>
-<th rowspan="3">Level</th>
-<th rowspan="3">Keputusan</th>
-<th rowspan="3">Perlakuan</th>
-<th colspan="2">Rencana</th>
-<th rowspan="3">PJ</th>
+<th rowspan="3">Tingkat Risiko</th>
+<th rowspan="3">Level Risiko</th>
+<th rowspan="3">Keputusan Penanganan Risiko</th>
+<th rowspan="3">Perlakuan Risiko</th>
+<th colspan="2">Rencana Pengendalian</th>
+<th rowspan="3">PJTL</th>
 </tr>
 
 <tr>
@@ -66,6 +66,7 @@ th,td{border:1px solid #000;padding:3px;text-align:center}
 <td>{{ $r->sebab }}</td>
 <td>{{ $r->uc_c }}</td>
 <td>{{ $r->dampak }}</td>
+
 
 <td>{{ $r->pengendalian_uraian }}</td>
 <td>{{ $r->desain_a?'✔':'-' }}</td>
