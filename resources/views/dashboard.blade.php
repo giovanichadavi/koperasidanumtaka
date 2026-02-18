@@ -1,8 +1,21 @@
-
 @extends('adminlte::page')
 
 @section('title', 'Dashboard')
 
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+@endsection
+
+@section('navbar-right')
+
+@section('content')
+
+@if(session('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    ✅ {{ session('success') }}
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+</div>
+@endif
 @section('content_header')
 <h1>Selamat Datang Di SiManis Danum Taka</h1>
 @endsection

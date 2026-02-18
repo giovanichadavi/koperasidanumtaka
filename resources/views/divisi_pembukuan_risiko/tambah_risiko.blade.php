@@ -34,7 +34,8 @@
 
             <form method="POST"
                   action="{{ route('divisi_pembukuan.risiko.store') }}"
-                  class="flex-grow-1 d-flex flex-column">
+                  class="flex-grow-1 d-flex flex-column"
+                  novalidate>
                 @csrf
 
         <div class="row flex-grow-1">
@@ -45,28 +46,43 @@
                 <div class="form-group mb-4">
                     <label>Nama Kegiatan</label>
                     <input type="text" name="nama_kegiatan" class="form-control"
-                        placeholder="Masukkan nama kegiatan" required>
+                        placeholder="Masukkan Nama Kegiatan" required
+                        value="{{ old('nama_kegiatan') }}">
+                    @error('nama_kegiatan')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-4">
                     <label>Tujuan Kegiatan</label>
                     <input type="text" name="tujuan" class="form-control"
-                        placeholder="Masukkan tujuan kegiatan" required>
+                        placeholder="Masukkan Tujuan Kegiatan" required
+                        value="{{ old('tujuan') }}">
+                    @error('tujuan')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-4">
                     <label>Pernyataan Risiko</label>
                     <textarea name="pernyataan_risiko" class="form-control auto-resize"
-                            rows="2" required></textarea>
+                    placeholder="Masukkan Pernyataan Risiko"
+                    rows="2" required>{{ old('pernyataan_risiko') }}</textarea>
+                    @error('pernyataan_risiko')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-4">
                     <label>Dampak</label>
                     <textarea name="dampak" class="form-control auto-resize"
-                            rows="2" required></textarea>
+                    placeholder="Masukkan Dampak Risiko"
+                            rows="2" required>{{ old('dampak') }}</textarea>
+                    @error('dampak')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
 
-                {{-- TABEL PENGENDALIAN --}}
                 <div class="form-group mb-4">
                     <label>Pengendalian</label>
                     <table class="table table-bordered text-center">
@@ -86,44 +102,21 @@
                         </thead>
                         <tbody>
                             <tr>
-                                {{-- URAIAN (sama seperti Dampak) --}}
                                 <td>
                                     <textarea name="pengendalian_uraian"
                                             class="form-control auto-resize"
                                             rows="2"
-                                            placeholder="Tuliskan uraian pengendalian"></textarea>
+                                            placeholder="Tuliskan Uraian Pengendalian">{{ old('pengendalian_uraian') }}</textarea>
+                                    @error('pengendalian_uraian')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </td>
 
-                                {{-- DESAIN A --}}
-                                <td>
-                                    <input type="checkbox"
-                                        name="desain_a"
-                                        value="1">
-                                </td>
-
-                                {{-- DESAIN T --}}
-                                <td>
-                                    <input type="checkbox"
-                                        name="desain_t"
-                                        value="1">
-                                </td>
-
-                                {{-- EFEKTIVITAS --}}
-                                <td>
-                                    <input type="checkbox"
-                                        name="efektivitas_te"
-                                        value="1">
-                                </td>
-                                <td>
-                                    <input type="checkbox"
-                                        name="efektivitas_ke"
-                                        value="1">
-                                </td>
-                                <td>
-                                    <input type="checkbox"
-                                        name="efektivitas_e"
-                                        value="1">
-                                </td>
+                                <td><input type="checkbox" name="desain_a" value="1" {{ old('desain_a') ? 'checked' : '' }}></td>
+                                <td><input type="checkbox" name="desain_t" value="1" {{ old('desain_t') ? 'checked' : '' }}></td>
+                                <td><input type="checkbox" name="efektivitas_te" value="1" {{ old('efektivitas_te') ? 'checked' : '' }}></td>
+                                <td><input type="checkbox" name="efektivitas_ke" value="1" {{ old('efektivitas_ke') ? 'checked' : '' }}></td>
+                                <td><input type="checkbox" name="efektivitas_e" value="1" {{ old('efektivitas_e') ? 'checked' : '' }}></td>
                             </tr>
                         </tbody>
                     </table>
@@ -156,7 +149,8 @@
                        class="custom-control-input"
                        id="risiko{{ $i }}"
                        name="id_risiko[]"
-                       value="{{ $risiko }}">
+                       value="{{ $risiko }}"
+                       {{ in_array($risiko, old('id_risiko', [])) ? 'checked' : '' }}>
                 <label class="custom-control-label" for="risiko{{ $i }}">
                     {{ $risiko }}
                 </label>
@@ -164,28 +158,36 @@
         </div>
         @endforeach
     </div>
+    @error('id_risiko')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
 </div>
 
                 <div class="form-group mb-4">
                     <label>Sebab</label>
                     <textarea name="sebab" class="form-control auto-resize"
-                            rows="2" required></textarea>
+                    placeholder="Masukkan Sebab Dari Risiko"
+                            rows="2" required>{{ old('sebab') }}</textarea>
+                    @error('sebab')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
 
-                {{-- INPUT BARU UC / C --}}
                 <div class="form-group mb-4">
                     <label>UC / C</label>
                     <select name="uc_c" class="form-control" required>
-                        <option value="">-- Pilih --</option>
-                        <option value="UC">UC</option>
-                        <option value="C">C</option>
+                        <option value="">-- Pilih Uncontrol atau Control --</option>
+                        <option value="UC" {{ old('uc_c') == 'UC' ? 'selected' : '' }}>UC</option>
+                        <option value="C" {{ old('uc_c') == 'C' ? 'selected' : '' }}>C</option>
                     </select>
+                    @error('uc_c')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
 
             </div>
         </div>
 
-                {{-- FOOTER --}}
                 <div class="d-flex justify-content-end border-top pt-3 mt-auto">
                     <a href="{{ route('divisi_pembukuan.risiko.index') }}"
                        class="btn btn-secondary">
@@ -203,7 +205,6 @@
 
 @endsection
 
-{{-- AUTO RESIZE TEXTAREA --}}
 @push('js')
 <script>
     document.querySelectorAll('.auto-resize').forEach(el => {
@@ -215,7 +216,6 @@
 </script>
 @endpush
 
-{{-- CUSTOM STYLE --}}
 @push('css')
 <style>
     .content-wrapper {

@@ -6,12 +6,8 @@
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 @endsection
 
-
-@section('navbar-right')
-
 @section('content')
 
-{{-- NOTIFIKASI --}}
 @if(session('success'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
     ✅ {{ session('success') }}
@@ -25,6 +21,22 @@
 </div>
 
 <div class="card-body">
+
+<form method="GET" action="{{ route('laporan.daftar_risiko.index') }}" class="mb-3">
+<div class="row">
+<div class="col-md-4">
+<div class="input-group input-group-sm">
+<input type="text" name="search" class="form-control"
+       placeholder="Cari data risiko..."
+       value="{{ request('search') }}">
+<div class="input-group-append">
+<button class="btn btn-primary">🔍</button>
+</div>
+</div>
+</div>
+</div>
+</form>
+
 <div class="table-responsive">
 <table class="table table-bordered table-striped">
 <thead class="text-center align-middle">
@@ -38,22 +50,17 @@
 <th rowspan="3">Sebab</th>
 <th rowspan="3">UC/C</th>
 <th rowspan="3">Dampak Awal</th>
-
 <th colspan="6">Pengendalian yang Ada</th>
-
 <th rowspan="3">Probabilitas</th>
 <th rowspan="3">Dampak</th>
 <th rowspan="3">Nilai Risiko</th>
 <th rowspan="3">Level Risiko</th>
-
 <th rowspan="3">Keputusan Penanganan Risiko</th>
 <th rowspan="3">Perlakuan Risiko</th>
-
 <th colspan="2">Rencana Pengendalian</th>
 <th rowspan="3">Penanggung Jawab</th>
 <th rowspan="3">Aksi</th>
 </tr>
-
 <tr>
 <th rowspan="2">Uraian</th>
 <th colspan="2">Desain</th>
@@ -61,7 +68,6 @@
 <th rowspan="2">Uraian</th>
 <th rowspan="2">Jadwal</th>
 </tr>
-
 <tr>
 <th>A</th>
 <th>T</th>
@@ -83,70 +89,56 @@
 <td>{{ $r->sebab }}</td>
 <td>{{ $r->uc_c }}</td>
 <td>{{ $r->dampak }}</td>
-
-
 <td>{{ $r->pengendalian_uraian }}</td>
 <td>{{ $r->desain_a ? '✔':'-' }}</td>
 <td>{{ $r->desain_t ? '✔':'-' }}</td>
 <td>{{ $r->efektivitas_te ? '✔':'-' }}</td>
 <td>{{ $r->efektivitas_ke ? '✔':'-' }}</td>
 <td>{{ $r->efektivitas_e ? '✔':'-' }}</td>
-
 <td>{{ $r->probabilitas }}</td>
 <td>{{ $r->dampak_risiko }}</td>
 <td>{{ $r->nilai_risiko }}</td>
-
 <td>
 <span class="badge badge-{{ $r->warna_risiko }}">
 {{ $r->level_risiko ?? 'Belum Dinilai' }}
 </span>
 </td>
-
 <td>{{ $r->keputusan_penanganan ?? '-' }}</td>
 <td>{{ $r->perlakuan_risiko ?? '-' }}</td>
-
 <td>{{ $r->rencana_pengendalian }}</td>
 <td>{{ $r->jadwal_pengendalian }}</td>
 <td>{{ $r->penanggung_jawab }}</td>
-
 <td class="text-center">
-<div class="d-flex justify-content-center gap-1">
-
 <form action="{{ route('laporan.risiko.hapus',$r->id) }}" method="POST"
-onsubmit="return confirm('⚠ Yakin ingin menghapus data ini?')">
+onsubmit="return confirm('Yakin hapus data?')">
 @csrf
 @method('DELETE')
-<button class="btn btn-danger btn-sm">
-Hapus
-</button>
+<button class="btn btn-danger btn-sm">Hapus</button>
 </form>
 
-<a href="{{ route('laporan.risiko.tindaklanjut.form',$r->id) }}"
-class="btn btn-success btn-sm ml-1">
-Tindak Lanjut
-</a>
-
-</div>
+@if($r->keputusan_penanganan)
+<a href="{{ route('laporan.risiko.tindaklanjut.form',$r->id) }}?page={{ $risiko->currentPage() }}&search={{ request('search') }}"
+class="btn btn-primary btn-sm mt-1">Ubah</a>
+@else
+<a href="{{ route('laporan.risiko.tindaklanjut.form',$r->id) }}?page={{ $risiko->currentPage() }}&search={{ request('search') }}"
+class="btn btn-success btn-sm mt-1">Tindak Lanjut</a>
+@endif
 </td>
 </tr>
 @endforeach
 </tbody>
 </table>
-
-{{-- BAGIAN BAWAH --}}
-<div class="d-flex justify-content-between align-items-center mt-3">
-<div>
-{{ $risiko->links() }}
 </div>
 
+<div class="d-flex justify-content-between mt-3">
+<div>{{ $risiko->links() }}</div>
 <div>
-<a href="{{ route('laporan.daftar_risiko.pdf') }}" class="btn btn-danger btn-sm">
+<a href="{{ route('laporan.daftar_risiko.pdf', request()->all()) }}" class="btn btn-danger btn-sm">
 📄 Download PDF
 </a>
 </div>
 </div>
 
-</div>
 </div>
 </div>
 @endsection
