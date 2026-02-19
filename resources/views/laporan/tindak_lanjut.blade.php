@@ -17,22 +17,20 @@
 <table class="table table-bordered table-striped">
 <thead class="text-center align-middle">
 <tr>
-<th rowspan="3" style="vertical-align: middle; padding-top: 12px;">Nama Unit</th>
-<th rowspan="3" style="vertical-align: middle; padding-top: 12px;">Nama Kegiatan</th>
-<th rowspan="3" style="vertical-align: middle; padding-top: 12px;">Tujuan Kegiatan</th>
-<th rowspan="3" style="vertical-align: middle; padding-top: 12px;">ID Risiko</th>
-<th rowspan="3" style="vertical-align: middle; padding-top: 12px;">Pernyataan Risiko</th>
-<th rowspan="3" style="vertical-align: middle; padding-top: 12px;">Sebab</th>
-<th rowspan="3" style="vertical-align: middle; padding-top: 12px;">UC/C</th>
-<th rowspan="3" style="vertical-align: middle; padding-top: 12px;">Dampak Awal</th>
+<th rowspan="3">Nama Unit</th>
+<th rowspan="3">Nama Kegiatan</th>
+<th rowspan="3">Tujuan Kegiatan</th>
+<th rowspan="3">ID Risiko</th>
+<th rowspan="3">Pernyataan Risiko</th>
+<th rowspan="3">Sebab</th>
+<th rowspan="3">UC/C</th>
+<th rowspan="3">Dampak Awal</th>
 </tr>
-
 <tr>
 <th rowspan="2">Uraian</th>
 <th colspan="2">Desain</th>
 <th colspan="3">Efektivitas</th>
 </tr>
-
 <tr>
 <th>A</th>
 <th>T</th>
@@ -66,7 +64,7 @@
 
 <hr>
 
-<form method="POST" action="{{ route('laporan.risiko.tindaklanjut.simpan', $risiko->id) }}">
+<form method="POST" action="{{ route('laporan.risiko.tindaklanjut.simpan', $risiko->id) }}" novalidate>
 @csrf
 
 <input type="hidden" name="unit" value="{{ request('unit') }}">
@@ -75,26 +73,32 @@
 <div class="row">
 <div class="col-md-6">
 <label>Dampak</label>
-<select name="dampak_risiko" id="dampak_risiko" class="form-control" onchange="hitungRisiko()" required>
+<select name="dampak_risiko" id="dampak_risiko" class="form-control" onchange="hitungRisiko()">
 <option value="">-- Pilih Dampak --</option>
-<option value="1">1 - Tidak Signifikan</option>
-<option value="2">2 - Rendah</option>
-<option value="3">3 - Menengah</option>
-<option value="4">4 - Besar</option>
-<option value="5">5 - Dahsyat</option>
+<option value="1" {{ old('dampak_risiko')=='1'?'selected':'' }}>1 - Tidak Signifikan</option>
+<option value="2" {{ old('dampak_risiko')=='2'?'selected':'' }}>2 - Rendah</option>
+<option value="3" {{ old('dampak_risiko')=='3'?'selected':'' }}>3 - Menengah</option>
+<option value="4" {{ old('dampak_risiko')=='4'?'selected':'' }}>4 - Besar</option>
+<option value="5" {{ old('dampak_risiko')=='5'?'selected':'' }}>5 - Dahsyat</option>
 </select>
+@error('dampak_risiko')
+<small class="text-danger">{{ $message }}</small>
+@enderror
 </div>
 
 <div class="col-md-6">
 <label>Probabilitas</label>
-<select name="probabilitas" id="probabilitas" class="form-control" onchange="hitungRisiko()" required>
+<select name="probabilitas" id="probabilitas" class="form-control" onchange="hitungRisiko()">
 <option value="">-- Pilih Probabilitas --</option>
-<option value="1">1 - Jarang</option>
-<option value="2">2 - Kecil</option>
-<option value="3">3 - Sedang</option>
-<option value="4">4 - Besar</option>
-<option value="5">5 - Hampir Pasti</option>
+<option value="1" {{ old('probabilitas')=='1'?'selected':'' }}>1 - Jarang</option>
+<option value="2" {{ old('probabilitas')=='2'?'selected':'' }}>2 - Kecil</option>
+<option value="3" {{ old('probabilitas')=='3'?'selected':'' }}>3 - Sedang</option>
+<option value="4" {{ old('probabilitas')=='4'?'selected':'' }}>4 - Besar</option>
+<option value="5" {{ old('probabilitas')=='5'?'selected':'' }}>5 - Hampir Pasti</option>
 </select>
+@error('probabilitas')
+<small class="text-danger">{{ $message }}</small>
+@enderror
 </div>
 </div>
 
@@ -102,7 +106,7 @@
 <div class="col-md-6">
 <label>Nilai Risiko</label>
 <input type="text" id="nilai_risiko" class="form-control" readonly>
-<input type="hidden" name="nilai_risiko" id="nilai_risiko_hidden">
+<input type="hidden" name="nilai_risiko" id="nilai_risiko_hidden" value="{{ old('nilai_risiko') }}">
 </div>
 
 <div class="col-md-6">
@@ -119,21 +123,30 @@
 
 <div class="col-md-6">
 <label>Perlakuan Risiko</label>
-<select name="perlakuan_risiko" class="form-control" required>
+<select name="perlakuan_risiko" class="form-control">
 <option value="Mitigasi">Mitigasi</option>
 </select>
+@error('perlakuan_risiko')
+<small class="text-danger">{{ $message }}</small>
+@enderror
 </div>
 </div>
 
 <div class="form-group mt-3">
 <label>Rencana Pengendalian</label>
-<textarea name="rencana_pengendalian" class="form-control" rows="3" required></textarea>
+<textarea name="rencana_pengendalian" class="form-control" rows="3">{{ old('rencana_pengendalian') }}</textarea>
+@error('rencana_pengendalian')
+<small class="text-danger">{{ $message }}</small>
+@enderror
 </div>
 
 <div class="row mt-3">
 <div class="col-md-6">
 <label>Jadwal Pengendalian</label>
-<input type="date" name="jadwal_pengendalian" class="form-control" required>
+<input type="date" name="jadwal_pengendalian" class="form-control" value="{{ old('jadwal_pengendalian') }}">
+@error('jadwal_pengendalian')
+<small class="text-danger">{{ $message }}</small>
+@enderror
 </div>
 
 <div class="col-md-6">
@@ -142,7 +155,8 @@
 <div class="col-md-6">
 @foreach(['Direktur','Manajer Produksi','Manajer Teknik'] as $i => $pj)
 <div class="form-check">
-<input class="form-check-input" type="checkbox" name="penanggung_jawab[]" value="{{ $pj }}" id="pj{{ $i }}">
+<input class="form-check-input" type="checkbox" name="penanggung_jawab[]" value="{{ $pj }}" id="pj{{ $i }}"
+{{ is_array(old('penanggung_jawab')) && in_array($pj, old('penanggung_jawab')) ? 'checked' : '' }}>
 <label class="form-check-label" for="pj{{ $i }}">{{ $pj }}</label>
 </div>
 @endforeach
@@ -150,12 +164,16 @@
 <div class="col-md-6">
 @foreach(['Manajer Keuangan','Kepala Unit'] as $i => $pj)
 <div class="form-check">
-<input class="form-check-input" type="checkbox" name="penanggung_jawab[]" value="{{ $pj }}" id="pjx{{ $i }}">
+<input class="form-check-input" type="checkbox" name="penanggung_jawab[]" value="{{ $pj }}" id="pjx{{ $i }}"
+{{ is_array(old('penanggung_jawab')) && in_array($pj, old('penanggung_jawab')) ? 'checked' : '' }}>
 <label class="form-check-label" for="pjx{{ $i }}">{{ $pj }}</label>
 </div>
 @endforeach
 </div>
 </div>
+@error('penanggung_jawab')
+<small class="text-danger">{{ $message }}</small>
+@enderror
 </div>
 </div>
 

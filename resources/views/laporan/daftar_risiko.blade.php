@@ -22,8 +22,20 @@
 
 <div class="card-body">
 
+{{-- FILTER UNIT --}}
 <form method="GET" action="{{ route('laporan.daftar_risiko.index') }}" class="mb-3">
 <div class="row">
+<div class="col-md-3">
+<select name="unit" class="form-control form-control-sm" onchange="this.form.submit()">
+<option value="">-- Semua Unit --</option>
+@foreach($units as $u)
+<option value="{{ $u }}" {{ $activeUnit==$u?'selected':'' }}>
+{{ $u }}
+</option>
+@endforeach
+</select>
+</div>
+
 <div class="col-md-4">
 <div class="input-group input-group-sm">
 <input type="text" name="search" class="form-control"
@@ -117,10 +129,10 @@ onsubmit="return confirm('Yakin hapus data?')">
 </form>
 
 @if($r->keputusan_penanganan)
-<a href="{{ route('laporan.risiko.tindaklanjut.form',$r->id) }}?page={{ $risiko->currentPage() }}&search={{ request('search') }}"
+<a href="{{ route('laporan.risiko.tindaklanjut.form',$r->id) }}?page={{ $risiko->currentPage() }}&search={{ request('search') }}&unit={{ request('unit') }}"
 class="btn btn-primary btn-sm mt-1">Ubah</a>
 @else
-<a href="{{ route('laporan.risiko.tindaklanjut.form',$r->id) }}?page={{ $risiko->currentPage() }}&search={{ request('search') }}"
+<a href="{{ route('laporan.risiko.tindaklanjut.form',$r->id) }}?page={{ $risiko->currentPage() }}&search={{ request('search') }}&unit={{ request('unit') }}"
 class="btn btn-success btn-sm mt-1">Tindak Lanjut</a>
 @endif
 </td>

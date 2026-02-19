@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\http\Controllers\RisikoController;
 use App\Http\Controllers\LaporanRisikoController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AkunController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
@@ -568,4 +569,14 @@ Route::middleware(['auth'])
 
     // DASHBOARD
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
+    // AKUN 
+    Route::middleware(['auth'])->group(function () {
+    Route::get('/akun', [AkunController::class, 'index'])->name('akun.index');
+    Route::post('/akun/update-profil', [AkunController::class, 'updateProfil'])->name('akun.updateProfil');
+    Route::post('/akun/update-password', [AkunController::class, 'updatePassword'])->name('akun.updatePassword');
+    });
+
+
 require __DIR__.'/auth.php';
