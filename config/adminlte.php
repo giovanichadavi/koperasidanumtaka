@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'logo' => '<b>DANUM TAKA</b>',
+'logo' => '<strong style="font-weight:600;">SiManis Danum Taka</strong>',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image',
     'logo_img_xl' => null,
