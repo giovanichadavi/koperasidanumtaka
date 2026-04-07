@@ -6,6 +6,10 @@
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 @endsection
 
+@push('css')
+<link rel="stylesheet" href="{{ asset('css/darkmode-switch.css') }}">
+@endpush
+
 @section('navbar-right')
 <li class="nav-item">
     <a class="nav-link" href="#"
