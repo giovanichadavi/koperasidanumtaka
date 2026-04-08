@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-
+<link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 @section('content_header')
     <h1>Halaman Risiko</h1>
 @endsection

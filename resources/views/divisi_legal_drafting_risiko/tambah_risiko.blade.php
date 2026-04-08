@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('title', 'Tambah Risiko | Legal Drafting')
-
+<link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 @endsection

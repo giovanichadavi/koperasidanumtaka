@@ -1,10 +1,10 @@
 @extends('adminlte::page')
 
 @section('title', 'Tabel Risiko')
+
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 @endsection
-
 
 @section('navbar-right')
 <li class="nav-item">

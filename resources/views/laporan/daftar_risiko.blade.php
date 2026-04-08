@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-
+<link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 @section('title', 'Laporan Manajemen Risiko')
 
 @section('css')
