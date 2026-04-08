@@ -21,7 +21,7 @@ use App\Http\Controllers\DivisiLaboratoriumRisikoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
-use App\http\Controllers\RisikoController;
+use App\Http\Controllers\RisikoController;
 use App\Http\Controllers\LaporanRisikoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AkunController;
