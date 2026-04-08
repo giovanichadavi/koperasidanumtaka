@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Peta Risiko')
+@section('title', 'Tabel Risiko')
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 @endsection
@@ -23,7 +23,7 @@
 @section('content')
 <div class="card mt-4">
     <div class="card-header">
-        <h5 class="mb-0">Peta Risiko</h5>
+        <h5 class="mb-0">Tabel Risiko</h5>
     </div>
 
     <div class="card-body">

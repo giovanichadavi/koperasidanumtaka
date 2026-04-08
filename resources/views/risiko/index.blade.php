@@ -9,12 +9,12 @@
 @endsection
 
 
-@section('title', 'Peta Risiko')
+@section('title', 'Tabel Risiko')
 
 @section('content')
 <div class="card mt-4">
     <div class="card-header">
-        <h5 class="mb-0">Peta Risiko</h5>
+        <h5 class="mb-0">Tabel Risiko</h5>
     </div>
 
     <div class="card-body">

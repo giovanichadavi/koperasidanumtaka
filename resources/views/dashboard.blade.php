@@ -32,7 +32,7 @@
 </div>
 @endif
 @section('content_header')
-<h1>Selamat Datang Di SiManis Danum Taka</h1>
+<h1>Selamat Datang Di Safety Danum Taka</h1>
 @endsection
 
 @section('content')
