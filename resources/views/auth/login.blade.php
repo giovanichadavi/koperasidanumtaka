@@ -40,7 +40,7 @@
 
         /* PERBAIKAN: Box biru dirampingkan (padding dikurangi) */
         .header-section {
-            background: linear-gradient(135deg, #4338ca 0%, #3730a3 100%);
+            background: linear-gradient(135deg, #003049 0%, #003049 100%);
             padding: 20px 20px; /* Diperkecil dari 30px ke 20px */
             text-align: center;
             color: white;
@@ -151,7 +151,7 @@
 
         .btn-login {
             width: 100%;
-            background-color: #4338ca;
+            background-color: #003049;
             color: white;
             padding: 12px;
             border: none;

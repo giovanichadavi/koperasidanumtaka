@@ -561,7 +561,7 @@ return [
             'url' => 'akun',
             'icon' => 'fas fa-users-cog',
             'label_color' => 'success',
-            'can' => 'divisi_kas_pembukuan', 
+            'can' => 'divisi_kas_penagihan', 
         ],
 
         [   'text' => 'Akun',
@@ -610,8 +610,9 @@ return [
             'url' => 'akun',
             'icon' => 'fas fa-users-cog',
             'label_color' => 'success',
-            'can' => 'unit_laboratorium', 
+            'can' => 'divisi_laboratorium', 
         ],
+
     ],
 
     /*

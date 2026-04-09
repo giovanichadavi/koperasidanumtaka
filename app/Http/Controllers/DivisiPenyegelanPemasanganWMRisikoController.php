@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DaftarRisiko;
 
-class DivisiUmumRisikoController extends Controller
+class DivisiPenyegelanPemasanganWMRisikoController extends Controller
 {
     private function checkRole()
     {
@@ -20,7 +20,7 @@ class DivisiUmumRisikoController extends Controller
 
         $risiko = DaftarRisiko::where('unit_nama', 'Divisi Penyegelan & Pemasangan WM')
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            ->paginate(10);
 
         return view('divisi_penyegelan_pemasangan_wm_risiko.daftar_risiko', compact('risiko'));
     }

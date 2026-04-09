@@ -40,7 +40,7 @@ class LaporanRisikoController extends Controller
 
         $risiko = $query
             ->orderBy('created_at','desc')
-            ->paginate(5)
+            ->paginate(10)
             ->withQueryString();
 
         return view('laporan.daftar_risiko', compact(

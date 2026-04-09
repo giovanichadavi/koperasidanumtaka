@@ -17,7 +17,7 @@ class UserController extends Controller
         ,'divisi_pengaduan_pelanggan','divisi_perencanaan_anggaran','divisi_pembukuan',
         'divisi_kas_penagihan','unit_lawe_lawe','unit_sepaku','unit_waru','unit_sotek','unit_maridan','unit_babulu',
         'divisi_laboratorium',])
-                    ->paginate(7); 
+                    ->paginate(10); 
         return view('admin.users.index', compact('users'));
     }
 

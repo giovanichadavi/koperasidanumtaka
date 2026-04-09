@@ -2,20 +2,57 @@
 
 @section('title', 'Tindak Lanjut Risiko')
 <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
-@section('css')
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+@section('css')
 <style>
+    /* Variabel Warna untuk Mode Terang & Gelap */
+    :root {
+        --card-header-bg: #ffffff;
+        --card-header-text: #007bff;
+        --input-readonly-bg: #e9ecef;
+    }
+
+    .dark-mode {
+        --card-header-bg: #3f474e;
+        --card-header-text: #ffffff;
+        --input-readonly-bg: #454d55; /* Warna input readonly di mode gelap */
+    }
+
+    /* Styling Header Kartu */
+    .card-header-custom {
+        background-color: var(--card-header-bg) !important;
+        color: var(--card-header-text) !important;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+    }
+
     #level_risiko {
         font-weight: bold;
         transition: all 0.3s ease;
+        color: white !important;
     }
+
+    .text-success-check {
+        color: #28a745;
+        font-size: 1.1rem;
+    }
+
+    /* Input Readonly Adaptif */
+    .form-control-readonly {
+        background-color: var(--input-readonly-bg) !important;
+        cursor: not-allowed;
+    }
+
+    /* Penyesuaian Tabel & Label di Mode Gelap */
+    .dark-mode .table-responsive { background-color: #343a40; }
+    .dark-mode label { color: #fff; }
+    .dark-mode .card { background-color: #343a40; color: #fff; }
 </style>
 @endsection
 
 @section('content')
-<div class="card mt-4 shadow-sm">
-    <div class="card-header">
-        <h5 class="mb-0 text-center">Tindak Lanjut Risiko</h5>
+<div class="card mt-4 shadow-sm" style="border-radius: 15px; overflow: hidden;">
+    <div class="card-header card-header-custom">
+        <h5 class="mb-0 text-center font-weight-bold text-uppercase">Tindak Lanjut Risiko</h5>
     </div>
 
     <div class="card-body">
@@ -51,17 +88,17 @@
                         <td>{{ $risiko->unit_nama }}</td>
                         <td>{{ $risiko->nama_kegiatan }}</td>
                         <td>{{ $risiko->tujuan }}</td>
-                        <td>{{ $risiko->id_risiko }}</td>
+                        <td><b class="text-primary">{{ $risiko->id_risiko }}</b></td>
                         <td>{{ $risiko->pernyataan_risiko }}</td>
                         <td>{{ $risiko->sebab }}</td>
                         <td>{{ $risiko->uc_c }}</td>
                         <td>{{ $risiko->dampak }}</td>
                         <td>{{ $risiko->pengendalian_uraian }}</td>
-                        <td>{{ $risiko->desain_a ? '✔' : '-' }}</td>
-                        <td>{{ $risiko->desain_t ? '✔' : '-' }}</td>
-                        <td>{{ $risiko->efektivitas_te ? '✔' : '-' }}</td>
-                        <td>{{ $risiko->efektivitas_ke ? '✔' : '-' }}</td>
-                        <td>{{ $risiko->efektivitas_e ? '✔' : '-' }}</td>
+                        <td class="text-success-check">{!! $risiko->desain_a ? '<i class="fas fa-check"></i>' : '-' !!}</td>
+                        <td class="text-success-check">{!! $risiko->desain_t ? '<i class="fas fa-check"></i>' : '-' !!}</td>
+                        <td class="text-success-check">{!! $risiko->efektivitas_te ? '<i class="fas fa-check"></i>' : '-' !!}</td>
+                        <td class="text-success-check">{!! $risiko->efektivitas_ke ? '<i class="fas fa-check"></i>' : '-' !!}</td>
+                        <td class="text-success-check">{!! $risiko->efektivitas_e ? '<i class="fas fa-check"></i>' : '-' !!}</td>
                     </tr>
                 </tbody>
             </table>
@@ -72,7 +109,6 @@
         <form method="POST" action="{{ route('laporan.risiko.tindaklanjut.simpan', $risiko->id) }}" novalidate>
             @csrf
 
-            {{-- Hidden input untuk menjaga state pagination & filter --}}
             <input type="hidden" name="unit_filter" value="{{ request('unit') }}">
             <input type="hidden" name="page" value="{{ request('page') }}">
 
@@ -82,17 +118,12 @@
                     <select name="dampak_risiko" id="dampak_risiko" class="form-control" onchange="hitungRisiko()">
                         <option value="">-- Pilih Dampak --</option>
                         @for ($i = 1; $i <= 5; $i++)
-                            @php
-                                $labels = [1=>'Tidak Signifikan', 2=>'Rendah', 3=>'Menengah', 4=>'Besar', 5=>'Dahsyat'];
-                            @endphp
+                            @php $labels = [1=>'Tidak Signifikan', 2=>'Rendah', 3=>'Menengah', 4=>'Besar', 5=>'Dahsyat']; @endphp
                             <option value="{{ $i }}" {{ old('dampak_risiko', $risiko->dampak_risiko) == $i ? 'selected' : '' }}>
                                 {{ $i }} - {{ $labels[$i] }}
                             </option>
                         @endfor
                     </select>
-                    @error('dampak_risiko')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
                 </div>
 
                 <div class="col-md-6">
@@ -100,24 +131,19 @@
                     <select name="probabilitas" id="probabilitas" class="form-control" onchange="hitungRisiko()">
                         <option value="">-- Pilih Probabilitas --</option>
                         @for ($i = 1; $i <= 5; $i++)
-                            @php
-                                $labels = [1=>'Jarang', 2=>'Kecil', 3=>'Sedang', 4=>'Besar', 5=>'Hampir Pasti'];
-                            @endphp
+                            @php $labels = [1=>'Jarang', 2=>'Kecil', 3=>'Sedang', 4=>'Besar', 5=>'Hampir Pasti']; @endphp
                             <option value="{{ $i }}" {{ old('probabilitas', $risiko->probabilitas) == $i ? 'selected' : '' }}>
                                 {{ $i }} - {{ $labels[$i] }}
                             </option>
                         @endfor
                     </select>
-                    @error('probabilitas')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
                 </div>
             </div>
 
             <div class="row mt-3">
                 <div class="col-md-6">
                     <label>Nilai Risiko</label>
-                    <input type="text" id="nilai_risiko" class="form-control" readonly value="{{ old('nilai_risiko', $risiko->nilai_risiko) }}">
+                    <input type="text" id="nilai_risiko" class="form-control form-control-readonly" readonly value="{{ old('nilai_risiko', $risiko->nilai_risiko) }}">
                     <input type="hidden" name="nilai_risiko" id="nilai_risiko_hidden" value="{{ old('nilai_risiko', $risiko->nilai_risiko) }}">
                 </div>
 
@@ -130,7 +156,8 @@
             <div class="row mt-3">
                 <div class="col-md-6">
                     <label>Keputusan Penanganan Risiko</label>
-                    <input type="text" class="form-control" name="keputusan_penanganan" value="YA" readonly>
+                    {{-- Diperbaiki agar menggunakan class 'form-control-readonly' yang adaptif terhadap dark mode --}}
+                    <input type="text" class="form-control form-control-readonly" name="keputusan_penanganan" value="YA" readonly>
                 </div>
 
                 <div class="col-md-6">
@@ -138,37 +165,27 @@
                     <select name="perlakuan_risiko" class="form-control">
                         <option value="Mitigasi" {{ old('perlakuan_risiko', $risiko->perlakuan_risiko) == 'Mitigasi' ? 'selected' : '' }}>Mitigasi</option>
                     </select>
-                    @error('perlakuan_risiko')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
                 </div>
             </div>
 
             <div class="form-group mt-3">
                 <label>Rencana Pengendalian</label>
-                <textarea name="rencana_pengendalian" class="form-control" rows="3">{{ old('rencana_pengendalian', $risiko->rencana_pengendalian) }}</textarea>
-                @error('rencana_pengendalian')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
+                <textarea name="rencana_pengendalian" class="form-control" rows="3" placeholder="Masukkan rencana mitigasi...">{{ old('rencana_pengendalian', $risiko->rencana_pengendalian) }}</textarea>
             </div>
 
             <div class="row mt-3">
                 <div class="col-md-6">
                     <label>Jadwal Pengendalian</label>
                     <input type="date" name="jadwal_pengendalian" class="form-control" value="{{ old('jadwal_pengendalian', $risiko->jadwal_pengendalian) }}">
-                    @error('jadwal_pengendalian')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
                 </div>
 
                 <div class="col-md-6">
                     <label>Penanggung Jawab</label>
                     @php
-                        // Mengubah string penanggung_jawab dari DB menjadi array agar bisa dicek in_array
                         $pj_db = is_string($risiko->penanggung_jawab) ? explode(',', $risiko->penanggung_jawab) : ($risiko->penanggung_jawab ?? []);
                         $pj_selected = old('penanggung_jawab', $pj_db);
                     @endphp
-                    <div class="row">
+                    <div class="row p-2 rounded border mx-0" style="background-color: rgba(0,0,0,0.05);">
                         <div class="col-md-6">
                             @foreach(['Direktur','Manajer Produksi','Manajer Teknik'] as $i => $pj)
                                 <div class="form-check">
@@ -188,18 +205,15 @@
                             @endforeach
                         </div>
                     </div>
-                    @error('penanggung_jawab')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
                 </div>
             </div>
 
-            <div class="text-right mt-4">
-                <a href="{{ route('laporan.daftar_risiko.index', ['page' => request('page'), 'unit' => request('unit'), 'search' => request('search')]) }}" class="btn btn-secondary">
-                    <i class="fas fa-arrow-left"></i> Batal
+            <div class="text-right mt-5">
+                <a href="{{ route('laporan.daftar_risiko.index', ['page' => request('page'), 'unit' => request('unit')]) }}" class="btn btn-secondary px-4">
+                    <i class="fas fa-times-circle"></i> Batal
                 </a>
-                <button type="submit" class="btn btn-success">
-                    <i class="fas fa-save"></i> Simpan
+                <button type="submit" class="btn btn-primary px-4 shadow-sm">
+                    <i class="fas fa-save"></i> Simpan Data
                 </button>
             </div>
         </form>
@@ -209,10 +223,7 @@
 
 @push('js')
 <script>
-    // Jalankan fungsi hitung saat halaman pertama kali dimuat (untuk Mode Ubah)
-    document.addEventListener('DOMContentLoaded', function() {
-        hitungRisiko();
-    });
+    document.addEventListener('DOMContentLoaded', function() { hitungRisiko(); });
 
     function hitungRisiko(){
         let d = document.getElementById('dampak_risiko').value;
@@ -228,18 +239,12 @@
         };
 
         let nilai = matrix[d][p];
-        let level = '';
-        let warna = '';
+        let level = ''; let warna = '';
 
-        if ([1,2,3,5,7,8].includes(nilai)) {
-            level = 'Rendah'; warna = '#28a745'; // Green
-        } else if ([4,10,11,13,20].includes(nilai)) {
-            level = 'Moderat'; warna = '#ffc107'; // Yellow
-        } else if ([6,12,14,16,17,21].includes(nilai)) {
-            level = 'Tinggi'; warna = '#fd7e14'; // Orange
-        } else {
-            level = 'Ekstrim'; warna = '#dc3545'; // Red
-        }
+        if ([1,2,3,5,7,8].includes(nilai)) { level = 'Rendah'; warna = '#28a745'; } 
+        else if ([4,10,11,13,20].includes(nilai)) { level = 'Moderat'; warna = '#ffc107'; } 
+        else if ([6,12,14,16,17,21].includes(nilai)) { level = 'Tinggi'; warna = '#fd7e14'; } 
+        else { level = 'Ekstrim'; warna = '#dc3545'; }
 
         document.getElementById('nilai_risiko').value = nilai;
         document.getElementById('nilai_risiko_hidden').value = nilai;

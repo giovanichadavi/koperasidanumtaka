@@ -20,7 +20,7 @@ class DivisiUmumRisikoController extends Controller
 
         $risiko = DaftarRisiko::where('unit_nama', 'Divisi Umum')
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            ->paginate(10);
 
         return view('divisi_umum_risiko.daftar_risiko', compact('risiko'));
     }

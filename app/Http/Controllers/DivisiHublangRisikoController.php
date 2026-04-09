@@ -20,7 +20,7 @@ class DivisiHublangRisikoController extends Controller
 
         $risiko = DaftarRisiko::where('unit_nama', 'Divisi Hublang')
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            ->paginate(10);
 
         return view('divisi_hublang_risiko.daftar_risiko', compact('risiko'));
     }

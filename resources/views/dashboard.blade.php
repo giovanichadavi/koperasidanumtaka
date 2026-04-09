@@ -2,9 +2,7 @@
 
 @section('title', 'Dashboard')
 <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
-@section('css')
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-@endsection
 
 @push('css')
 <link rel="stylesheet" href="{{ asset('css/darkmode-switch.css') }}">
