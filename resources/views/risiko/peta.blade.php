@@ -96,11 +96,11 @@
             <thead>
                 <tr>
                     <th rowspan="2" style="font-size: 9px;">Dampak /<br>Peluang</th>
-                    <th>Jar</th>
-                    <th>Kcl</th>
-                    <th>Sed</th>
-                    <th>Bsr</th>
-                    <th>Pst</th>
+                    <th>Jarang</th>
+                    <th>Kecil</th>
+                    <th>Sedang</th>
+                    <th>Besar</th>
+                    <th>Pasti</th>
                 </tr>
                 <tr>
                     <th>(1)</th>
@@ -113,11 +113,11 @@
             <tbody>
                 @php
                     $labelDampak = [
-                        1 => 'T.Sig',
-                        2 => 'Rndh',
-                        3 => 'Mngh',
-                        4 => 'Bsr',
-                        5 => 'Dhst'
+                        1 => 'Tidak Signifikan',
+                        2 => 'Rendah',
+                        3 => 'Menengah',
+                        4 => 'Besar',
+                        5 => 'Dahsyat'
                     ];
                 @endphp
 

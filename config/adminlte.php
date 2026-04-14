@@ -613,6 +613,13 @@ return [
             'can' => 'divisi_laboratorium', 
         ],
 
+        [   'text' => 'Akun',
+            'url' => 'akun',
+            'icon' => 'fas fa-users-cog',
+            'label_color' => 'success',
+            'can' => 'admin_mr', 
+        ],
+
     ],
 
     /*

@@ -281,7 +281,7 @@
             </div>
             <div class="download-wrapper">
                 <a href="{{ route('laporan.daftar_risiko.pdf', request()->all()) }}" class="btn btn-danger btn-sm shadow-sm">
-                    <i class="fas fa-file-pdf mr-1"></i> PDF
+                    <i class="fas fa-file-pdf mr-1"></i> Download Laporan PDF
                 </a>
             </div>
         </div>
