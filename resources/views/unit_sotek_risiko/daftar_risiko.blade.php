@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Laporan Daftar Risiko | Unit Sotek')
+@section('title', 'Laporan Daftar Risiko | Sotek')
 <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
@@ -25,7 +25,6 @@
         --info-text-color: #adb5bd;
     }
 
-    /* 1. Container utama responsif */
     .table-responsive-custom {
         display: block;
         width: 100%;
@@ -37,14 +36,12 @@
         position: relative;
     }
 
-    /* Scrollbar Styling */
     .table-responsive-custom::-webkit-scrollbar { height: 10px; }
     .table-responsive-custom::-webkit-scrollbar-track { background: var(--header-bg); border-radius: 10px; }
     .table-responsive-custom::-webkit-scrollbar-thumb { background: #007bff; border-radius: 10px; }
 
-    /* 2. Lebar Tabel agar tidak menumpuk */
     .table-custom {
-        min-width: 2400px; 
+        min-width: 2600px; 
         margin-bottom: 0;
         border-collapse: separate;
         border-spacing: 0;
@@ -52,7 +49,6 @@
         color: var(--table-text);
     }
 
-    /* 3. Sticky Column & Mobile Pagination Fix */
     @media (max-width: 768px) {
         .sticky-no {
             position: sticky !important;
@@ -79,7 +75,6 @@
         .pagination { display: inline-flex !important; flex-wrap: nowrap !important; margin: 0 auto !important; }
     }
 
-    /* Styling Header & Cell dengan ruang lega */
     .table-custom thead th {
         vertical-align: middle;
         background-color: var(--header-bg);
@@ -100,21 +95,20 @@
         border: 1px solid var(--table-border);
     }
 
-    /* --- TOMBOL AKSI: SEJAJAR, IDENTIK & BERJARAK --- */
     .action-container {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        gap: 10px; 
-        min-width: 200px; 
+        gap: 10px;
+        min-width: 200px;
     }
 
     .form-inline-action { display: inline-block; margin: 0; padding: 0; }
 
     .btn-action {
-        width: 85px; 
-        height: 32px; 
+        width: 85px;
+        height: 32px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -135,7 +129,6 @@
 
     .btn-action i { margin-right: 5px; font-size: 10px; }
 
-    /* Footer Info Text Fix */
     .info-text-box {
         color: var(--info-text-color);
         font-size: 13px;
@@ -143,6 +136,24 @@
     }
     .info-text-box b { color: #007bff; }
     .separator-dash { margin: 0 8px; font-weight: bold; color: var(--table-text); }
+    
+    .user-info {
+        font-size: 10px;
+        line-height: 1.4;
+        min-width: 160px;
+    }
+    .user-info i { width: 15px; }
+
+    /* Tambahan style agar feedback terlihat rapi di dalam tabel */
+    .feedback-box {
+        margin-top: 5px;
+        padding: 5px;
+        background: #fff5f5;
+        border-left: 3px solid #dc3545;
+        color: #b02a37;
+        font-size: 11px;
+        white-space: normal;
+    }
 </style>
 @endsection
 
@@ -161,6 +172,22 @@
 
 @section('content')
 
+{{-- NOTIFIKASI FEEDBACK ADMIN --}}
+@foreach($risiko as $r)
+    @if($r->feedback_admin)
+        <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert" style="background-color: #dc3545; color: white; border: none;">
+            <button type="button" class="close text-white" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h5>
+                <i class="icon fas fa-comment-dots"></i> 
+                <strong>Feedback Admin:</strong> Ada revisi untuk kegiatan <b>{{ $r->nama_kegiatan }}</b>
+            </h5>
+            <p class="mb-0">Catatan: <b>{{ $r->feedback_admin }}</b></p>
+        </div>
+    @endif
+@endforeach
+
 @if(session('success'))
 <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
     <i class="fas fa-check-circle mr-1"></i> {{ session('success') }}
@@ -171,7 +198,7 @@
 <div class="card mt-2 shadow-sm">
     <div class="card-header py-3 border-0 d-flex align-items-center">
         <h5 class="mb-0 flex-grow-1 text-center font-weight-bold text-uppercase">Laporan Daftar Risiko Unit Sotek</h5>
-        <a href="{{ route('unit_sotek.risiko.create') }}" class="btn btn-primary btn-sm shadow-sm">
+        <a href="{{ route('divisi_sotek.risiko.create') }}" class="btn btn-primary btn-sm shadow-sm">
             <i class="fas fa-plus mr-1"></i> Tambah Risiko
         </a>
     </div>
@@ -191,6 +218,7 @@
                         <th rowspan="3">UC / C</th>
                         <th rowspan="3">Dampak</th>
                         <th colspan="6">Pengendalian yang Ada</th>
+                        <th rowspan="3">Input/Update Oleh</th> 
                         <th rowspan="3">Aksi</th>
                     </tr>
                     <tr>
@@ -207,7 +235,15 @@
                     <tr>
                         <td class="text-center sticky-no">{{ $risiko->firstItem() + $i }}</td>
                         <td class="font-weight-bold">{{ $r->unit_nama }}</td>
-                        <td>{{ $r->nama_kegiatan }}</td>
+                        <td>
+                            {{ $r->nama_kegiatan }}
+                            {{-- FEEDBACK PINDAH KE SINI --}}
+                            @if($r->feedback_admin)
+                                <div class="feedback-box">
+                                    <strong><i class="fas fa-exclamation-circle"></i> Feedback Admin:</strong> {{ $r->feedback_admin }}
+                                </div>
+                            @endif
+                        </td>
                         <td>{{ $r->tujuan }}</td>
                         <td class="text-center">{{ $r->id_risiko }}</td>
                         <td>{{ $r->pernyataan_risiko }}</td>
@@ -222,6 +258,17 @@
                         <td class="text-center text-success">{!! $r->efektivitas_ke ? '<i class="fas fa-check"></i>' : '-' !!}</td>
                         <td class="text-center text-success">{!! $r->efektivitas_e ? '<i class="fas fa-check"></i>' : '-' !!}</td>
                         
+                        <td class="user-info">
+                            <div>
+                                <i class="fas fa-plus-circle text-primary"></i> 
+                                <b>{{ $r->user_creator ?? 'Data Lama' }}</b>
+                            </div>
+                            <div class="text-muted">
+                                <i class="fas fa-history text-secondary"></i> 
+                                {{ $r->user_updater ?? '-' }}
+                            </div>
+                        </td>
+
                         <td class="text-center">
                             <div class="action-container">
                                 <form action="{{ route('unit_sotek.risiko.destroy', $r->id) }}" method="POST" onsubmit="return confirm('Hapus data ini?')" class="form-inline-action">
@@ -239,14 +286,13 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="16" class="text-center text-muted py-4">Data risiko belum tersedia</td>
+                        <td colspan="17" class="text-center text-muted py-4">Data risiko belum tersedia</td>
                     </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
 
-        {{-- Footer Info & Pagination --}}
         <div class="bottom-actions d-flex flex-column flex-md-row justify-content-between align-items-center mt-4 px-2">
             <div class="info-text-box mb-3 mb-md-0">
                 Menampilkan <b>{{ $risiko->firstItem() }}</b><span class="separator-dash">sampai</span><b>{{ $risiko->lastItem() }}</b> dari <b>{{ $risiko->total() }}</b> data

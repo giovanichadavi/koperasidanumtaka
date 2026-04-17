@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Tambah Risiko | Legal Drafting')
+@section('title', 'Tambah Risiko | Kepegawaian')
 <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
@@ -26,14 +26,14 @@
 
         <div class="card-header">
             <label class="mb-0 font-weight-semibold">
-                Tambah Daftar Risiko Divisi Legal Drafting
+                Tambah Daftar Risiko Divisi Kepegawaian
             </label>
         </div>
 
         <div class="card-body d-flex flex-column">
 
             <form method="POST"
-                  action="{{ route('divisi_legal_drafting.risiko.store') }}"
+                  action="{{ route('divisi_kepegawaian.risiko.store') }}"
                   class="flex-grow-1 d-flex flex-column"
                   novalidate>
                 @csrf
@@ -189,7 +189,7 @@
         </div>
 
                 <div class="d-flex justify-content-end border-top pt-3 mt-auto">
-                    <a href="{{ route('divisi_legal_drafting.risiko.index') }}"
+                    <a href="{{ route('divisi_kepegawaian.risiko.index') }}"
                        class="btn btn-secondary">
                         Kembali
                     </a>

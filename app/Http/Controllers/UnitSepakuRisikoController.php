@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DaftarRisiko;
+use Carbon\Carbon; // Tambahkan ini
 
 class UnitSepakuRisikoController extends Controller
 {
@@ -18,11 +19,18 @@ class UnitSepakuRisikoController extends Controller
     {
         $this->checkRole();
 
+        // MENGAMBIL DATA UNTUK NOTIFIKASI FEEDBACK ADMIN
+        $alerts = DaftarRisiko::where('unit_nama', 'Unit Sepaku')
+            ->whereNotNull('feedback_admin')
+            ->where('feedback_admin', '!=', '')
+            ->get();
+
         $risiko = DaftarRisiko::where('unit_nama', 'Unit Sepaku')
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        return view('unit_sepaku_risiko.daftar_risiko', compact('risiko'));
+        // Tambahkan 'alerts' ke dalam compact
+        return view('unit_sepaku_risiko.daftar_risiko', compact('risiko', 'alerts'));
     }
 
     public function create()
@@ -47,26 +55,29 @@ class UnitSepakuRisikoController extends Controller
             'id_risiko.required' => 'Pilih minimal satu jenis risiko!',
         ]);
 
-        DaftarRisiko::create([
-            'unit_nama' => 'Unit Sepaku',
-            'nama_kegiatan' => $validated['nama_kegiatan'],
-            'tujuan' => $validated['tujuan'],
-            'id_risiko' => implode(', ', $validated['id_risiko']),
-            'pernyataan_risiko' => $validated['pernyataan_risiko'],
-            'dampak' => $validated['dampak'],
-            'pengendalian_uraian' => $validated['pengendalian_uraian'],
-            'sebab' => $validated['sebab'],
-            'uc_c' => $validated['uc_c'],
-            'desain_a' => $request->has('desain_a'),
-            'desain_t' => $request->has('desain_t'),
-            'efektivitas_te' => $request->has('efektivitas_te'),
-            'efektivitas_ke' => $request->has('efektivitas_ke'),
-            'efektivitas_e' => $request->has('efektivitas_e'),
-        ]);
+        $risiko = new DaftarRisiko();
+        $risiko->unit_nama = 'Unit Sepaku';
+        $risiko->nama_kegiatan = $validated['nama_kegiatan'];
+        $risiko->tujuan = $validated['tujuan'];
+        $risiko->id_risiko = implode(', ', $validated['id_risiko']);
+        $risiko->pernyataan_risiko = $validated['pernyataan_risiko'];
+        $risiko->dampak = $validated['dampak'];
+        $risiko->pengendalian_uraian = $validated['pengendalian_uraian'];
+        $risiko->sebab = $validated['sebab'];
+        $risiko->uc_c = $validated['uc_c'];
+        $risiko->desain_a = $request->has('desain_a');
+        $risiko->desain_t = $request->has('desain_t');
+        $risiko->efektivitas_te = $request->has('efektivitas_te');
+        $risiko->efektivitas_ke = $request->has('efektivitas_ke');
+        $risiko->efektivitas_e = $request->has('efektivitas_e');
+        
+        $risiko->user_creator = auth()->user()->name; 
+
+        $risiko->save();
 
         return redirect()
             ->route('unit_sepaku.risiko.index')
-            ->with('success', 'Data risiko berhasil ditambahkan');
+            ->with('success', 'Data risiko berhasil ditambahkan oleh ' . auth()->user()->name);
     }
 
     public function edit($id)
@@ -94,25 +105,30 @@ class UnitSepakuRisikoController extends Controller
 
         $risiko = DaftarRisiko::findOrFail($id);
 
-        $risiko->update([
-            'nama_kegiatan' => $validated['nama_kegiatan'],
-            'tujuan' => $validated['tujuan'],
-            'id_risiko' => implode(', ', $validated['id_risiko']),
-            'pernyataan_risiko' => $validated['pernyataan_risiko'],
-            'dampak' => $validated['dampak'],
-            'pengendalian_uraian' => $validated['pengendalian_uraian'],
-            'sebab' => $validated['sebab'],
-            'uc_c' => $validated['uc_c'],
-            'desain_a' => $request->has('desain_a'),
-            'desain_t' => $request->has('desain_t'),
-            'efektivitas_te' => $request->has('efektivitas_te'),
-            'efektivitas_ke' => $request->has('efektivitas_ke'),
-            'efektivitas_e' => $request->has('efektivitas_e'),
-        ]);
+        $risiko->nama_kegiatan = $validated['nama_kegiatan'];
+        $risiko->tujuan = $validated['tujuan'];
+        $risiko->id_risiko = implode(', ', $validated['id_risiko']);
+        $risiko->pernyataan_risiko = $validated['pernyataan_risiko'];
+        $risiko->dampak = $validated['dampak'];
+        $risiko->pengendalian_uraian = $validated['pengendalian_uraian'];
+        $risiko->sebab = $validated['sebab'];
+        $risiko->uc_c = $validated['uc_c'];
+        $risiko->desain_a = $request->has('desain_a');
+        $risiko->desain_t = $request->has('desain_t');
+        $risiko->efektivitas_te = $request->has('efektivitas_te');
+        $risiko->efektivitas_ke = $request->has('efektivitas_ke');
+        $risiko->efektivitas_e = $request->has('efektivitas_e');
+        
+        $risiko->user_updater = auth()->user()->name;
+
+        // LANGKAH NO 2: Menghapus feedback agar notifikasi hilang setelah diperbaiki
+        $risiko->feedback_admin = null;
+
+        $risiko->save();
 
         return redirect()
             ->route('unit_sepaku.risiko.index')
-            ->with('success', 'Data risiko berhasil diperbarui');
+            ->with('success', 'Data risiko berhasil diperbarui dan feedback admin telah diselesaikan.');
     }
 
     public function destroy($id)

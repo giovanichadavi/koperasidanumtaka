@@ -7,6 +7,7 @@ use App\Models\DaftarRisiko;
 use App\Models\Unit;
 use App\Models\Kegiatan;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class LaporanRisikoController extends Controller
 {
@@ -19,13 +20,36 @@ class LaporanRisikoController extends Controller
 
         $activeUnit = $request->unit;
         $search = $request->search;
+        $statusFilter = $request->status; 
 
         $query = DaftarRisiko::query();
 
+        // Logika Deadline Alert (14 hari / 2 Minggu)
+        $duaMingguLagi = Carbon::now()->addDays(14)->format('Y-m-d');
+        $hariIni = Carbon::now()->format('Y-m-d');
+        
+        $alerts = DaftarRisiko::where('status', 'ditindaklanjuti')
+            ->whereBetween('jadwal_pengendalian', [$hariIni, $duaMingguLagi])
+            ->when($activeUnit, function($q) use ($activeUnit) {
+                $q->where('unit_nama', $activeUnit);
+            })->get();
+
+        // Filter berdasarkan Unit
         if ($activeUnit) {
             $query->where('unit_nama', $activeUnit);
         }
 
+        // Filter berdasarkan Status Tindak Lanjut
+        if ($statusFilter === 'sudah') {
+            $query->where('status', 'ditindaklanjuti');
+        } elseif ($statusFilter === 'belum') {
+            $query->where(function($q) {
+                $q->whereNull('status')
+                  ->orWhere('status', '!=', 'ditindaklanjuti');
+            });
+        }
+
+        // Filter berdasarkan Pencarian
         if ($search) {
             $query->where(function($q) use ($search){
                 $q->where('unit_nama','like',"%$search%")
@@ -46,7 +70,8 @@ class LaporanRisikoController extends Controller
         return view('laporan.daftar_risiko', compact(
             'units',
             'activeUnit',
-            'risiko'
+            'risiko',
+            'alerts' 
         ));
     }
 
@@ -95,7 +120,7 @@ class LaporanRisikoController extends Controller
             'efektivitas_te' => $validated['efektivitas_te'],
             'efektivitas_ke' => $validated['efektivitas_ke'],
             'efektivitas_e' => $validated['efektivitas_e'],
-            'status' => null
+            'status' => null 
         ]);
 
         return redirect()->back()->with('success','Data berhasil disimpan');
@@ -153,7 +178,7 @@ class LaporanRisikoController extends Controller
             'rencana_pengendalian' => $request->rencana_pengendalian,
             'jadwal_pengendalian' => $request->jadwal_pengendalian,
             'penanggung_jawab' => implode(', ',$request->penanggung_jawab),
-            'status' => 'ditindaklanjuti'
+            'status' => 'ditindaklanjuti' 
         ]);
 
         return redirect()->route('laporan.daftar_risiko.index', [
@@ -163,14 +188,37 @@ class LaporanRisikoController extends Controller
         ])->with('success','Tindak lanjut berhasil disimpan');
     }
 
+    // Fungsi Gabungan: Simpan Feedback Admin dengan Redirect
+    public function updateFeedback(Request $request, $id)
+    {
+        $request->validate([
+            'feedback_admin' => 'required'
+        ]);
+
+        $risiko = DaftarRisiko::findOrFail($id);
+        $risiko->feedback_admin = $request->feedback_admin;
+        $risiko->save();
+
+        return redirect()->back()->with('success', 'Feedback berhasil dikirim ke unit.');
+    }
+
     public function exportPdf(Request $request)
     {
         $unit = $request->unit;
         $search = $request->search;
+        $statusFilter = $request->status;
 
         $query = DaftarRisiko::query();
 
         if ($unit) $query->where('unit_nama',$unit);
+
+        if ($statusFilter === 'sudah') {
+            $query->where('status', 'ditindaklanjuti');
+        } elseif ($statusFilter === 'belum') {
+            $query->where(function($q) {
+                $q->whereNull('status')->orWhere('status', '!=', 'ditindaklanjuti');
+            });
+        }
 
         if ($search) {
             $query->where(function($q) use ($search){
@@ -192,5 +240,16 @@ class LaporanRisikoController extends Controller
     {
         DaftarRisiko::findOrFail($id)->delete();
         return redirect()->back()->with('success','Data risiko berhasil dihapus');
+    }
+
+    // Menyesuaikan fungsi berikanFeedback agar sinkron dengan route dan view Anda
+    public function berikanFeedback(Request $request, $id)
+    {
+        $risiko = DaftarRisiko::findOrFail($id);
+        // Pastikan name di textarea modal Anda adalah 'feedback_admin'
+        $risiko->feedback_admin = $request->feedback_admin; 
+        $risiko->save();
+
+        return redirect()->back()->with('success', 'Feedback berhasil disimpan.');
     }
 }
