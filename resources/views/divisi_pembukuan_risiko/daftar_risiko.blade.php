@@ -41,7 +41,7 @@
     .table-responsive-custom::-webkit-scrollbar-thumb { background: #007bff; border-radius: 10px; }
 
     .table-custom {
-        min-width: 2600px; 
+        min-width: 2800px; 
         margin-bottom: 0;
         border-collapse: separate;
         border-spacing: 0;
@@ -144,7 +144,6 @@
     }
     .user-info i { width: 15px; }
 
-    /* Tambahan style agar feedback terlihat rapi di dalam tabel */
     .feedback-box {
         margin-top: 5px;
         padding: 5px;
@@ -153,6 +152,15 @@
         color: #b02a37;
         font-size: 11px;
         white-space: normal;
+    }
+
+    /* Badge Status Baru */
+    .badge-status {
+        padding: 5px 8px;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
     }
 </style>
 @endsection
@@ -210,6 +218,7 @@
                     <tr>
                         <th rowspan="3" class="sticky-no">No</th>
                         <th rowspan="3">Nama Unit</th>
+                        <th rowspan="3">Status Tindak Lanjut</th> {{-- KOLOM BARU --}}
                         <th rowspan="3">Nama Kegiatan</th>
                         <th rowspan="3">Tujuan Kegiatan</th>
                         <th rowspan="3">ID Risiko</th>
@@ -235,9 +244,22 @@
                     <tr>
                         <td class="text-center sticky-no">{{ $risiko->firstItem() + $i }}</td>
                         <td class="font-weight-bold">{{ $r->unit_nama }}</td>
+                        
+                        {{-- PENGECEKAN STATUS ADMIN --}}
+                        <td class="text-center">
+                            @if($r->keputusan_penanganan)
+                                <span class="badge badge-success badge-status">
+                                    <i class="fas fa-check-circle"></i> Sudah Ditindaklanjuti
+                                </span>
+                            @else
+                                <span class="badge badge-warning badge-status">
+                                    <i class="fas fa-clock"></i> Belum Ditindaklanjuti
+                                </span>
+                            @endif
+                        </td>
+
                         <td>
                             {{ $r->nama_kegiatan }}
-                            {{-- FEEDBACK PINDAH KE SINI --}}
                             @if($r->feedback_admin)
                                 <div class="feedback-box">
                                     <strong><i class="fas fa-exclamation-circle"></i> Feedback Admin:</strong> {{ $r->feedback_admin }}
@@ -286,7 +308,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="17" class="text-center text-muted py-4">Data risiko belum tersedia</td>
+                        <td colspan="18" class="text-center text-muted py-4">Data risiko belum tersedia</td>
                     </tr>
                     @endforelse
                 </tbody>
@@ -303,4 +325,12 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 @endsection

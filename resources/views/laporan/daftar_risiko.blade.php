@@ -134,7 +134,7 @@
         <div class="alert alert-warning alert-dismissible fade show shadow-sm border-0" role="alert" style="border-left: 5px solid #ffc107 !important;">
             <i class="fas fa-exclamation-triangle mr-2"></i>
             @if(auth()->user()->role == 'admin')
-                <strong>Monitor Deadline:</strong> Unit <b>{{ $alert->unit_nama }}</b> memiliki jadwal mitigasi (ID: {{ $alert->id_risiko }}) dalam {{ \Carbon\Carbon::now()->diffInDays($alert->jadwal_pengendalian) }} hari lagi.
+                <strong>Monitor Deadline:</strong> Unit <b>{{ $alert->unit_nama }}</b> memiliki jadwal mitigasi (Kegiatan: {{ $alert->nama_kegiatan }}) dalam {{ \Carbon\Carbon::now()->diffInDays($alert->jadwal_pengendalian) }} hari lagi.
             @else
                 <strong>Peringatan Jadwal:</strong> Risiko <b>{{ $alert->id_risiko }}</b> harus diselesaikan paling lambat tanggal {{ \Carbon\Carbon::parse($alert->jadwal_pengendalian)->format('d M Y') }} (Tersisa {{ \Carbon\Carbon::now()->diffInDays($alert->jadwal_pengendalian) }} hari).
             @endif
