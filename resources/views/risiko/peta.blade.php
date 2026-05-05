@@ -1,121 +1,125 @@
 @extends('adminlte::page')
 
 @section('title', 'Tabel Risiko')
+
 <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 
 @section('css')
-<style>
-    /* 1. Mencegah Card meluap di HP */
-    .card-body {
-        padding: 10px;
-    }
+    {{-- Memanggil file CSS eksternal terlebih dahulu --}}
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
-    /* 2. Styling Tabel agar Muat Satu Layar (No Scroll) */
-    .table-risk {
-        width: 100%;
-        table-layout: fixed; /* Memaksa lebar kolom sama rata */
-        border-collapse: collapse;
-        margin-bottom: 0;
-    }
+    <style>
+        /* 1. Mencegah Card meluap di HP */
+        .card-body {
+            padding: 10px;
+        }
 
-    /* Header & Cell General */
-    .table-risk th, .table-risk td {
-        padding: 8px 2px !important;
-        text-align: center;
-        vertical-align: middle !important;
-        font-size: 11px; /* Ukuran font standar */
-        border: 1px solid #dee2e6;
-    }
+        /* 2. Styling Tabel agar Muat Satu Layar (No Scroll) */
+        .table-risk {
+            width: 100%;
+            table-layout: fixed; /* Memaksa lebar kolom sama rata */
+            border-collapse: collapse;
+            margin-bottom: 0;
+        }
 
-    /* Header Kolom (Kemungkinan) */
-    .table-risk thead th {
-        background-color: #f4f6f9;
-        font-weight: bold;
-        color: #212529;
-    }
-
-    /* Kolom Pertama (Dampak) */
-    .table-risk tbody th {
-        background-color: #f4f6f9;
-        width: 70px; /* Lebar kolom label dampak */
-        color: #212529;
-    }
-
-    /* Sel Warna Risiko */
-    .risk-cell {
-        height: 60px; /* Membuat sel mendekati bentuk kotak */
-        color: white;
-        font-weight: bold;
-        line-height: 1.2;
-    }
-
-    .risk-cell small {
-        display: block;
-        font-size: 9px;
-        font-weight: normal;
-        margin-top: 2px;
-    }
-
-    /* 3. RESPONSIVE SETUP (HP/Smartphone) */
-    @media (max-width: 576px) {
+        /* Header & Cell General */
         .table-risk th, .table-risk td {
-            font-size: 9px; /* Perkecil font di HP */
-            padding: 4px 1px !important;
+            padding: 8px 2px !important;
+            text-align: center;
+            vertical-align: middle !important;
+            font-size: 11px; /* Ukuran font standar */
+            border: 1px solid #dee2e6;
         }
 
+        /* Header Kolom (Kemungkinan) */
+        .table-risk thead th {
+            background-color: #f4f6f9;
+            font-weight: bold;
+            color: #212529;
+        }
+
+        /* Kolom Pertama (Dampak) */
         .table-risk tbody th {
-            width: 55px; /* Perkecil kolom label dampak di HP */
+            background-color: #f4f6f9;
+            width: 70px; /* Lebar kolom label dampak */
+            color: #212529;
         }
 
+        /* Sel Warna Risiko */
         .risk-cell {
-            height: 50px; /* Perkecil tinggi kotak di HP */
+            height: 60px; /* Membuat sel mendekati bentuk kotak */
+            color: white;
+            font-weight: bold;
+            line-height: 1.2;
         }
 
-        .hide-mobile {
-            display: none;
+        .risk-cell small {
+            display: block;
+            font-size: 9px;
+            font-weight: normal;
+            margin-top: 2px;
         }
-    }
 
-    /* Penyesuaian Warna AdminLTE */
-    .bg-danger { background-color: #dc3545 !important; color: #ffffff !important; }
-    .bg-warning { background-color: #ffc107 !important; color: #212529 !important; }
-    .bg-success { background-color: #28a745 !important; color: #ffffff !important; }
-    .bg-orange { background-color: #fd7e14 !important; color: #ffffff !important; }
+        /* 3. RESPONSIVE SETUP (HP/Smartphone) */
+        @media (max-width: 576px) {
+            .table-risk th, .table-risk td {
+                font-size: 9px; /* Perkecil font di HP */
+                padding: 4px 1px !important;
+            }
 
-    /* ============================================================
-       PERBAIKAN KHUSUS DARK MODE (AGAR TEKS TERLIHAT)
-       ============================================================ */
-    .dark-mode .card, 
-    .dark-mode .card-header {
-        background-color: #343a40 !important;
-        color: #ffffff !important;
-    }
+            .table-risk tbody th {
+                width: 55px; /* Perkecil kolom label dampak di HP */
+            }
 
-    .dark-mode .table-risk th, 
-    .dark-mode .table-risk td {
-        border-color: #4b545c !important;
-    }
+            .risk-cell {
+                height: 50px; /* Perkecil tinggi kotak di HP */
+            }
 
-    .dark-mode .table-risk thead th,
-    .dark-mode .table-risk tbody th {
-        background-color: #454d55 !important;
-        color: #ffffff !important;
-    }
+            .hide-mobile {
+                display: none;
+            }
+        }
 
-    .dark-mode .bg-light {
-        background-color: #454d55 !important;
-        color: #adb5bd !important;
-    }
+        /* Penyesuaian Warna AdminLTE */
+        .bg-danger { background-color: #dc3545 !important; color: #ffffff !important; }
+        .bg-warning { background-color: #ffc107 !important; color: #212529 !important; }
+        .bg-success { background-color: #28a745 !important; color: #ffffff !important; }
+        .bg-orange { background-color: #fd7e14 !important; color: #ffffff !important; }
 
-    /* Memastikan teks pada sel berwarna tetap kontras */
-    .dark-mode .risk-cell {
-        color: #ffffff !important;
-    }
-    
-    .dark-mode .bg-warning {
-        color: #212529 !important; /* Tetap hitam di kotak kuning agar terbaca */
-    }
-</style>
+        /* ============================================================
+           PERBAIKAN KHUSUS DARK MODE (AGAR TEKS TERLIHAT)
+           ============================================================ */
+        .dark-mode .card, 
+        .dark-mode .card-header {
+            background-color: #343a40 !important;
+            color: #ffffff !important;
+        }
+
+        .dark-mode .table-risk th, 
+        .dark-mode .table-risk td {
+            border-color: #4b545c !important;
+        }
+
+        .dark-mode .table-risk thead th,
+        .dark-mode .table-risk tbody th {
+            background-color: #454d55 !important;
+            color: #ffffff !important;
+        }
+
+        .dark-mode .bg-light {
+            background-color: #454d55 !important;
+            color: #adb5bd !important;
+        }
+
+        /* Memastikan teks pada sel berwarna tetap kontras */
+        .dark-mode .risk-cell {
+            color: #ffffff !important;
+        }
+        
+        .dark-mode .bg-warning {
+            color: #212529 !important; /* Tetap hitam di kotak kuning agar terbaca */
+        }
+    </style>
 @endsection
 
 @section('content')

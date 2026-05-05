@@ -63,3 +63,80 @@
     background-color: #fd7e14;
     color: white;
 }
+
+/* Tombol Logout Kustom */
+.logout-custom-btn {
+    background-color: #dc3545 !important; /* Merah Solid */
+    color: #ffffff !important;
+    border-radius: 8px;
+    margin: 5px 10px;
+    padding: 5px 15px !important;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.logout-custom-btn:hover {
+    background-color: #c82333 !important;
+    transform: translateY(-2px); /* Efek Timbul */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* ============================================================
+   4. PERBAIKAN USER MENU DROPDOWN (image_11e420.png)
+   ============================================================ */
+
+/* Menghilangkan kotak garis tipis dan border kaku di User Menu */
+.user-footer, 
+.dropdown-user-footer {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 15px !important;
+    display: flex !important;
+    justify-content: center !important;
+}
+
+/* Mengubah tombol logout menjadi merah solid modern & timbul */
+.user-footer a.btn-flat, 
+.dropdown-user-footer a,
+.nav-link[onclick*="logout-form"] {
+    background-color: #dc3545 !important; /* Merah Solid */
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    padding: 10px 20px !important;
+    font-weight: 800 !important;
+    text-align: center;
+    width: 100%;
+    display: block !important;
+    border: none !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15) !important;
+    text-decoration: none !important;
+}
+
+/* Efek Timbul & Hover */
+.user-footer a.btn-flat:hover,
+.dropdown-user-footer a:hover,
+.nav-link[onclick*="logout-form"]:hover {
+    background-color: #c82333 !important;
+    transform: translateY(-3px) !important; /* Efek Timbul Keatas */
+    box-shadow: 0 8px 15px rgba(220, 53, 69, 0.4) !important;
+    color: #ffffff !important;
+}
+
+/* Memastikan teks icon putih */
+.user-footer a i, 
+.dropdown-user-footer a i {
+    color: #ffffff !important;
+    margin-right: 5px;
+}
+
+/* Merapikan Container Dropdown */
+.navbar-nav .dropdown-menu {
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
+    overflow: hidden;
+    padding: 0 !important;
+}

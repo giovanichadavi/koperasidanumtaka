@@ -135,7 +135,7 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => false,
     'usermenu_desc' => false,
@@ -153,7 +153,7 @@ return [
     |
     */
 
-    'layout_topnav' => false,
+    'layout_topnav' => null,
     'layout_boxed' => null,
     'layout_fixed_sidebar' => true,
     'layout_fixed_navbar' => true,
@@ -264,6 +264,7 @@ return [
     'use_route_url' => false,
     'dashboard_url' => 'dashboard',
     'logout_url' => 'logout',
+    'logout_method' => null,
     'login_url' => 'login',
     'register_url' => 'register',
     'password_reset_url' => 'password/reset',
