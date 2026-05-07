@@ -291,7 +291,9 @@ return [
     'laravel_asset_bundling' => false,
     'laravel_css_path' => 'css/app.css',
     'laravel_js_path' => 'js/app.js',
-
+    'extra_css' => [
+        'css/custom.css',
+    ],
     /*
     |--------------------------------------------------------------------------
     | Menu Items
@@ -306,10 +308,11 @@ return [
 
     'menu' => [
         // Navbar items:
-        [
-        'type' => 'darkmode-widget',
-        'topnav_right' => true,
-        ],
+   //     [
+     //   'type' => 'darkmode-widget',
+       // 'topnav_right' => true,
+        // ],
+
         // Sidebar items:
         [   'text' => 'Dashboard',
             'url' => 'dashboard',
@@ -328,6 +331,23 @@ return [
         [   'text' => 'Manajemen Risiko',
             'url' => 'laporan/daftar-risiko',
             'icon' => 'fas fa-clipboard-list',
+            'label_color' => 'success',
+            'can' => 'admin_mr'
+            
+        ],
+
+        [   'text' => 'Kegiatan Tindak Lanjut',
+            'url' => 'manajemen-tindak-lanjut',
+            'icon' => 'fas fa-fw fa-tasks',
+            'label_color' => 'success',
+            'can' => 'admin'
+
+            
+        ],
+
+        [   'text' => 'Kegiatan Tindak Lanjut',
+            'url' => 'manajemen-tindak-lanjut',
+            'icon' => 'fas fa-fw fa-tasks',
             'label_color' => 'success',
             'can' => 'admin_mr'
             

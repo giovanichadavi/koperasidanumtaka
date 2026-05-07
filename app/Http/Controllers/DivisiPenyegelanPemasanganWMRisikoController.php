@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\DaftarRisiko;
 use Carbon\Carbon; // Tambahkan ini
 
-class DivisiPenyegelanPemasanganWMRisikoController extends Controller
+class DivisiPenyegelanPemasanganWmRisikoController extends Controller
 {
     private function checkRole()
     {

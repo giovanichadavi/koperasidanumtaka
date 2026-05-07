@@ -5,7 +5,18 @@
 <style>
 body{font-family:DejaVu Sans;font-size:8px}
 table{border-collapse:collapse;width:100%}
-th,td{border:1px solid #000;padding:3px;text-align:center}
+th,td{
+    border:1px solid #000;
+    padding:3px;
+    text-align:center;
+}
+
+/* Tambahkan ini untuk warna abu-abu header tabel */
+thead th{
+    background:#d9d9d9;
+    font-weight:bold;
+}
+
 .level-rendah{background:#28a745;color:#fff}
 .level-moderat{background:#ffc107}
 .level-tinggi{background:#fd7e14;color:#fff}
@@ -66,7 +77,6 @@ th,td{border:1px solid #000;padding:3px;text-align:center}
 <td>{{ $r->sebab }}</td>
 <td>{{ $r->uc_c }}</td>
 <td>{{ $r->dampak }}</td>
-
 
 <td>{{ $r->pengendalian_uraian }}</td>
 <td>{{ $r->desain_a?'✔':'-' }}</td>

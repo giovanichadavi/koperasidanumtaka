@@ -25,6 +25,8 @@ use App\Http\Controllers\RisikoController;
 use App\Http\Controllers\LaporanRisikoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\TindakLanjutController;
+use App\Http\Controllers\TindakLanjutKegiatanController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
@@ -85,6 +87,35 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/laporan/daftar-risiko', 
     [LaporanRisikoController::class, 'store'])
     ->name('laporan.daftar.risiko.store');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('manajemen-tindak-lanjut', [TindakLanjutController::class, 'index'])->name('tindak-lanjut.index');
+});
+
+Route::middleware(['auth'])->group(function () {
+    // Route untuk menampilkan halaman daftar
+    Route::get('manajemen-tindak-lanjut', [TindakLanjutController::class, 'index'])->name('tindak-lanjut.index');
+    
+    // TAMBAHKAN BARIS INI: Route untuk memproses update foto dan tanggal
+    Route::put('manajemen-tindak-lanjut/{id}', [TindakLanjutController::class, 'update'])->name('tindak-lanjut.update');
+});
+
+
+
+Route::middleware(['auth'])->group(function () {
+    // Rute untuk menampilkan halaman web
+    Route::get('manajemen-tindak-lanjut', [TindakLanjutKegiatanController::class, 'index'])
+         ->name('tindak-lanjut.index');
+    
+    // Rute untuk simpan data (Update)
+    Route::put('manajemen-tindak-lanjut/{id}', [TindakLanjutKegiatanController::class, 'update'])
+         ->name('tindak-lanjut.update');
+
+    // PERBAIKAN: Rute khusus untuk download PDF Tindak Lanjut
+    Route::get('tindak-lanjut-download-pdf', [TindakLanjutKegiatanController::class, 'exportPdf'])
+         ->name('tindak-lanjut.export-pdf');
+});
 
     // ==== DIVISI UMUM ====
     Route::middleware(['auth'])

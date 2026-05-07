@@ -3,6 +3,7 @@
 @section('title', 'Akun Saya')
 
 <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+<link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
 @section('css')
 <style>

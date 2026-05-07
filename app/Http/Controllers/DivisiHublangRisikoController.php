@@ -30,7 +30,7 @@ class DivisiHublangRisikoController extends Controller
             ->paginate(10);
 
         // Tambahkan 'alerts' ke dalam compact
-        return view('divisi_Hublang_risiko.daftar_risiko', compact('risiko', 'alerts'));
+        return view('divisi_hublang_risiko.daftar_risiko', compact('risiko', 'alerts'));
     }
 
     public function create()

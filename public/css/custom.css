@@ -39,17 +39,26 @@
 }
 
 /* ============================================================
-   3. LOGIC HOVER & ACTIVE (UNIVERSAL)
+   3. LOGIC HOVER & ACTIVE (DENGAN WARNA AKTIF BIRU MUDA)
    ============================================================ */
 
-/* Hilangkan warna biru permanen pada link aktif di semua mode */
+/* Warna Biru Muda saat menu sedang AKTIF (diklik/dibuka) */
 .nav-sidebar .nav-link.active {
-    background-color: transparent !important;
-    color: inherit !important;
+    background-color: #e3f2fd !important; /* Biru Muda lembut (Light Blue) */
+    color: #007bff !important;           /* Teks Biru Standar */
+    font-weight: 700 !important;
     box-shadow: none !important;
+    border-left: 4px solid #007bff;      /* Garis penanda di sebelah kiri */
 }
 
-/* Warna Biru HANYA muncul saat kursor diarahkan (Hover) */
+/* Warna untuk Mode Gelap agar tidak terlalu silau */
+.dark-mode .nav-sidebar .nav-link.active {
+    background-color: rgba(0, 123, 255, 0.2) !important; /* Biru transparan */
+    color: #80bdff !important;                           /* Teks Biru Terang */
+    border-left: 4px solid #80bdff;
+}
+
+/* Warna Biru Standar HANYA muncul saat kursor diarahkan (Hover) */
 .nav-sidebar .nav-link:hover,
 .navbar-nav .nav-link:hover {
     background-color: #007bff !important;
@@ -58,85 +67,160 @@
     transition: all 0.2s ease;
 }
 
-/* Badge Orange */
-.badge-orange {
-    background-color: #fd7e14;
-    color: white;
-}
-
-/* Tombol Logout Kustom */
-.logout-custom-btn {
-    background-color: #dc3545 !important; /* Merah Solid */
-    color: #ffffff !important;
-    border-radius: 8px;
-    margin: 5px 10px;
-    padding: 5px 15px !important;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    transition: all 0.3s ease;
-}
-
-.logout-custom-btn:hover {
-    background-color: #c82333 !important;
-    transform: translateY(-2px); /* Efek Timbul */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
 /* ============================================================
-   4. PERBAIKAN USER MENU DROPDOWN (image_11e420.png)
+   4. CUSTOM LOGOUT (SOLID MERAH, TIMBUL & IKON TAJAM)
    ============================================================ */
 
-/* Menghilangkan kotak garis tipis dan border kaku di User Menu */
-.user-footer, 
-.dropdown-user-footer {
-    background-color: transparent !important;
-    border: none !important;
-    padding: 15px !important;
-    display: flex !important;
-    justify-content: center !important;
-}
-
-/* Mengubah tombol logout menjadi merah solid modern & timbul */
-.user-footer a.btn-flat, 
-.dropdown-user-footer a,
+/* Gaya Tombol Logout di Navbar dan Dropdown */
+.logout-custom-btn,
+.dropdown-user-footer a, 
+.user-footer a.btn-default,
 .nav-link[onclick*="logout-form"] {
     background-color: #dc3545 !important; /* Merah Solid */
     color: #ffffff !important;
     border-radius: 8px !important;
-    padding: 10px 20px !important;
+    padding: 8px 20px !important;
     font-weight: 800 !important;
     text-align: center;
-    width: 100%;
-    display: block !important;
-    border: none !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
     transition: all 0.3s ease !important;
     box-shadow: 0 4px 6px rgba(0,0,0,0.15) !important;
+    border: none !important;
     text-decoration: none !important;
 }
 
 /* Efek Timbul & Hover */
-.user-footer a.btn-flat:hover,
+.logout-custom-btn:hover,
 .dropdown-user-footer a:hover,
+.user-footer a.btn-default:hover,
 .nav-link[onclick*="logout-form"]:hover {
     background-color: #c82333 !important;
-    transform: translateY(-3px) !important; /* Efek Timbul Keatas */
+    transform: translateY(-3px) !important;
     box-shadow: 0 8px 15px rgba(220, 53, 69, 0.4) !important;
     color: #ffffff !important;
 }
 
-/* Memastikan teks icon putih */
-.user-footer a i, 
-.dropdown-user-footer a i {
+/* MEMPERJELAS LOGO ON/OFF (IKON POWER) */
+.dropdown-user-footer a i, 
+.logout-custom-btn i,
+.user-footer a i {
     color: #ffffff !important;
-    margin-right: 5px;
+    margin-right: 10px;
+    font-size: 1.1rem; /* Ukuran ikon sedikit lebih besar */
+    font-weight: 900 !important; /* Mempertebal ikon FontAwesome */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2); /* Memberi dimensi agar tajam */
 }
 
-/* Merapikan Container Dropdown */
+/* ============================================================
+   5. PENYESUAIAN DROPDOWN (ANTI-MEPET & CLEAN)
+   ============================================================ */
+
+/* Menggeser Menu Dropdown ke Kiri agar tidak mepet layar */
+.navbar-nav .dropdown-menu-right {
+    right: 15px !important; 
+    left: auto !important;
+}
+
+/* Menghilangkan border kotak putih yang kaku di User Menu */
+.dropdown-user-footer, .user-footer {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 15px !important;
+}
+
+/* Merapikan Container Dropdown secara Global */
 .navbar-nav .dropdown-menu {
     border: none !important;
     border-radius: 12px !important;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
     overflow: hidden;
     padding: 0 !important;
+}
+
+/* ANIMASI TOGGLE MATAHARI & BULAN */
+.dark-mode-switch-label {
+    cursor: pointer;
+    background-color: #e9ecef;
+    border-radius: 20px;
+    width: 54px;
+    height: 28px;
+    position: relative;
+    margin: 0;
+    transition: background 0.4s ease;
+}
+
+.switch-ball {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    background-color: #6c757d;
+    border-radius: 50%;
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.switch-ball i {
+    color: white;
+    font-size: 12px;
+    position: absolute;
+    transition: all 0.4s ease;
+}
+
+.moon-icon { opacity: 0; transform: translateY(20px); }
+
+#darkModeSwitch:checked ~ .dark-mode-switch-label { background-color: #343a40; }
+#darkModeSwitch:checked ~ .dark-mode-switch-label .switch-ball {
+    transform: translateX(26px);
+    background-color: #007bff;
+}
+
+#darkModeSwitch:checked ~ .dark-mode-switch-label .sun-icon { opacity: 0; transform: translateY(-20px); }
+#darkModeSwitch:checked ~ .dark-mode-switch-label .moon-icon { opacity: 1; transform: translateY(0); }
+
+/* ANIMASI LOGOUT PADA TULISAN ADMIN */
+.logout-anim-icon {
+    width: 30px;
+    height: 30px;
+    background: #f8f9fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #dc3545;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover .logout-anim-icon {
+    background: #dc3545;
+    color: white;
+    transform: rotate(15deg) scale(1.1);
+    box-shadow: 0 0 10px rgba(220, 53, 69, 0.4);
+}
+
+.dark-mode .logout-anim-icon { background: #454d55; }
+
+/* TOMBOL LOGOUT MERAH SOLID DI DROPDOWN */
+.logout-custom-btn {
+    background-color: #dc3545 !important;
+    color: white !important;
+    border-radius: 8px !important;
+    padding: 10px 20px !important;
+    font-weight: 800 !important;
+    border: none !important;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.logout-custom-btn:hover {
+    background-color: #c82333 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
 }

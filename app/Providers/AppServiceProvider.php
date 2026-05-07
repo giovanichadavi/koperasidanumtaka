@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Event;
+use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Pagination\Paginator;
@@ -20,6 +22,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Event::listen(BuildingMenu::class, function (BuildingMenu $event) {
+        $event->menu->addAfter('user-menu', [
+            'type'         => 'navbar-item',
+            'text'         => '',
+            'topnav_right' => true,
+            'view'         => 'partials.dark-mode-toggle', // Kita buat file ini di langkah 3
+        ]);
+    });
         Gate::define('admin', fn($user) => $user->role === 'admin');
         Gate::define('user', fn($user) => $user->role === 'user');
         Gate::define('divisi_umum', fn($user) => $user->role === 'divisi_umum');

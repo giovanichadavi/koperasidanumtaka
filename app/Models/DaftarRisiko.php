@@ -33,6 +33,8 @@ class DaftarRisiko extends Model
         'efektivitas_e',
         'user_creator',
         'user_updater',
+        'tanggal_pelaksanaan',
+        'foto_dokumentasi'
     ];
 
     /**
