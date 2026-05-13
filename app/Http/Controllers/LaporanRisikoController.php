@@ -21,8 +21,57 @@ class LaporanRisikoController extends Controller
         $activeUnit = $request->unit;
         $search = $request->search;
         $statusFilter = $request->status; 
+        
+        // Menangkap parameter 'id' (yang dikirim dari Log Aktivitas)
+        $filterId = $request->id; 
 
         $query = DaftarRisiko::query();
+
+        // ============================================================
+        // LOGIKA PRIORITAS: JIKA ADA ID DARI LOG, TAMPILKAN 1 DATA SAJA
+        // ============================================================
+        if (!empty($filterId)) {
+            $query->where(function($q) use ($filterId) {
+                // Mencari berdasarkan id_risiko atau nama_kegiatan agar lebih akurat
+                $q->where('id_risiko', $filterId)
+                  ->orWhere('nama_kegiatan', $filterId);
+            });
+
+            // Matikan filter lain agar tidak terjadi tabrakan logika
+            $activeUnit = null;
+            $search = null;
+            $statusFilter = null;
+        } else {
+            // JALANKAN FILTER NORMAL JIKA TIDAK ADA PARAMETER ID
+            
+            // Filter berdasarkan Unit
+            if ($activeUnit) {
+                $query->where('unit_nama', $activeUnit);
+            }
+
+            // Filter berdasarkan Status Tindak Lanjut
+            if ($statusFilter === 'sudah') {
+                $query->where('status', 'ditindaklanjuti');
+            } elseif ($statusFilter === 'belum') {
+                $query->where(function($q) {
+                    $q->whereNull('status')
+                      ->orWhere('status', '!=', 'ditindaklanjuti');
+                });
+            }
+
+            // Filter berdasarkan Pencarian
+            if ($search) {
+                $query->where(function($q) use ($search){
+                    $q->where('unit_nama','like',"%$search%")
+                      ->orWhere('nama_kegiatan','like',"%$search%")
+                      ->orWhere('tujuan','like',"%$search%")
+                      ->orWhere('id_risiko','like',"%$search%")
+                      ->orWhere('pernyataan_risiko','like',"%$search%")
+                      ->orWhere('sebab','like',"%$search%")
+                      ->orWhere('uc_c','like',"%$search%");
+                });
+            }
+        }
 
         // Logika Deadline Alert (14 hari / 2 Minggu)
         $duaMingguLagi = Carbon::now()->addDays(14)->format('Y-m-d');
@@ -33,34 +82,6 @@ class LaporanRisikoController extends Controller
             ->when($activeUnit, function($q) use ($activeUnit) {
                 $q->where('unit_nama', $activeUnit);
             })->get();
-
-        // Filter berdasarkan Unit
-        if ($activeUnit) {
-            $query->where('unit_nama', $activeUnit);
-        }
-
-        // Filter berdasarkan Status Tindak Lanjut
-        if ($statusFilter === 'sudah') {
-            $query->where('status', 'ditindaklanjuti');
-        } elseif ($statusFilter === 'belum') {
-            $query->where(function($q) {
-                $q->whereNull('status')
-                  ->orWhere('status', '!=', 'ditindaklanjuti');
-            });
-        }
-
-        // Filter berdasarkan Pencarian
-        if ($search) {
-            $query->where(function($q) use ($search){
-                $q->where('unit_nama','like',"%$search%")
-                  ->orWhere('nama_kegiatan','like',"%$search%")
-                  ->orWhere('tujuan','like',"%$search%")
-                  ->orWhere('id_risiko','like',"%$search%")
-                  ->orWhere('pernyataan_risiko','like',"%$search%")
-                  ->orWhere('sebab','like',"%$search%")
-                  ->orWhere('uc_c','like',"%$search%");
-            });
-        }
 
         $risiko = $query
             ->orderBy('created_at','desc')
@@ -188,7 +209,6 @@ class LaporanRisikoController extends Controller
         ])->with('success','Tindak lanjut berhasil disimpan');
     }
 
-    // Fungsi Gabungan: Simpan Feedback Admin dengan Redirect
     public function updateFeedback(Request $request, $id)
     {
         $request->validate([
@@ -242,11 +262,9 @@ class LaporanRisikoController extends Controller
         return redirect()->back()->with('success','Data risiko berhasil dihapus');
     }
 
-    // Menyesuaikan fungsi berikanFeedback agar sinkron dengan route dan view Anda
     public function berikanFeedback(Request $request, $id)
     {
         $risiko = DaftarRisiko::findOrFail($id);
-        // Pastikan name di textarea modal Anda adalah 'feedback_admin'
         $risiko->feedback_admin = $request->feedback_admin; 
         $risiko->save();
 

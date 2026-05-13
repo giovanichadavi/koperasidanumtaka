@@ -34,8 +34,18 @@ class DaftarRisiko extends Model
         'user_creator',
         'user_updater',
         'tanggal_pelaksanaan',
-        'foto_dokumentasi'
+        'foto_dokumentasi',
+        'created_by' // Pastikan kolom ID ini ada di fillable jika ingin digunakan
     ];
+
+    /**
+     * RELASI UNTUK NOTIFIKASI
+     * Menghubungkan created_by (ID) ke model User
+     */
+    public function penginput()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
+    }
 
     /**
      * Tip: Jika kamu ingin memastikan user_creator selalu terisi otomatis 
@@ -47,6 +57,8 @@ class DaftarRisiko extends Model
         static::creating(function ($model) {
             if (auth()->check()) {
                 $model->user_creator = auth()->user()->name;
+                // Sangat disarankan mengisi created_by dengan ID untuk relasi
+                $model->created_by = auth()->id(); 
             }
         });
 
@@ -66,4 +78,5 @@ class DaftarRisiko extends Model
     {
         return $this->belongsTo(Kegiatan::class);
     }
+    
 }

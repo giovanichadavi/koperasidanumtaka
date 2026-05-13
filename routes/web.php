@@ -116,7 +116,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('tindak-lanjut-download-pdf', [TindakLanjutKegiatanController::class, 'exportPdf'])
          ->name('tindak-lanjut.export-pdf');
 });
-
+Route::get('/log-aktivitas', [App\Http\Controllers\LogAktivitasController::class, 'index'])->name('log.index')->middleware('can:admin');
     // ==== DIVISI UMUM ====
     Route::middleware(['auth'])
     ->prefix('divisi/umum')

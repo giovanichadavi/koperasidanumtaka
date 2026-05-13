@@ -21,7 +21,39 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */
     public function boot(): void
-    {
+    {   \Illuminate\Pagination\Paginator::useBootstrap();
+
+    // Registrasi Event Menu
+    \Illuminate\Support\Facades\Event::listen(\JeroenNoten\LaravelAdminLte\Events\BuildingMenu::class, function ($event) {
+        
+        // 1. Ambil data log hari ini
+        $logCount = \App\Models\LogAktivitas::whereDate('created_at', \Illuminate\Support\Carbon::today())->count();
+        $badge = $logCount > 0 ? '<span class="badge badge-warning navbar-badge">' . $logCount . '</span>' : '';
+
+        // 2. Cek Akses
+        $user = \Illuminate\Support\Facades\Auth::user();
+        $isAdmin = $user && in_array($user->role, ['admin', 'admin_mr']);
+
+        // 3. SUNTIKKAN PAKSA ke Navbar Kanan
+        $event->menu->add([
+            'key'          => 'notif_log_final',
+            'text'         => '<div class="notif-lingkaran-log"><i class="fas fa-history"></i>' . $badge . '</div>',
+            'url'          => $isAdmin ? url('/log-aktivitas') : '#',
+            'topnav_right' => true, // Memaksa muncul di kanan atas
+            'attributes'   => [
+                'onclick' => !$isAdmin ? "alert('Akses Ditolak: Anda tidak memiliki izin untuk melihat riwayat aktivitas sistem.'); return false;" : "",
+            ],
+        ]);
+
+        // 4. Masukkan Dark Mode SETELAH lonceng (agar lonceng di sebelah kirinya)
+        $event->menu->add([
+            'type'         => 'navbar-item',
+            'text'         => '',
+            'topnav_right' => true,
+            'view'         => 'partials.dark-mode-toggle',
+        ]);
+    });
+        \App\Models\DaftarRisiko::observe(\App\Observers\DaftarRisikoObserver::class);
         Event::listen(BuildingMenu::class, function (BuildingMenu $event) {
         $event->menu->addAfter('user-menu', [
             'type'         => 'navbar-item',

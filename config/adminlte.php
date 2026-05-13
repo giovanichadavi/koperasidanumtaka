@@ -111,7 +111,7 @@ return [
     */
 
     'preloader' => [
-        'enabled' => true,
+        'enabled' => false,
         'mode' => 'fullscreen',
         'img' => [
             'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
@@ -312,7 +312,16 @@ return [
      //   'type' => 'darkmode-widget',
        // 'topnav_right' => true,
         // ],
-
+[
+        'type'         => 'navbar-item',
+        'view'         => 'partials.notif-log', 
+        'topnav_right' => true,
+    ],
+    // Tambahkan item ini untuk mengetes apakah topnav_right berfungsi
+    [
+        'text' => 'Cek Notif',
+        'topnav_right' => true,
+    ],
         // Sidebar items:
         [   'text' => 'Dashboard',
             'url' => 'dashboard',
@@ -493,7 +502,6 @@ return [
             'label_color' => 'success',
             'can'  => 'divisi_laboratorium',
         ],
-
         [
             'text' => 'Tabel Risiko',
             'url' => 'risiko',
@@ -501,12 +509,26 @@ return [
             'label_color' => 'success',
         ],
         [
+            'text' => 'Log Aktivitas',
+            'url'  => 'log-aktivitas',
+            'icon' => 'fas fa-history',
+            'can'  => 'admin', // Hanya admin yang bisa melihat log ini
+        ],
+        [
+            'text' => 'Log Aktivitas',
+            'url'  => 'log-aktivitas',
+            'icon' => 'fas fa-history',
+            'can'  => 'admin_mr', // Hanya admin yang bisa melihat log ini
+        ],
+
+        [
             'text' => 'Manajemen Admin',
             'url' => 'admin/users',
             'icon' => 'fas fa-users-cog',
             'label_color' => 'success',
             'can' => 'admin',
         ],
+        
 ///////////////////////////// AKUN //////////////////////////
         [   'text' => 'Akun',
             'url' => 'akun',
