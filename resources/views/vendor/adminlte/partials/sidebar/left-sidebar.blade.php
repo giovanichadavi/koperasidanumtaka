@@ -1,25 +1,59 @@
 <aside class="main-sidebar {{ config('adminlte.classes_sidebar', 'sidebar-dark-primary elevation-4') }}">
 
-    {{-- Sidebar brand logo --}}
     @if(config('adminlte.logo_img_xl'))
         @include('adminlte::partials.common.brand-logo-xl')
     @else
         @include('adminlte::partials.common.brand-logo-xs')
     @endif
 
-    {{-- Sidebar menu --}}
     <div class="sidebar">
         <nav class="pt-2">
             <ul class="nav nav-pills nav-sidebar flex-column {{ config('adminlte.classes_sidebar_nav', '') }}"
-                data-widget="treeview" role="menu"
-                @if(config('adminlte.sidebar_nav_animation_speed') != 300)
-                    data-animation-speed="{{ config('adminlte.sidebar_nav_animation_speed') }}"
-                @endif
-                @if(!config('adminlte.sidebar_nav_accordion'))
-                    data-accordion="false"
-                @endif>
-                {{-- Configured sidebar links --}}
-                @each('adminlte::partials.sidebar.menu-item', $adminlte->menu('sidebar'), 'item')
+                data-widget="treeview" role="menu">
+
+                {{-- ================= MENU UTAMA ================= --}}
+                <li class="nav-header text-uppercase text-muted font-weight-bold">
+                    MENU UTAMA
+                </li>
+
+                @foreach($adminlte->menu('sidebar') as $item)
+
+                    {{-- FILTER MENU UTAMA --}}
+                    @if(!isset($item['text']) || in_array($item['text'], ['Tabel Risiko','Log Aktivitas','Manajemen Admin','Akun']))
+                        @continue
+                    @endif
+
+                    @include('adminlte::partials.sidebar.menu-item', ['item' => $item])
+                @endforeach
+
+
+                {{-- ================= MENU TAMBAHAN ================= --}}
+                <li class="nav-header text-uppercase text-muted font-weight-bold mt-2">
+                    MENU TAMBAHAN
+                </li>
+
+                @foreach($adminlte->menu('sidebar') as $item)
+
+                    @if(isset($item['text']) && in_array($item['text'], ['Tabel Risiko','Log Aktivitas']))
+                        @include('adminlte::partials.sidebar.menu-item', ['item' => $item])
+                    @endif
+
+                @endforeach
+
+
+                {{-- ================= MENU AKUN ================= --}}
+                <li class="nav-header text-uppercase text-muted font-weight-bold mt-2">
+                    MENU AKUN
+                </li>
+
+                @foreach($adminlte->menu('sidebar') as $item)
+
+                    @if(isset($item['text']) && in_array($item['text'], ['Manajemen Admin','Akun']))
+                        @include('adminlte::partials.sidebar.menu-item', ['item' => $item])
+                    @endif
+
+                @endforeach
+
             </ul>
         </nav>
     </div>
