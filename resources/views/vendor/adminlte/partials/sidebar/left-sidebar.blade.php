@@ -17,12 +17,13 @@
                 </li>
 
                 @foreach($adminlte->menu('sidebar') as $item)
-
                     {{-- FILTER MENU UTAMA --}}
                     @if(!isset($item['text']) || in_array($item['text'], ['Tabel Risiko','Log Aktivitas','Manajemen Admin','Akun']))
                         @continue
                     @endif
 
+                    {{-- Menambahkan atribut wire:navigate secara dinamis --}}
+                    @php $item['attributes'] = array_merge($item['attributes'] ?? [], ['wire:navigate' => 'true']); @endphp
                     @include('adminlte::partials.sidebar.menu-item', ['item' => $item])
                 @endforeach
 
@@ -33,11 +34,11 @@
                 </li>
 
                 @foreach($adminlte->menu('sidebar') as $item)
-
                     @if(isset($item['text']) && in_array($item['text'], ['Tabel Risiko','Log Aktivitas']))
+                        {{-- Menambahkan atribut wire:navigate secara dinamis --}}
+                        @php $item['attributes'] = array_merge($item['attributes'] ?? [], ['wire:navigate' => 'true']); @endphp
                         @include('adminlte::partials.sidebar.menu-item', ['item' => $item])
                     @endif
-
                 @endforeach
 
 
@@ -47,11 +48,11 @@
                 </li>
 
                 @foreach($adminlte->menu('sidebar') as $item)
-
                     @if(isset($item['text']) && in_array($item['text'], ['Manajemen Admin','Akun']))
+                        {{-- Menambahkan atribut wire:navigate secara dinamis --}}
+                        @php $item['attributes'] = array_merge($item['attributes'] ?? [], ['wire:navigate' => 'true']); @endphp
                         @include('adminlte::partials.sidebar.menu-item', ['item' => $item])
                     @endif
-
                 @endforeach
 
             </ul>
