@@ -72,22 +72,19 @@ Route::middleware(['auth'])->group(function () {
     ->name('peta.risiko');
     });
 
-    Route::get('/laporan/daftar-risiko', 
-    [LaporanRisikoController::class, 'index'])
-    ->name('laporan.daftar.risiko');
+Route::middleware(['auth'])->group(function () {
+    
+    // Nama route diubah menjadi 'laporan.daftar_risiko.index' sesuai cetakan di Blade
+    Route::get('/laporan/daftar-risiko', [LaporanRisikoController::class, 'index'])
+        ->name('laporan.daftar_risiko.index');
 
-    Route::get('/laporan/daftar-risiko', 
-    [LaporanRisikoController::class, 'index'])
-    ->name('laporan.daftar.risiko');
+    Route::get('/laporan/daftar-risiko/create', [LaporanRisikoController::class, 'create'])
+        ->name('laporan.daftar_risiko.create');
 
-    Route::get('/laporan/daftar-risiko/create', 
-    [LaporanRisikoController::class, 'create'])
-    ->name('laporan.daftar.risiko.create');
-
-    Route::post('/laporan/daftar-risiko', 
-    [LaporanRisikoController::class, 'store'])
-    ->name('laporan.daftar.risiko.store');
-
+    Route::post('/laporan/daftar-risiko', [LaporanRisikoController::class, 'store'])
+        ->name('laporan.daftar_risiko.store');
+        
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('manajemen-tindak-lanjut', [TindakLanjutController::class, 'index'])->name('tindak-lanjut.index');
@@ -572,9 +569,6 @@ Route::middleware(['auth'])
             ->name('risiko.destroy');
     });
 
-        Route::get('/laporan/daftar-risiko',
-            [LaporanRisikoController::class, 'index']
-        )->name('laporan.daftar_risiko.index');
 
         Route::post('/laporan/daftar-risiko/tindaklanjut',
             [LaporanRisikoController::class, 'tindakLanjut']
