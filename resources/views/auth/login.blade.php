@@ -195,7 +195,7 @@
                 <img src="{{ asset('vendor/adminlte/dist/img/AdminLTELogo.png') }}" alt="Logo AdminLTE">
             </div>
             <h1>Manajemen Risiko</h1>
-            <p>Danum Taka Safety</p>
+            <p>Danum Taka Risk Management</p>
         </div>
 
         <div class="form-section">
@@ -250,7 +250,7 @@
             </form>
 
             <div class="footer">
-                &copy; 2026 Danum Taka Safety. All rights reserved.
+                &copy; 2026 Danum Taka Risk Management. All rights reserved.
             </div>
         </div>
     </div>

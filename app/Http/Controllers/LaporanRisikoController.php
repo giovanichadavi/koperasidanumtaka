@@ -22,34 +22,24 @@ class LaporanRisikoController extends Controller
         $search = $request->search;
         $statusFilter = $request->status; 
         
-        // Menangkap parameter 'id' (yang dikirim dari Log Aktivitas)
         $filterId = $request->id; 
 
         $query = DaftarRisiko::query();
 
-        // ============================================================
-        // LOGIKA PRIORITAS: JIKA ADA ID DARI LOG, TAMPILKAN 1 DATA SAJA
-        // ============================================================
         if (!empty($filterId)) {
             $query->where(function($q) use ($filterId) {
-                // Mencari berdasarkan id_risiko atau nama_kegiatan agar lebih akurat
                 $q->where('id_risiko', $filterId)
                   ->orWhere('nama_kegiatan', $filterId);
             });
 
-            // Matikan filter lain agar tidak terjadi tabrakan logika
             $activeUnit = null;
             $search = null;
             $statusFilter = null;
         } else {
-            // JALANKAN FILTER NORMAL JIKA TIDAK ADA PARAMETER ID
-            
-            // Filter berdasarkan Unit
             if ($activeUnit) {
                 $query->where('unit_nama', $activeUnit);
             }
 
-            // Filter berdasarkan Status Tindak Lanjut
             if ($statusFilter === 'sudah') {
                 $query->where('status', 'ditindaklanjuti');
             } elseif ($statusFilter === 'belum') {
@@ -59,7 +49,6 @@ class LaporanRisikoController extends Controller
                 });
             }
 
-            // Filter berdasarkan Pencarian
             if ($search) {
                 $query->where(function($q) use ($search){
                     $q->where('unit_nama','like',"%$search%")
@@ -73,7 +62,6 @@ class LaporanRisikoController extends Controller
             }
         }
 
-        // Logika Deadline Alert (14 hari / 2 Minggu)
         $duaMingguLagi = Carbon::now()->addDays(14)->format('Y-m-d');
         $hariIni = Carbon::now()->format('Y-m-d');
         
@@ -269,5 +257,37 @@ class LaporanRisikoController extends Controller
         $risiko->save();
 
         return redirect()->back()->with('success', 'Feedback berhasil disimpan.');
+    }
+
+    // 🔥 TAMBAHAN EDIT
+    public function edit($id)
+    {
+        $risiko = DaftarRisiko::findOrFail($id);
+        return view('laporan.edit_risiko', compact('risiko'));
+    }
+
+    // 🔥 TAMBAHAN UPDATE
+    public function update(Request $request, $id)
+    {
+        $risiko = DaftarRisiko::findOrFail($id);
+
+        $risiko->update([
+            'nama_kegiatan' => $request->nama_kegiatan,
+            'tujuan' => $request->tujuan,
+            'pernyataan_risiko' => $request->pernyataan_risiko,
+            'dampak' => $request->dampak,
+            'pengendalian_uraian' => $request->pengendalian_uraian,
+            'sebab' => $request->sebab,
+            'uc_c' => $request->uc_c,
+            'id_risiko' => implode(', ', $request->id_risiko),
+            'desain_a' => $request->desain_a ? 1 : 0,
+            'desain_t' => $request->desain_t ? 1 : 0,
+            'efektivitas_te' => $request->efektivitas_te ? 1 : 0,
+            'efektivitas_ke' => $request->efektivitas_ke ? 1 : 0,
+            'efektivitas_e' => $request->efektivitas_e ? 1 : 0,
+        ]);
+
+        return redirect()->route('laporan.daftar_risiko.index')
+            ->with('success','Data berhasil diupdate');
     }
 }

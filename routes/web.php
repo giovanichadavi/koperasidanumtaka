@@ -607,4 +607,9 @@ Route::middleware(['auth'])
     Route::post('/laporan/risiko/feedback/{id}', [LaporanRisikoController::class, 'updateFeedback'])
     ->name('laporan.risiko.feedback');
 
+Route::get('/laporan/risiko/{id}/edit', [LaporanRisikoController::class, 'edit'])
+    ->name('laporan.risiko.edit');
+
+Route::put('/laporan/risiko/{id}', [LaporanRisikoController::class, 'update'])
+    ->name('laporan.risiko.update');
 require __DIR__.'/auth.php';

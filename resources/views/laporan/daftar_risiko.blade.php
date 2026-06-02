@@ -278,33 +278,40 @@
                             <div class="text-muted"><i class="fas fa-history text-secondary"></i> {{ $r->user_updater ?? '-' }}</div>
                         </td>
 
-                        <td class="text-center">
-                            <div class="action-container">
-                                <form action="{{ route('laporan.risiko.hapus',$r->id) }}" method="POST" onsubmit="return confirm('Hapus data ini?')" class="form-inline-action">
-                                    @csrf @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-action">
-                                        <i class="fas fa-trash"></i> HAPUS
-                                    </button>
-                                </form>
+<td class="text-center">
+    <div class="action-container">
 
-                                @if($r->keputusan_penanganan)
-                                    <a href="{{ route('laporan.risiko.tindaklanjut.form',$r->id) }}?page={{ $risiko->currentPage() }}" class="btn btn-primary btn-action">
-                                        <i class="fas fa-edit"></i> UBAH
-                                    </a>
-                                @else
-                                    <a href="{{ route('laporan.risiko.tindaklanjut.form',$r->id) }}?page={{ $risiko->currentPage() }}" class="btn btn-success btn-action">
-                                        <i class="fas fa-plus-circle"></i> TINDAK LANJUT
-                                    </a>
-                                @endif
+        {{-- TOMBOL HAPUS --}}
+        <form action="{{ route('laporan.risiko.hapus',$r->id) }}" method="POST" onsubmit="return confirm('Hapus data ini?')" class="form-inline-action">
+            @csrf @method('DELETE')
+            <button type="submit" class="btn btn-danger btn-action">
+                <i class="fas fa-trash"></i> HAPUS
+            </button>
+        </form>
 
-                                {{-- TOMBOL FEEDBACK KHUSUS ADMIN --}}
-                                @if(auth()->user()?->role == 'admin')
-                                    <button type="button" class="btn btn-info btn-action" data-toggle="modal" data-target="#modalFeedback{{ $r->id }}">
-                                        <i class="fas fa-comment-alt"></i> FEEDBACK
-                                    </button>
-                                @endif
-                            </div>
-                        </td>
+        {{-- 🔥 TOMBOL EDIT DATA (BARU) --}}
+        <a href="{{ route('laporan.risiko.edit', $r->id) }}" class="btn btn-warning btn-action">
+            <i class="fas fa-pen"></i> EDIT DATA
+        </a>
+
+        {{-- TOMBOL TINDAK LANJUT / UBAH --}}
+        @if($r->keputusan_penanganan)
+            <a href="{{ route('laporan.risiko.tindaklanjut.form',$r->id) }}?page={{ $risiko->currentPage() }}" class="btn btn-primary btn-action">
+                <i class="fas fa-edit"></i> UBAH
+            </a>
+        @else
+            <a href="{{ route('laporan.risiko.tindaklanjut.form',$r->id) }}?page={{ $risiko->currentPage() }}" class="btn btn-success btn-action">
+                <i class="fas fa-plus-circle"></i> TINDAK LANJUT
+            </a>
+        @endif
+
+        {{-- TOMBOL FEEDBACK --}}
+        <button type="button" class="btn btn-info btn-action" data-toggle="modal" data-target="#modalFeedback{{ $r->id }}">
+            <i class="fas fa-comment-alt"></i> FEEDBACK
+        </button>
+
+    </div>
+</td>
                     </tr>
 
                     {{-- MODAL FEEDBACK ADMIN --}}
