@@ -110,7 +110,7 @@
 @endpush
 
 @section('content_header')
-    <h1 class="welcome-text">Selamat Datang Di Safety Danum Taka</h1>
+    <h1 class="welcome-text">Selamat Datang Di Manajemen Risiko Danum Taka</h1>
 @endsection
 
 @section('content')
